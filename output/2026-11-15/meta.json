@@ -12,5 +12,11 @@
   "needs_review": [
     "Volver a mirar la agenda de ARCA el 14/11 por si hay prórrogas."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408373843,
+    "estado": "borrador"
+  }
 }

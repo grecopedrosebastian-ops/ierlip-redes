@@ -15,5 +15,11 @@
     "Confirmar en agip.gob.ar que el plan permanente siga en hasta 36 cuotas.",
     "Hay un plan especial para ABL y Patentes (Res. 383/AGIP/2026) que no se menciona: solo visto en un resumen."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408373900,
+    "estado": "borrador"
+  }
 }

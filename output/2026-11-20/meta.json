@@ -14,5 +14,11 @@
   "needs_review": [
     "Desde cuándo rige el cambio de obra social: SSSalud y argentina.gob.ar se contradicen (no se menciona en la pieza)."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408373946,
+    "estado": "borrador"
+  }
 }

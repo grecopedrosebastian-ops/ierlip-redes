@@ -15,5 +15,11 @@
     "Condiciones vigentes del reintegro por pagar los 12 meses por débito automático.",
     "Desde qué período rige la adhesión (no se menciona en la pieza)."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408373791,
+    "estado": "borrador"
+  }
 }

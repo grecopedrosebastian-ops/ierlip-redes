@@ -15,5 +15,11 @@
     "ARBA dice que la clave actual sirve «hasta la transición definitiva»: confirmar que no haya cambios anunciados para noviembre.",
     "Confirmar el alcance de los feriados del 10/11 (CABA y Córdoba) y 11/11 (PBA) en el Boletín Oficial / normas locales."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408373741,
+    "estado": "borrador"
+  }
 }

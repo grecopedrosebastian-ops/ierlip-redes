@@ -12,5 +12,11 @@
   "needs_review": [
     "Entrar a «Mis Comprobantes» y confirmar que filtros y formatos de descarga coincidan con la pieza."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408373855,
+    "estado": "borrador"
+  }
 }
