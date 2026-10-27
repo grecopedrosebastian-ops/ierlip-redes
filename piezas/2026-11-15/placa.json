@@ -1,0 +1,25 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-15/placa",
+  "slides": [
+    {
+      "variant": "items",
+      "eyebrow": "resumen impositivo · semana 3",
+      "titulo": "Semana clave: *IVA y monotributo*",
+      "items": [
+        {
+          "t": "IVA: del 18 al 25",
+          "d": "CUIT 0-1 el 18, 2-3 el 19, 4-5 el 20, 6-7 el 24 y 8-9 el 25."
+        },
+        {
+          "t": "Monotributo: viernes 20",
+          "d": "Para todas las terminaciones de CUIT."
+        },
+        {
+          "t": "Lunes 23: feriado",
+          "d": "Por eso el IVA de los CUIT 6-7 y 8-9 se corre al 24 y al 25."
+        }
+      ]
+    }
+  ]
+}

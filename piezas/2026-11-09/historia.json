@@ -1,0 +1,17 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-09/historia",
+  "slides": [
+    {
+      "eyebrow": "hoy es feriado",
+      "titulo": "Descansá, *los vencimientos esperan*",
+      "sticker_zone": true,
+      "tarjetas": [
+        {
+          "t": "Esta semana",
+          "d": "F.931 del 11 al 13 y monotributo el viernes 20."
+        }
+      ]
+    }
+  ]
+}

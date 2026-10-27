@@ -1,0 +1,19 @@
+{
+  "fecha": "2026-11-12",
+  "dia": "jue",
+  "pilar": "Vencimientos",
+  "titulo": "Débito automático del monotributo",
+  "publicar_placa": "2026-11-12T12:00:00-03:00",
+  "publicar_historia": "2026-11-12T09:00:00-03:00",
+  "sticker_nativo": "Cuenta regresiva: «Vence el monotributo», 20/11 a las 09:00",
+  "sources": [
+    "https://www.afip.gob.ar/comoPagarImpuestos/como-pagar-impuestos/monotributo/desde-07-2004.asp",
+    "https://serviciosweb.afip.gob.ar/genericos/guiaspasopaso/VerGuia.aspx?id=286",
+    "https://www.afip.gob.ar/monotributo/ayuda/pagos.asp"
+  ],
+  "needs_review": [
+    "Condiciones vigentes del reintegro por pagar los 12 meses por débito automático.",
+    "Desde qué período rige la adhesión (no se menciona en la pieza)."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

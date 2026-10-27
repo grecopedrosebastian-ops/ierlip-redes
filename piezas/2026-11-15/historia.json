@@ -1,0 +1,24 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-15/historia",
+  "slides": [
+    {
+      "eyebrow": "agenda · semana del 16/11",
+      "titulo": "Se viene la *semana de vencimientos*",
+      "tarjetas": [
+        {
+          "t": "IVA: del 18 al 25",
+          "d": "Según la terminación de tu CUIT."
+        },
+        {
+          "t": "Monotributo: vie 20",
+          "d": "Para todas las terminaciones de CUIT."
+        },
+        {
+          "t": "Lunes 23: feriado",
+          "d": "Feriado nacional."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-09/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "tutorial ARCA · paso a paso",
+      "titulo": "Cómo descargar tu *constancia de inscripción*",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "paso a paso",
+      "titulo": "Descargala en *3 pasos*",
+      "items": [
+        {
+          "t": "Entrá a la consulta pública",
+          "d": "Es la «Constancia de Inscripción» de ARCA: no necesitás clave fiscal."
+        },
+        {
+          "t": "Ingresá el CUIT",
+          "d": "El tuyo o el de cualquier contribuyente que quieras consultar."
+        },
+        {
+          "t": "Guardala en PDF",
+          "d": "Así la tenés a mano para mandarla a quien te la pida."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "ojo con la fecha",
+      "titulo": "Tiene *vigencia*",
+      "texto": "La constancia vale 30 días corridos desde que la consultás. Si te la piden más adelante, descargá una nueva."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

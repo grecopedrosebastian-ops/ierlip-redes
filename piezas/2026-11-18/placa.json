@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-18/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "AGIP · lo básico",
+      "titulo": "¿Tenés deuda en AGIP? Mirá el *plan de facilidades*",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "AGIP · lo básico",
+      "titulo": "Lo que tenés que *saber*",
+      "items": [
+        {
+          "t": "Es un plan permanente",
+          "d": "Sirve para todos los impuestos de AGIP."
+        },
+        {
+          "t": "Hasta 36 cuotas",
+          "d": "Para deudas en instancia administrativa o judicial."
+        },
+        {
+          "t": "Dónde adherirte",
+          "d": "En el Portal del Contribuyente de AGIP, sección «Planes de Facilidades»."
+        },
+        {
+          "t": "Tus boletas",
+          "d": "Las consultás e imprimís online en el sitio de AGIP."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "antes de adherirte",
+      "titulo": "Hacé la *cuenta*",
+      "texto": "Revisá cuánto debés y qué te conviene: contado o cuotas. Te ayudamos a calcularlo."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

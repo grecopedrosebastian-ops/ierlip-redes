@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-11-17",
+  "dia": "mar",
+  "pilar": "ARBA",
+  "titulo": "Cómo ver tus percepciones y retenciones en ARBA",
+  "publicar_placa": "2026-11-17T12:00:00-03:00",
+  "publicar_historia": "2026-11-17T09:00:00-03:00",
+  "sticker_nativo": "Cuestionario: Un impuesto extra / Un pago a cuenta (correcta: Un pago a cuenta)",
+  "sources": [
+    "https://www.arba.gov.ar/GuiaTramites/TramiteSeleccionado.asp?tramite=604",
+    "https://www.arba.gov.ar/GuiaTramites/TramiteSeleccionado.asp?tramite=650&categ=33",
+    "https://www.arba.gov.ar/Intranet/Legislacion/Normas/Resoluciones/2026/Res016-26.pdf"
+  ],
+  "needs_review": [],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

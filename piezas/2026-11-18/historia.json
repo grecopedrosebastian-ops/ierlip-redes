@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-18/historia",
+  "slides": [
+    {
+      "eyebrow": "¿sabías que?",
+      "titulo": "El IVA de este mes vence *hasta el miércoles 25*",
+      "texto": "Según la terminación de tu CUIT.",
+      "sticker_zone": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-08/historia",
+  "slides": [
+    {
+      "eyebrow": "agenda · semana del 9/11",
+      "titulo": "Semana *corta*: el lunes es feriado",
+      "tarjetas": [
+        {
+          "t": "Lunes 9: feriado",
+          "d": "Además, el 10 en CABA y Córdoba, y el 11 en PBA."
+        },
+        {
+          "t": "F.931: del 11 al 13",
+          "d": "Según la terminación de tu CUIT."
+        },
+        {
+          "t": "Monotributo: vie 20",
+          "d": "Para todas las terminaciones de CUIT."
+        }
+      ]
+    }
+  ]
+}

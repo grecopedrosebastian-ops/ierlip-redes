@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-16/historia",
+  "slides": [
+    {
+      "eyebrow": "esta semana",
+      "titulo": "Vence el *monotributo*",
+      "texto": "Viernes 20. Pagalo antes y disfrutá el finde largo.",
+      "sticker_zone": true
+    }
+  ]
+}

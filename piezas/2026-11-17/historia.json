@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-17/historia",
+  "slides": [
+    {
+      "eyebrow": "quiz",
+      "titulo": "Una percepción es… *¿un impuesto extra?*",
+      "texto": "Respondé acá abajo.",
+      "sticker_zone": true
+    }
+  ]
+}

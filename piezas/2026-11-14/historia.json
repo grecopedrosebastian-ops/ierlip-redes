@@ -1,0 +1,24 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-14/historia",
+  "slides": [
+    {
+      "eyebrow": "tip laboral",
+      "titulo": "¿Presentaste el *F.931*?",
+      "tarjetas": [
+        {
+          "t": "Venció del 11 al 13",
+          "d": "Según la terminación de tu CUIT."
+        },
+        {
+          "t": "¿Se te pasó?",
+          "d": "Presentalo cuanto antes desde la web de ARCA."
+        },
+        {
+          "t": "¿Dudas?",
+          "d": "Escribinos y lo revisamos con vos."
+        }
+      ]
+    }
+  ]
+}

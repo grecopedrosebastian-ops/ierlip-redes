@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-10/historia",
+  "slides": [
+    {
+      "eyebrow": "quiz",
+      "titulo": "¿La CIT de ARBA es lo mismo que la *clave fiscal*?",
+      "texto": "Respondé acá abajo.",
+      "sticker_zone": true
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-17/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "ARBA · paso a paso",
+      "titulo": "Cómo ver tus *percepciones y retenciones* en ARBA",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "ARBA · paso a paso",
+      "titulo": "Consultalas en *3 pasos*",
+      "items": [
+        {
+          "t": "Entrá con CUIT y CIT",
+          "d": "Al trámite «Consulta y Descarga de Deducciones de Ingresos Brutos»."
+        },
+        {
+          "t": "Elegí período y tipo",
+          "d": "Filtrá por mes y por tipo de deducción."
+        },
+        {
+          "t": "Descargalas",
+          "d": "En Excel o PDF para revisarlas, o en archivo para importar."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "ARBA · saldo a favor",
+      "titulo": "¿Te quedó *saldo a favor*?",
+      "texto": "Podés trasladarlo a los meses siguientes, compensarlo o pedir la devolución. Consultanos cuál te conviene."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

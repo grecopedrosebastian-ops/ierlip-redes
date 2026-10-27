@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-11/historia",
+  "slides": [
+    {
+      "eyebrow": "¿sabías que?",
+      "titulo": "Hoy es feriado en *provincia de Buenos Aires*",
+      "texto": "Solo en PBA. En el resto del país es día hábil.",
+      "sticker_zone": true
+    }
+  ]
+}

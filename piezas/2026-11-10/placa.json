@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-10/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "ARBA · paso a paso",
+      "titulo": "Cómo obtener tu *CIT de ARBA*",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "ARBA · paso a paso",
+      "titulo": "4 formas de *sacarla*",
+      "items": [
+        {
+          "t": "Con clave fiscal de ARCA",
+          "d": "Online, con clave nivel 3."
+        },
+        {
+          "t": "Con Mi Argentina",
+          "d": "Online, con tu cuenta nivel 3."
+        },
+        {
+          "t": "Respondiendo preguntas",
+          "d": "Online, sobre tus pagos, si ya tenés relación tributaria con ARBA."
+        },
+        {
+          "t": "En forma presencial",
+          "d": "En un Centro de Atención de ARBA, con turno."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "para qué sirve",
+      "titulo": "Que no se te *venza*",
+      "texto": "La CIT es tu contraseña para operar en la web de ARBA. Caduca si no la confirmás en 30 días o si pasás 1 año sin usarla."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-19/placa",
+  "slides": [
+    {
+      "variant": "items",
+      "eyebrow": "vence mañana",
+      "titulo": "Monotributo: *3 formas* de pagarlo",
+      "items": [
+        {
+          "t": "VEP desde ARCA",
+          "d": "Generalo en «Presentación de DDJJ y Pagos» y pagalo por home banking o Interbanking."
+        },
+        {
+          "t": "Billetera con QR",
+          "d": "Con el código QR del Portal Monotributo, desde tu billetera virtual."
+        },
+        {
+          "t": "Débito automático",
+          "d": "En tu cuenta bancaria o tarjeta de crédito, y te olvidás de la fecha."
+        }
+      ]
+    }
+  ]
+}

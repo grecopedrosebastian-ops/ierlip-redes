@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-11-11",
+  "dia": "mie",
+  "pilar": "AGIP",
+  "titulo": "Ingresos Brutos en CABA si sos monotributista",
+  "publicar_placa": "2026-11-11T12:00:00-03:00",
+  "publicar_historia": "2026-11-11T09:00:00-03:00",
+  "sticker_nativo": "Encuesta: ¿Trabajás hoy? Sí / No",
+  "sources": [
+    "https://imagenes.agip.gob.ar/campanas/Monotributo-Unificado"
+  ],
+  "needs_review": [
+    "Confirmar el alcance de los feriados del 10/11 (CABA y Córdoba) y 11/11 (PBA) en el Boletín Oficial / normas locales."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

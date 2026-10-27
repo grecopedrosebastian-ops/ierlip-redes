@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-13/historia",
+  "slides": [
+    {
+      "eyebrow": "preguntanos",
+      "titulo": "¿Te *retienen* cuando cobrás?",
+      "texto": "Contanos tu caso y te respondemos en historias.",
+      "sticker_zone": true
+    }
+  ]
+}

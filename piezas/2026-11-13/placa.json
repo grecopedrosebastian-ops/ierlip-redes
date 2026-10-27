@@ -1,0 +1,40 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-13/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "glosario",
+      "titulo": "*Alícuota, percepción y retención*, explicadas fácil",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "glosario",
+      "titulo": "Qué es *cada una*",
+      "items": [
+        {
+          "t": "Alícuota",
+          "d": "El porcentaje que se aplica sobre una base para calcular un impuesto."
+        },
+        {
+          "t": "Percepción",
+          "d": "Te la suman al importe cuando te cobran algo."
+        },
+        {
+          "t": "Retención",
+          "d": "Te la descuentan del importe cuando cobrás."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "dato clave",
+      "titulo": "No es plata *perdida*",
+      "texto": "Las percepciones y retenciones que te hacen son pagos a cuenta: las descontás del impuesto que tenés que pagar."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

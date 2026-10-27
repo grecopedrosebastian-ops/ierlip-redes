@@ -1,0 +1,25 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-20/placa",
+  "slides": [
+    {
+      "variant": "items",
+      "eyebrow": "¿mito o verdad?",
+      "titulo": "«El monotributo *incluye* la obra social»",
+      "items": [
+        {
+          "t": "Verdad, en general",
+          "d": "La cuota tiene tres partes: impositivo, jubilación (SIPA) y obra social."
+        },
+        {
+          "t": "Hay excepciones",
+          "d": "Si trabajás en relación de dependencia, pagás solo el impositivo. Si sos jubilado, no pagás obra social."
+        },
+        {
+          "t": "Podés cambiarla",
+          "d": "Una vez por año, con la «Opción de cambio» de la Superintendencia de Servicios de Salud."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-11-15",
+  "dia": "dom",
+  "pilar": "Resumen",
+  "titulo": "Semana clave: IVA y monotributo",
+  "publicar_placa": "2026-11-15T11:00:00-03:00",
+  "publicar_historia": "2026-11-15T09:00:00-03:00",
+  "sticker_nativo": null,
+  "sources": [
+    "https://seti.afip.gob.ar/av/seleccionVencimientos.do (agenda oficial de noviembre 2026)"
+  ],
+  "needs_review": [
+    "Volver a mirar la agenda de ARCA el 14/11 por si hay prórrogas."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

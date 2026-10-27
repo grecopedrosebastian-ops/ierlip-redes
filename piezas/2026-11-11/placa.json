@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-11/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "AGIP · lo básico",
+      "titulo": "Ingresos Brutos en CABA si sos *monotributista*",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "AGIP · lo básico",
+      "titulo": "Monotributo *Unificado*",
+      "items": [
+        {
+          "t": "Un solo pago",
+          "d": "Desde 2026, el IIBB de CABA se paga junto con la cuota del monotributo, en ARCA."
+        },
+        {
+          "t": "Vence el 20",
+          "d": "Un solo vencimiento mensual, el mismo de tu monotributo."
+        },
+        {
+          "t": "Todo se hace en ARCA",
+          "d": "Altas, bajas y recategorizaciones. Las categorías de CABA son las mismas de ARCA."
+        },
+        {
+          "t": "¿Estabas en los dos?",
+          "d": "Pasaste de oficio: no tuviste que hacer ningún trámite."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "AGIP · lo básico",
+      "titulo": "¿Quiénes quedan *afuera*?",
+      "texto": "Quienes no tienen domicilio fiscal en CABA o son responsables inscriptos en IVA, entre otros. Pasan al Régimen General de IIBB."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-14/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "laboral · sin enredos",
+      "titulo": "*F.931*: qué es y quién lo presenta",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "laboral · sin enredos",
+      "titulo": "Lo *básico*",
+      "items": [
+        {
+          "t": "Qué es",
+          "d": "La declaración jurada de aportes y contribuciones de la seguridad social."
+        },
+        {
+          "t": "Quién lo presenta",
+          "d": "El empleador, todos los meses, desde la web de ARCA con clave fiscal."
+        },
+        {
+          "t": "Cómo se presenta",
+          "d": "Con Declaración en Línea, SICOSS o Libro de Sueldos Digital."
+        },
+        {
+          "t": "Este mes ya venció",
+          "d": "Fue del 11 al 13, según tu CUIT. Si no lo presentaste, hacelo cuanto antes."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "laboral · sin enredos",
+      "titulo": "¿Y si no tuviste *empleados*?",
+      "texto": "Se presenta «sin empleados» solo el primer mes de esa situación. Y se vuelve a presentar cuando retomás."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-11-20",
+  "dia": "vie",
+  "pilar": "Mito o verdad",
+  "titulo": "El monotributo incluye la obra social",
+  "publicar_placa": "2026-11-20T12:00:00-03:00",
+  "publicar_historia": "2026-11-20T09:00:00-03:00",
+  "sticker_nativo": "Link a WhatsApp: https://wa.me/541149922513 (texto: «Escribinos»)",
+  "sources": [
+    "https://www.afip.gob.ar/monotributo/ayuda/tipos-de-monotributo.asp",
+    "https://www.argentina.gob.ar/sssalud/usuarios/cambio-obra-sociales/monotributistas",
+    "https://www.argentina.gob.ar/servicio/realizar-opcion-de-cambio-libre-eleccion-de-agentes-del-seguro"
+  ],
+  "needs_review": [
+    "Desde cuándo rige el cambio de obra social: SSSalud y argentina.gob.ar se contradicen (no se menciona en la pieza)."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

@@ -1,0 +1,25 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-08/placa",
+  "slides": [
+    {
+      "variant": "items",
+      "eyebrow": "resumen impositivo · semana 2",
+      "titulo": "Lo importante de la semana, *sin vueltas*",
+      "items": [
+        {
+          "t": "Lunes 9: feriado nacional",
+          "d": "Además, el martes 10 es feriado en CABA y Córdoba, y el miércoles 11 en PBA."
+        },
+        {
+          "t": "F.931: del 11 al 13",
+          "d": "Empleadores: CUIT 0-3 el 11, 4-6 el 12 y 7-9 el 13."
+        },
+        {
+          "t": "Monotributo: viernes 20",
+          "d": "La cuota de noviembre vence el 20 para todas las terminaciones de CUIT."
+        }
+      ]
+    }
+  ]
+}

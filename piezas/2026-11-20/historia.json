@@ -1,0 +1,17 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-20/historia",
+  "slides": [
+    {
+      "eyebrow": "hoy · 20/11",
+      "titulo": "Hoy vence el *monotributo*",
+      "sticker_zone": true,
+      "tarjetas": [
+        {
+          "t": "Pagalo hoy",
+          "d": "Con VEP, QR o débito automático."
+        }
+      ]
+    }
+  ]
+}

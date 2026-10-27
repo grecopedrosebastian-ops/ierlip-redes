@@ -1,0 +1,21 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-12/historia",
+  "slides": [
+    {
+      "eyebrow": "recordatorio · 12/11/2026",
+      "titulo": "Monotributo: vence el *20/11*",
+      "sticker_zone": true,
+      "tarjetas": [
+        {
+          "t": "Vence el viernes 20/11",
+          "d": "Para todas las terminaciones de CUIT."
+        },
+        {
+          "t": "¿Débito automático?",
+          "d": "Adherite y olvidate de la fecha."
+        }
+      ]
+    }
+  ]
+}

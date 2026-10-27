@@ -1,0 +1,17 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-19/historia",
+  "slides": [
+    {
+      "eyebrow": "mañana · 20/11",
+      "titulo": "Vence el *monotributo*",
+      "sticker_zone": true,
+      "tarjetas": [
+        {
+          "t": "Viernes 20/11",
+          "d": "Para todas las terminaciones de CUIT."
+        }
+      ]
+    }
+  ]
+}

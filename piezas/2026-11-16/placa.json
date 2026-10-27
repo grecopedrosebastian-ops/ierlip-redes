@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-16/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "tutorial ARCA · paso a paso",
+      "titulo": "*Mis Comprobantes*: descargá lo que facturaste",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "paso a paso",
+      "titulo": "En *4 pasos*",
+      "items": [
+        {
+          "t": "Entrá con clave fiscal",
+          "d": "En arca.gob.ar, al servicio «Mis Comprobantes»."
+        },
+        {
+          "t": "Elegí emitidos o recibidos",
+          "d": "Lo que facturaste o lo que te facturaron."
+        },
+        {
+          "t": "Filtrá",
+          "d": "Por fechas (hasta 1 año), tipo de comprobante, CUIT o punto de venta."
+        },
+        {
+          "t": "Descargá",
+          "d": "En Excel, CSV o PDF."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "para qué sirve",
+      "titulo": "Tené tus números a *mano*",
+      "texto": "Te sirve para controlar cuánto facturaste antes de recategorizarte y para tener todo listo si te lo pide tu contador."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

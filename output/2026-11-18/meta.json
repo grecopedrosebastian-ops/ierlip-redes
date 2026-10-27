@@ -1,0 +1,19 @@
+{
+  "fecha": "2026-11-18",
+  "dia": "mie",
+  "pilar": "AGIP",
+  "titulo": "¿Tenés deuda en AGIP? Plan de facilidades",
+  "publicar_placa": "2026-11-18T12:00:00-03:00",
+  "publicar_historia": "2026-11-18T09:00:00-03:00",
+  "sticker_nativo": "Encuesta: Lo sabía / No lo sabía",
+  "sources": [
+    "https://www.agip.gob.ar/impuestos/planes-de-facilidades",
+    "https://lb.agip.gob.ar/PlanFacilidadesBoleta/",
+    "https://seti.afip.gob.ar/av/seleccionVencimientos.do (agenda oficial de noviembre 2026)"
+  ],
+  "needs_review": [
+    "Confirmar en agip.gob.ar que el plan permanente siga en hasta 36 cuotas.",
+    "Hay un plan especial para ABL y Patentes (Res. 383/AGIP/2026) que no se menciona: solo visto en un resumen."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

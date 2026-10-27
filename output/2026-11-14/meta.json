@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-11-14",
+  "dia": "sab",
+  "pilar": "Laboral",
+  "titulo": "F.931: qué es y quién lo presenta",
+  "publicar_placa": "2026-11-14T11:00:00-03:00",
+  "publicar_historia": "2026-11-14T09:00:00-03:00",
+  "sticker_nativo": null,
+  "sources": [
+    "https://servicioscf.afip.gob.ar/publico/abc/ABCpaso2.aspx?id_nivel1=558&id_nivel2=942",
+    "https://www.afip.gob.ar/LibrodeSueldosDigital/documentos/G26-DJ-sin-nomina.pdf",
+    "https://seti.afip.gob.ar/av/seleccionVencimientos.do (agenda oficial de noviembre 2026)"
+  ],
+  "needs_review": [],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

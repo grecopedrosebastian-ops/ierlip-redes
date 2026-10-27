@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-12/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "tutorial ARCA · paso a paso",
+      "titulo": "*Débito automático* del monotributo",
+      "bajada": "y te olvidás de la fecha"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "paso a paso",
+      "titulo": "Cómo *adherirte*",
+      "items": [
+        {
+          "t": "Con tu cuenta bancaria",
+          "d": "Desde tu banco, el Portal Monotributo (solapa «Pagos»), «Declaración de CBU» o la app ARCA Móvil."
+        },
+        {
+          "t": "Qué necesitás",
+          "d": "Clave fiscal nivel 3 y una cuenta en pesos a tu nombre."
+        },
+        {
+          "t": "Con tarjeta de crédito",
+          "d": "Pedilo a la administradora de tu tarjeta, por teléfono."
+        },
+        {
+          "t": "Controlá el débito",
+          "d": "Revisá tus pagos en la CCMA (Cuenta Corriente de Monotributistas y Autónomos)."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "un beneficio",
+      "titulo": "Pagar a tiempo *suma*",
+      "texto": "Si pagás los 12 meses del año por débito automático, tenés derecho a un reintegro."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}
