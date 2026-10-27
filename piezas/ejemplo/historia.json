@@ -1,0 +1,7 @@
+{
+  "template": "historia-tipografica",
+  "out": "output/ejemplo/historia",
+  "slides": [
+    {"fondo": "navy", "eyebrow": "FALTAN 15 DÍAS", "titulo": "Monotributo: vence el *20/11*", "tarjetas": [{"t": "Pagalo con VEP o débito", "relleno": true}, {"t": "Si cae feriado, pasa al día hábil siguiente"}], "sticker_zone": true}
+  ]
+}

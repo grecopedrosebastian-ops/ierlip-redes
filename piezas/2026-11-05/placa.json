@@ -1,0 +1,25 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-05/placa",
+  "slides": [
+    {
+      "variant": "items",
+      "eyebrow": "vencimientos · noviembre",
+      "titulo": "Si el vencimiento cae *feriado*, ¿qué pasa?",
+      "items": [
+        {
+          "t": "Se corre al día hábil",
+          "d": "Pasa al día hábil siguiente, y los vencimientos que venían después se corren en orden."
+        },
+        {
+          "t": "Ejemplo: el IVA de noviembre",
+          "d": "Por el feriado del 23, los CUIT 6-7 pasan al martes 24 y los 8-9 al miércoles 25."
+        },
+        {
+          "t": "Ojo con lo provincial",
+          "d": "El 10 es feriado en CABA y el 11 en PBA: chequeá tus vencimientos de AGIP y ARBA."
+        }
+      ]
+    }
+  ]
+}

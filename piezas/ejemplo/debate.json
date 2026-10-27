@@ -1,0 +1,7 @@
+{
+  "template": "placa-debate",
+  "out": "output/ejemplo/debate",
+  "slides": [
+    {"eyebrow": "DEBATE", "titulo": "Ingresos Brutos: ¿*debería existir?*", "dato": "Se calcula sobre lo que facturás, no sobre lo que ganás.", "fuente": "EJEMPLO · verificar redacción en arba.gov.ar / agip.gob.ar", "sticker": "TE LEEMOS EN COMENTARIOS 👇"}
+  ]
+}

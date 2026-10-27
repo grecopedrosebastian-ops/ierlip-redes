@@ -1,0 +1,21 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-04/historia",
+  "slides": [
+    {
+      "eyebrow": "¿sabías que?",
+      "titulo": "AGIP y ARBA son *distintos* de ARCA",
+      "sticker_zone": true,
+      "tarjetas": [
+        {
+          "t": "ARCA es nacional",
+          "d": "Monotributo, IVA, Ganancias y aportes."
+        },
+        {
+          "t": "AGIP y ARBA, locales",
+          "d": "AGIP es de CABA y ARBA, de la provincia de Buenos Aires."
+        }
+      ]
+    }
+  ]
+}

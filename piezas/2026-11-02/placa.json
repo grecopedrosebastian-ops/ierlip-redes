@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-02/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "tutorial ARCA · paso a paso",
+      "titulo": "Cómo generar un *VEP* para pagar el monotributo",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "paso a paso",
+      "titulo": "Generá tu *VEP* en 4 pasos",
+      "items": [
+        {
+          "t": "Entrá con tu clave fiscal",
+          "d": "Desde arca.gob.ar, nunca desde un link que te llegó por mail."
+        },
+        {
+          "t": "Abrí «Presentación de DDJJ y Pagos»",
+          "d": "También podés generarlo desde la CCMA (Cuenta Corriente de Monotributistas y Autónomos)."
+        },
+        {
+          "t": "Elegí período y medio de pago",
+          "d": "Home banking (Red Link o Pago Mis Cuentas), Interbanking o billetera con QR."
+        },
+        {
+          "t": "Pagalo y guardá el comprobante",
+          "d": "Te sirve si después aparece una diferencia en tu cuenta corriente."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "otra opción",
+      "titulo": "¿No querés generar *VEP*?",
+      "texto": "Adherite al débito automático en tu cuenta o en tu tarjeta de crédito. Con tarjeta, el pago se acredita en 10 días hábiles."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

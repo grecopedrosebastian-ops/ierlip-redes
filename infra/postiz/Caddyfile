@@ -1,0 +1,19 @@
+# HTTPS automático con Let's Encrypt para el dominio de Postiz.
+{
+	email {$EMAIL_ACME}
+}
+
+{$DOMINIO} {
+	encode gzip
+
+	# Términos y privacidad: TikTok los pide en un dominio público con HTTPS.
+	handle_path /legal/* {
+		root * /srv/legal
+		try_files {path} {path}.html
+		file_server
+	}
+
+	handle {
+		reverse_proxy postiz:5000
+	}
+}

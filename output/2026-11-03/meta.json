@@ -1,0 +1,20 @@
+{
+  "fecha": "2026-11-03",
+  "dia": "mar",
+  "pilar": "ARBA",
+  "titulo": "Ingresos Brutos en PBA: ¿te toca el simplificado?",
+  "publicar_placa": "2026-11-03T12:00:00-03:00",
+  "publicar_historia": "2026-11-03T09:00:00-03:00",
+  "sticker_nativo": "Cuestionario: Nacional / Provincial (correcta: Provincial)",
+  "sources": [
+    "https://www.afip.gob.ar/monotributo/ayuda/monotributo-unificado.asp",
+    "https://web.arba.gov.ar/preguntas-frecuentes/quienes-pueden-acceder-ingresos-brutos-simplificado-ibs",
+    "https://www.arba.gov.ar/GuiaTramites/TramiteSeleccionado.asp?tramite=674&categ=34",
+    "https://www.ca.gov.ar/2016-03-21-17-33-41?showall=1"
+  ],
+  "needs_review": [
+    "Definición de IIBB («sobre lo que facturás») y quién debe inscribirse: confirmar con el Código Fiscal de PBA en arba.gov.ar.",
+    "Que quien tiene actividad en CABA quede fuera del Simplificado de PBA: solo visto en un fragmento de ARBA."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

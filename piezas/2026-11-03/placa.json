@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-03/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "ARBA · lo básico",
+      "titulo": "Ingresos Brutos en PBA: *¿te toca el simplificado?*",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "ARBA · lo básico",
+      "titulo": "Lo que tenés que *saber*",
+      "items": [
+        {
+          "t": "Qué es Ingresos Brutos",
+          "d": "Un impuesto provincial sobre lo que facturás. En la provincia de Buenos Aires lo cobra ARBA."
+        },
+        {
+          "t": "Monotributo Unificado",
+          "d": "Si sos monotributista en PBA, pagás IIBB Simplificado junto con la cuota, en un solo pago."
+        },
+        {
+          "t": "Quiénes pueden adherir",
+          "d": "Monotributistas con domicilio fiscal en PBA, sin domicilios en otra jurisdicción y con hasta 3 actividades."
+        },
+        {
+          "t": "¿Vendés también en CABA?",
+          "d": "Con actividad en más de una jurisdicción, corresponde el Convenio Multilateral."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "ARBA · lo básico",
+      "titulo": "Lo que *no* incluye",
+      "texto": "El pago unificado no incluye el componente municipal. Consultanos qué te corresponde según tu municipio."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

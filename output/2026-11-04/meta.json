@@ -1,0 +1,17 @@
+{
+  "fecha": "2026-11-04",
+  "dia": "mie",
+  "pilar": "AGIP",
+  "titulo": "Trámites de AGIP: ahora con miBA nivel 3",
+  "publicar_placa": "2026-11-04T12:00:00-03:00",
+  "publicar_historia": "2026-11-04T09:00:00-03:00",
+  "sticker_nativo": "Encuesta: Lo sabía / No lo sabía",
+  "sources": [
+    "https://buenosaires.gob.ar/gcaba_historico/noticias/ahora-los-tramites-de-agip-se-realizaran-con-cuenta-miba"
+  ],
+  "needs_review": [
+    "La noticia oficial es del 28/10/2025: confirmar en agip.gob.ar que sigue vigente y que no hubo cambios en los niveles.",
+    "Número de Boti 11-5050-0147: confirmar en buenosaires.gob.ar."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

@@ -1,0 +1,15 @@
+{
+  "fecha": "2026-11-06",
+  "dia": "vie",
+  "pilar": "Glosario",
+  "titulo": "CUIT, CUIL y CDI: no son lo mismo",
+  "publicar_placa": "2026-11-06T12:00:00-03:00",
+  "publicar_historia": "2026-11-06T09:00:00-03:00",
+  "sticker_nativo": "Caja de preguntas: «¿Qué trámite de ARCA te cuesta más?»",
+  "sources": [
+    "https://www.argentina.gob.ar/servicio/obtener-la-clave-de-identificacion-cdi",
+    "https://www.argentina.gob.ar/servicio/obtener-cuil"
+  ],
+  "needs_review": [],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/ejemplo/historia-papel",
+  "slides": [
+    {"eyebrow": "recordatorio · 05/11/2026", "titulo": "Monotributo: vence el *20/11*", "tarjetas": [
+      {"t": "Vence el viernes 20/11", "d": "La cuota mensual del Monotributo vence el 20/11 para todas las terminaciones de CUIT."},
+      {"t": "Pagalo con VEP o débito", "d": "Generá el VEP desde la web de ARCA o adherite al débito automático."},
+      {"t": "Si cae feriado, se corre", "d": "Si el vencimiento cae en un día no hábil, pasa al día hábil siguiente."},
+      {"t": "¿Te atrasaste?", "d": "Pagar fuera de término genera intereses resarcitorios. Ponete al día cuanto antes."}
+    ]}
+  ]
+}

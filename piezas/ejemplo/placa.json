@@ -1,0 +1,15 @@
+{
+  "template": "placa-papel",
+  "out": "output/ejemplo/placa",
+  "slides": [
+    {"variant": "portada", "eyebrow": "tutorial ARCA · paso a paso", "titulo": "Cómo generar un *VEP* para pagar el monotributo", "bajada": "lo importante, sin vueltas"},
+    {"variant": "items", "eyebrow": "paso a paso", "titulo": "Generá tu *VEP* en 4 pasos", "items": [
+      {"t": "Entrá con tu clave fiscal", "d": "Desde arca.gob.ar, nunca desde un link que te llegó por mail."},
+      {"t": "Buscá el servicio de pago", "d": "EJEMPLO: verificar el nombre actual del servicio antes de publicar."},
+      {"t": "Elegí período y medio de pago", "d": "Home banking, billetera o tarjeta según lo que tengas habilitado."},
+      {"t": "Pagalo y guardá el comprobante", "d": "Te sirve si después aparece una diferencia."}
+    ]},
+    {"variant": "tip", "eyebrow": "error común", "titulo": "Lo que *más* nos consultan", "texto": "Generar el VEP no es pagarlo: si no lo pagás antes de que venza, hay que generar uno nuevo."},
+    {"variant": "cierre"}
+  ]
+}

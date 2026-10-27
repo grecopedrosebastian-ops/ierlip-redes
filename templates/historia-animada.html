@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- Historia animada 1080x1920, loop de 12 s. La exporta scripts/render-animada.mjs a MP4. Copia del lienzo de Design. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Historia animada · chequeo en 3 pasos</title>
+</head>
+<body>
+<link rel="stylesheet" href="../node_modules/@fontsource/source-serif-4/800.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/source-serif-4/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/patrick-hand/400.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/800.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/inter/600.css">
+<style>
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden}
+.sc1{animation:sc1 12s infinite}
+.sc2{animation:sc2 12s infinite}
+.sc3{animation:sc3 12s infinite}
+.upA{animation:upA 12s infinite}
+.popA{animation:popA 12s infinite}
+.upB{animation:upB 12s infinite}
+.upC{animation:upC 12s infinite}
+.drop1{animation:drop1 12s infinite}
+.drop2{animation:drop2 12s infinite}
+.drop3{animation:drop3 12s infinite}
+.popC{animation:popC 12s infinite}
+.upD{animation:upD 12s infinite}
+.drift{animation:drift 12s ease-in-out infinite alternate}
+@keyframes sc1{0%{opacity:0}2%,23%{opacity:1}25%,100%{opacity:0}}
+@keyframes sc2{0%,25%{opacity:0}27%,73%{opacity:1}75%,100%{opacity:0}}
+@keyframes sc3{0%,75%{opacity:0}77%,98%{opacity:1}100%{opacity:0}}
+@keyframes upA{0%,2%{opacity:0;transform:translateY(40px)}6%,100%{opacity:1;transform:translateY(0)}}
+@keyframes popA{0%,5%{opacity:0;transform:scale(.3) rotate(-10deg)}9%{opacity:1;transform:scale(1.08) rotate(-3deg)}11%,100%{opacity:1;transform:scale(1) rotate(-3deg)}}
+@keyframes upB{0%,10%{opacity:0;transform:translateY(40px)}14%,100%{opacity:1;transform:translateY(0)}}
+@keyframes upC{0%,27%{opacity:0;transform:translateY(40px)}31%,100%{opacity:1;transform:translateY(0)}}
+@keyframes drop1{0%,31%{opacity:0;transform:translateY(-140px) rotate(-6deg)}35%{opacity:1;transform:translateY(12px) rotate(1deg)}37%,100%{opacity:1;transform:translateY(0) rotate(0)}}
+@keyframes drop2{0%,41%{opacity:0;transform:translateY(-140px) rotate(6deg)}45%{opacity:1;transform:translateY(12px) rotate(-1deg)}47%,100%{opacity:1;transform:translateY(0) rotate(0)}}
+@keyframes drop3{0%,51%{opacity:0;transform:translateY(-140px) rotate(-6deg)}55%{opacity:1;transform:translateY(12px) rotate(1deg)}57%,100%{opacity:1;transform:translateY(0) rotate(0)}}
+@keyframes popC{0%,77%{opacity:0;transform:scale(.4)}81%{opacity:1;transform:scale(1.06)}83%,100%{opacity:1;transform:scale(1)}}
+@keyframes upD{0%,84%{opacity:0;transform:translateY(40px)}88%,100%{opacity:1;transform:translateY(0)}}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(-40px,30px)}}
+</style>
+<div style="width: 1080px; height: 1920px; position: relative; overflow: hidden; background: #0F1A30; font-family: 'Source Serif 4', serif; color: #FFFFFF">
+  <svg class="drift" aria-hidden="true" viewBox="0 0 1080 1920" style="position: absolute; left: 0; top: 0; width: 1120px; height: 1960px">
+    <path d="M560 -80 C 780 40, 980 140, 1160 380" fill="none" stroke="#1F3A7A" stroke-width="170"></path>
+    <path d="M690 -60 C 880 50, 1020 150, 1170 300" fill="none" stroke="#E9B949" stroke-width="56"></path>
+    <circle cx="-60" cy="1500" r="260" fill="none" stroke="#892CA0" stroke-width="110"></circle>
+    <circle cx="1180" cy="1880" r="330" fill="none" stroke="#892CA0" stroke-width="130"></circle>
+    <circle cx="1180" cy="1880" r="200" fill="none" stroke="#C8643B" stroke-width="60"></circle>
+  </svg>
+  <img src="../assets/textura-papel-oscuro.png" alt="" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none">
+
+  <div class="sc1" style="position: absolute; left: 90px; right: 90px; top: 250px; bottom: 380px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 20px">
+    <div class="upA" style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 40px; letter-spacing: 0.25em; color: #60A5FA">A 15 DÍAS DEL</div>
+    <div class="popA" style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 250px; line-height: 1; color: #E9B949; letter-spacing: -0.03em">20/11</div>
+    <div class="upB" style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 92px; line-height: 1.02; color: #F5F5F0">vence el Monotributo</div>
+  </div>
+
+  <div class="sc2" style="position: absolute; left: 90px; right: 90px; top: 250px; bottom: 380px; display: flex; flex-direction: column; justify-content: center; gap: 34px">
+    <div class="upC" style="display: flex; flex-direction: column; gap: 4px; align-self: flex-start">
+      <div style="font-family: 'Patrick Hand', cursive; font-size: 54px; color: #E9B949">un chequeo en 3 pasos</div>
+      <svg aria-hidden="true" viewBox="0 0 600 16" preserveAspectRatio="none" style="width: 100%; height: 16px; display: block"><path d="M0 8 Q 15 0 30 8 T 60 8 T 90 8 T 120 8 T 150 8 T 180 8 T 210 8 T 240 8 T 270 8 T 300 8 T 330 8 T 360 8 T 390 8 T 420 8 T 450 8 T 480 8 T 510 8 T 540 8 T 570 8 T 600 8" fill="none" stroke="#E9B949" stroke-width="3"></path></svg>
+    </div>
+    <div class="drop1" style="position: relative; background: #F7F3EA; color: #0F1A30; border-radius: 6px; padding: 38px 40px; display: flex; gap: 28px; align-items: center; box-shadow: 0 14px 30px rgba(0,0,0,0.35)">
+      <div aria-hidden="true" style="position: absolute; top: -18px; left: 40px; width: 130px; height: 34px; background: rgba(233,185,73,0.75); transform: rotate(-3deg)"></div>
+      <div style="flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid #C8643B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Patrick Hand', cursive; font-size: 50px; color: #C8643B">1</div>
+      <div style="font-weight: 800; font-size: 48px; line-height: 1.15">Generá el VEP o revisá el débito</div>
+    </div>
+    <div class="drop2" style="position: relative; background: #F7F3EA; color: #0F1A30; border-radius: 6px; padding: 38px 40px; display: flex; gap: 28px; align-items: center; box-shadow: 0 14px 30px rgba(0,0,0,0.35)">
+      <div aria-hidden="true" style="position: absolute; top: -18px; right: 40px; width: 130px; height: 34px; background: rgba(233,185,73,0.75); transform: rotate(3deg)"></div>
+      <div style="flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid #C8643B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Patrick Hand', cursive; font-size: 50px; color: #C8643B">2</div>
+      <div style="font-weight: 800; font-size: 48px; line-height: 1.15">Pagalo antes del 20/11</div>
+    </div>
+    <div class="drop3" style="position: relative; background: #F7F3EA; color: #0F1A30; border-radius: 6px; padding: 38px 40px; display: flex; gap: 28px; align-items: center; box-shadow: 0 14px 30px rgba(0,0,0,0.35)">
+      <div aria-hidden="true" style="position: absolute; top: -18px; left: 40px; width: 130px; height: 34px; background: rgba(233,185,73,0.75); transform: rotate(-3deg)"></div>
+      <div style="flex: 0 0 84px; height: 84px; box-sizing: border-box; border: 4px solid #C8643B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Patrick Hand', cursive; font-size: 50px; color: #C8643B">3</div>
+      <div style="font-weight: 800; font-size: 48px; line-height: 1.15">Guardá el comprobante</div>
+    </div>
+  </div>
+
+  <div class="sc3" style="position: absolute; left: 90px; right: 90px; top: 250px; bottom: 380px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 30px">
+    <div class="popC" style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 120px; line-height: 1; color: #F5F5F0">¿Dudas?</div>
+    <div class="upD" style="background: #E9B949; color: #0F1A30; padding: 18px 40px 24px; transform: rotate(-3deg); box-shadow: 0 12px 26px rgba(0,0,0,0.3)">
+      <div style="font-family: 'Patrick Hand', cursive; font-size: 46px">escribinos por WhatsApp</div>
+      <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 64px; line-height: 1.1">+54 11 4992-2513</div>
+    </div>
+    <div class="upD" style="margin-top: 40px; background: #FFFFFF; border-radius: 999px; padding: 18px 46px; box-shadow: 0 10px 26px rgba(0,0,0,0.3)">
+      <img src="../assets/logo/ierlip-logo-color.png" alt="Estudio IERLIP" style="height: 92px; display: block">
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 400px; text-align: center; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 30px; color: #E2E8F0; opacity: 0.85">@estudioierlip</div>
+</div>
+</body>
+</html>

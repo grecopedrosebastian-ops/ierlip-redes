@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-01/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "resumen impositivo · noviembre 2026",
+      "titulo": "Noviembre: *2 feriados* y los vencimientos que importan",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "agenda de noviembre",
+      "titulo": "Lo que vence este mes",
+      "items": [
+        {
+          "t": "Feriados: lunes 9 y 23",
+          "d": "Además, el martes 10 es feriado en CABA y Córdoba, y el miércoles 11 en PBA."
+        },
+        {
+          "t": "F.931: del 11 al 13",
+          "d": "Empleadores: CUIT 0-3 el 11, 4-6 el 12 y 7-9 el 13."
+        },
+        {
+          "t": "Monotributo: viernes 20",
+          "d": "La cuota de noviembre vence el 20 para todas las terminaciones de CUIT."
+        },
+        {
+          "t": "IVA: del 18 al 25",
+          "d": "CUIT 0-1 el 18, 2-3 el 19, 4-5 el 20, 6-7 el 24 y 8-9 el 25."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "ojo con el IVA",
+      "titulo": "El *feriado* del 23 mueve fechas",
+      "texto": "Los CUIT 6-7, que vencerían el sábado 21, pasan al martes 24. Los 8-9 pasan al miércoles 25."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

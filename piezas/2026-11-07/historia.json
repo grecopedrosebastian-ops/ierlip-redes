@@ -1,0 +1,24 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-07/historia",
+  "slides": [
+    {
+      "eyebrow": "tip laboral",
+      "titulo": "Guardá tus *recibos*",
+      "tarjetas": [
+        {
+          "t": "Te sirven después",
+          "d": "Para pedir un crédito, alquilar o hacer un reclamo."
+        },
+        {
+          "t": "En papel o digital",
+          "d": "Te dan una copia en papel o lo firmás de forma digital."
+        },
+        {
+          "t": "Revisalos cada mes",
+          "d": "Que coincidan tu categoría, el período liquidado y el neto."
+        }
+      ]
+    }
+  ]
+}

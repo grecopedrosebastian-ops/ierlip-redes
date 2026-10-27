@@ -1,0 +1,28 @@
+# Todos los días a las 07:30 (Buenos Aires) manda a Telegram las piezas del día que no están en Metricool:
+# historia (con el sticker a pegar), carrusel o placa sin comprimir y el copy listo para pegar.
+# No publica nada. Las piezas tienen que estar commiteadas en output/<fecha>/ antes de ese día.
+name: Telegram diario (placas e historias)
+
+on:
+  schedule:
+    - cron: "30 10 * * *"   # 10:30 UTC = 07:30 en Buenos Aires
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: "Fecha a mandar (YYYY-MM-DD). Vacío = hoy."
+        required: false
+        default: ""
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Mandar a Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+        run: python3 scripts/enviar-telegram.py "${{ github.event.inputs.fecha || 'hoy' }}"

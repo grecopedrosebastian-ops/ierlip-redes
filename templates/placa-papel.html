@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+  Estilo B · Papel IERLIP · 1080x1350 (4:5). Lo renderiza scripts/render.mjs.
+  Aprobado en Design el 27/10/2026 (referencia: "resumen impositivo · 17/10/2026").
+  Datos: window.PIEZA (una slide). Variantes:
+    {variant:"portada", eyebrow, titulo, bajada}
+    {variant:"items",   eyebrow, titulo, items:[{t, d}], desde:1}
+    {variant:"tip",     eyebrow, titulo, texto}
+    {variant:"cierre",  titulo?}
+  window.META = {n, total}  (contador del carrusel; total 1 = sin contador)
+  En los textos, *palabra* = resaltado (subrayado terracota).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../node_modules/@fontsource/source-serif-4/700.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/source-serif-4/800.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/source-serif-4/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/patrick-hand/400.css">
+<style>
+  :root{--deep:#0F1A30;--fondo:#F3EEE2;--papel:rgba(251,248,241,.96);--azul:#1F3A7A;--vio:#892CA0;
+        --mostaza:#E9B949;--terra:#C8643B;--txt:#1D2A44}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1350px;overflow:hidden}
+  body{position:relative;background:var(--fondo);color:var(--deep);font-family:'Source Serif 4',serif}
+  .blob{position:absolute}
+  .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;mix-blend-mode:multiply;pointer-events:none}
+  .counter{position:absolute;top:72px;right:72px;font-family:'Patrick Hand',cursive;font-size:40px;color:#F5F1E8}
+  .hand{align-self:flex-start;display:flex;flex-direction:column;gap:2px}
+  .hand div{font-family:'Patrick Hand',cursive}
+  .wave{display:block;width:100%;height:16px}
+  em{font-style:normal;background:linear-gradient(transparent 68%, rgba(200,100,59,.45) 68%)}
+  .wrap{position:absolute;left:80px;right:80px;display:flex;flex-direction:column}
+  .card{position:relative;background:var(--papel);border-radius:12px;box-shadow:0 18px 40px rgba(10,25,47,.16)}
+  .tape1,.tape2{position:absolute;left:50%;background:rgba(233,185,73,.6)}
+  .tape1{top:-26px;width:220px;height:40px;margin-left:-120px;transform:rotate(-4deg)}
+  .tape2{top:-8px;width:200px;height:36px;margin-left:-96px;background:rgba(233,185,73,.5);transform:rotate(3deg)}
+  .item{display:flex;gap:28px;align-items:flex-start}
+  .num{flex:0 0 72px;height:72px;border:4px solid var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;
+       font-family:'Patrick Hand',cursive;font-size:42px;color:var(--terra)}
+  .it h3{font-weight:800;font-size:46px;line-height:1.1}
+  .it p{font-weight:700;font-size:28px;line-height:1.3;color:var(--txt);margin-top:6px}
+  .pocos{padding-top:60px!important;padding-bottom:56px!important;gap:26px!important}
+  .pocos .it h3{font-size:54px} .pocos .it p{font-size:34px}
+  .logo{position:absolute;left:0;right:0;bottom:48px;display:flex;justify-content:center}
+  .logo img{height:96px;display:block}
+  .logo span{font-weight:900;font-size:36px;color:var(--azul)}
+</style>
+</head>
+<body>
+<div id="blobs"></div>
+<img class="tex" src="../assets/textura-papel.png" alt="">
+<div class="counter" id="counter"></div>
+<div id="wrap"></div>
+<div class="logo" id="logo"><img src="../assets/logo/ierlip-logo-color.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'ESTUDIO IERLIP'}))"></div>
+<script>
+(function(){
+  const P = window.PIEZA || {variant:"portada", eyebrow:"tutorial ARCA · paso a paso", titulo:"Cómo generar un *VEP* para pagar el monotributo", bajada:"lo importante, sin vueltas"};
+  const M = window.META || {n:1,total:1};
+  const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  const mark = s => esc(s).replace(/\*(.+?)\*/g,"<em>$1</em>");
+  const wave = (c,h=16) => `<svg class="wave" style="height:${h}px" viewBox="0 0 600 16" preserveAspectRatio="none"><path d="M0 8 Q 15 0 30 8 T 60 8 T 90 8 T 120 8 T 150 8 T 180 8 T 210 8 T 240 8 T 270 8 T 300 8 T 330 8 T 360 8 T 390 8 T 420 8 T 450 8 T 480 8 T 510 8 T 540 8 T 570 8 T 600 8" fill="none" stroke="${c}" stroke-width="3"/></svg>`;
+  const blob = (w,h,pos,col,rot) => `<svg class="blob" style="width:${w}px;height:${h}px;${pos};transform:rotate(${rot}deg)" viewBox="0 0 200 200"><path fill="${col}" transform="translate(100 100)" d="M44,-58C57,-47,67,-33,72,-17C77,-1,77,17,69,31C61,46,45,58,27,66C9,74,-11,78,-29,72C-47,66,-63,50,-71,31C-79,12,-79,-9,-71,-27C-63,-45,-47,-60,-30,-70C-13,-80,6,-85,21,-79C36,-73,31,-69,44,-58Z"/></svg>`;
+  const hand = (txt,size,col,wcol) => `<div class="hand"><div style="font-size:${size}px;color:${col}">${esc(txt)}</div>${wave(wcol)}</div>`;
+  const tapes = `<div class="tape1"></div><div class="tape2"></div>`;
+  const v = P.variant;
+  // Manchas: azul arriba a la derecha (ahí va el contador), violeta a la izquierda, mostaza y terracota abajo.
+  document.getElementById("blobs").innerHTML =
+    blob(560,440,"right:-170px;top:-180px","#1F3A7A",26) +
+    (v === "cierre" || v === "tip" ? blob(460,420,"left:-190px;top:-180px","#892CA0",-18) : blob(280,440,"left:-160px;top:400px","#892CA0",-7)) +
+    blob(480,460,"left:-170px;bottom:-210px","#E9B949",8) +
+    blob(420,420,"right:-150px;bottom:-170px","#C8643B",-14);
+  if (M.total > 1) document.getElementById("counter").textContent = `${M.n}/${M.total}`;
+  const W = document.getElementById("wrap");
+  if (v === "portada") {
+    W.className = "wrap"; W.style.cssText = "left:110px;right:110px;top:300px;gap:34px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,46,"#1F3A7A","#1F3A7A") : "") +
+      `<div style="font-weight:900;font-size:${(P.titulo||"").length > 60 ? 92 : 108}px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo)}</div>` +
+      (P.bajada ? hand(P.bajada,50,"#C8643B","#E9B949") : "");
+    const lg = document.getElementById("logo");
+    lg.style.cssText = "bottom:80px;flex-direction:column;align-items:center;gap:26px";
+    lg.insertAdjacentHTML("afterbegin", `<div style="font-family:'Patrick Hand',cursive;font-size:40px;color:#1F3A7A">deslizá →</div>`);
+    lg.querySelector("img") && (lg.querySelector("img").style.height = "104px");
+  } else if (v === "items") {
+    W.className = "wrap"; W.style.cssText = "top:70px;bottom:180px;gap:14px";
+    const pocos = (P.items || []).length <= 3;
+    const start = P.desde || 1;
+    const items = (P.items || []).map((it,i) => `${i ? wave("#E9B949",14) : ""}<div class="item"><div class="num">${start+i}</div><div class="it"><h3>${mark(it.t)}</h3>${it.d ? `<p>${mark(it.d)}</p>` : ""}</div></div>`).join("");
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,44,"#1F3A7A","#1F3A7A") : "") +
+      `<div style="font-weight:800;font-size:66px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
+      `<div class="card ${pocos ? "pocos" : ""}" style="margin:56px -8px 0;padding:48px 52px 40px;display:flex;flex-direction:column;gap:14px">${tapes}${items}</div>`;
+  } else if (v === "tip") {
+    W.className = "wrap"; W.style.cssText = "top:0;bottom:140px;justify-content:center;gap:16px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,44,"#1F3A7A","#1F3A7A") : "") +
+      `<div style="font-weight:800;font-size:72px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
+      `<div class="card" style="margin-top:56px;padding:64px 60px 60px">${tapes}
+        <div style="display:inline-flex;flex-direction:column"><div style="font-family:'Patrick Hand',cursive;font-size:66px;color:#C8643B;line-height:1">ojo</div>${wave("#C8643B",14)}</div>
+        <div style="font-weight:700;font-size:50px;line-height:1.28;margin-top:26px;color:#1D2A44">${mark(P.texto)}</div></div>`;
+  } else {
+    W.className = "wrap"; W.style.cssText = "left:90px;right:90px;top:0;bottom:150px;justify-content:center;align-items:center;text-align:center;gap:12px";
+    W.innerHTML = `<div style="font-family:'Patrick Hand',cursive;font-size:50px;color:#1F3A7A">¿te sirvió?</div>
+      <div style="font-weight:900;font-size:104px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo || "*Guardalo* para cuando lo necesites")}</div>
+      <div class="card" style="width:100%;margin-top:70px;padding:60px 48px 52px;display:flex;flex-direction:column;align-items:center;gap:10px">${tapes}
+        <div style="font-family:'Patrick Hand',cursive;font-size:46px;color:#C8643B">escribinos por WhatsApp</div>
+        <div style="font-weight:900;font-size:84px;line-height:1.1;color:#1F3A7A">+54 11 4992-2513</div>
+        <div style="width:70%;margin:8px 0">${wave("#E9B949",14)}</div>
+        <div style="font-weight:700;font-size:34px;color:#1D2A44">@estudioierlip · estudioierlip.com</div></div>`;
+  }
+  window.__READY = true;
+})();
+</script>
+</body>
+</html>

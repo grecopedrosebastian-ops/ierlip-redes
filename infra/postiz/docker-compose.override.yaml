@@ -1,0 +1,54 @@
+# Ajustes de IERLIP sobre el docker-compose oficial de Postiz
+# (https://github.com/gitroomhq/postiz-docker-compose). Docker Compose combina
+# los dos archivos solo: no hace falta tocar el oficial, así se puede actualizar con git pull.
+# Los valores salen de .env (ver .env.example).
+services:
+  postiz:
+    # Postiz queda accesible solo desde el propio servidor; afuera se entra por Caddy (HTTPS).
+    ports: !override
+      - "127.0.0.1:4007:5000"
+    environment:
+      MAIN_URL: "https://${DOMINIO}"
+      FRONTEND_URL: "https://${DOMINIO}"
+      NEXT_PUBLIC_BACKEND_URL: "https://${DOMINIO}/api"
+      JWT_SECRET: "${JWT_SECRET}"
+      DATABASE_URL: "postgresql://postiz-user:${POSTGRES_PASSWORD}@postiz-postgres:5432/postiz-db-local"
+      DISABLE_REGISTRATION: "${DISABLE_REGISTRATION:-false}"
+      API_LIMIT: 90
+      # Instagram: elegí UNA de las dos formas (ver README).
+      FACEBOOK_APP_ID: "${FACEBOOK_APP_ID:-}"
+      FACEBOOK_APP_SECRET: "${FACEBOOK_APP_SECRET:-}"
+      INSTAGRAM_APP_ID: "${INSTAGRAM_APP_ID:-}"
+      INSTAGRAM_APP_SECRET: "${INSTAGRAM_APP_SECRET:-}"
+      TIKTOK_CLIENT_ID: "${TIKTOK_CLIENT_ID:-}"
+      TIKTOK_CLIENT_SECRET: "${TIKTOK_CLIENT_SECRET:-}"
+      LINKEDIN_CLIENT_ID: "${LINKEDIN_CLIENT_ID:-}"
+      LINKEDIN_CLIENT_SECRET: "${LINKEDIN_CLIENT_SECRET:-}"
+
+  postiz-postgres:
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+
+  caddy:
+    image: caddy:2.8
+    container_name: postiz-caddy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMINIO: "${DOMINIO}"
+      EMAIL_ACME: "${EMAIL_ACME}"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./legal:/srv/legal:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - postiz-network
+    depends_on:
+      - postiz
+
+volumes:
+  caddy-data:
+  caddy-config:

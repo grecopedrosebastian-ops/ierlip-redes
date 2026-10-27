@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-04/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "AGIP · novedad",
+      "titulo": "Chau Clave Ciudad: AGIP ahora es con *miBA*",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "AGIP · paso a paso",
+      "titulo": "Qué hacer *según tu caso*",
+      "items": [
+        {
+          "t": "Cambió el acceso",
+          "d": "Los trámites de AGIP ahora se hacen con tu cuenta miBA nivel 3."
+        },
+        {
+          "t": "¿No tenés cuenta miBA?",
+          "d": "Creala en login.buenosaires.gob.ar o desde la app miBA."
+        },
+        {
+          "t": "¿Tenés nivel 1 o 2?",
+          "d": "Subí a nivel 3 validando tu identidad en la app, con DNI y reconocimiento facial."
+        },
+        {
+          "t": "¿Ya tenés nivel 3?",
+          "d": "La migración es automática: entrás a AGIP con tu cuenta miBA."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "si te trabás",
+      "titulo": "¿Necesitás *ayuda*?",
+      "texto": "Escribile a Boti, el WhatsApp de la Ciudad, al 11-5050-0147. O consultanos a nosotros."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

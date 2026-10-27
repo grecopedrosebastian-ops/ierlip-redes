@@ -1,0 +1,5 @@
+node_modules/
+carga/
+output/ejemplo/
+.env
+revision/cambios-repo-videos.diff

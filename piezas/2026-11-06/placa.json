@@ -1,0 +1,40 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-06/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "glosario",
+      "titulo": "*CUIT, CUIL y CDI*: no son lo mismo",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "glosario",
+      "titulo": "Para qué sirve *cada una*",
+      "items": [
+        {
+          "t": "CUIT",
+          "d": "La pedís cuando iniciás una actividad económica: autónomos, comercios y empresas."
+        },
+        {
+          "t": "CUIL",
+          "d": "La usás al trabajar en relación de dependencia y para trámites de ANSES."
+        },
+        {
+          "t": "CDI",
+          "d": "Para quien no tiene CUIT ni CUIL, por ejemplo para comprar un bien registrable."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "dato que confunde",
+      "titulo": "¿Es el *mismo número*?",
+      "texto": "En las personas humanas, la CUIT tiene el mismo número que la CUIL. Lo que cambia es para qué la usás."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

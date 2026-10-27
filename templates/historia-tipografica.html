@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+  Estilo C · Tipográfico · historia 1080x1920 (9:16). Lo renderiza scripts/render.mjs.
+  window.PIEZA = {
+    fondo: "navy" | "inst" | "crema",
+    eyebrow: "¿SABÍAS QUE?",
+    titulo: "El monotributo vence el *20*",      // *x* = palabra en ámbar
+    texto: "opcional, 1-2 líneas",
+    tarjetas: [{t:"Pagalo con VEP", relleno:true}, {t:"O adherí al débito"}],   // opcional, máx. 3
+    sticker: "VENCE EL 20",                        // opcional, rectángulo ámbar inclinado
+    sticker_zone: true                             // deja espacio vacío para el sticker nativo (encuesta, quiz, cuenta regresiva, link)
+  }
+  Zonas libres: 250 px arriba, 380 px abajo.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/800.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/inter/600.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/inter/700.css">
+<style>
+  :root{--deep:#0A192F;--navy:#0F1A30;--inst:#1B2A5C;--vio:#892CA0;--cel:#60A5FA;--crema:#F5F1E8;--ambar:#F5B335;--menta:#3FD0A5;--blanco:#F5F5F0;--gris:#E2E8F0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden}
+  body{position:relative;font-family:'Inter',sans-serif;background:var(--navy);color:var(--blanco)}
+  body.inst{background:var(--inst)} body.crema{background:var(--crema);color:var(--deep)}
+  .globe{position:absolute;width:1500px;height:1500px;right:-620px;top:420px;opacity:.07}
+  .safe{position:absolute;left:72px;right:72px;top:250px;bottom:380px;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-weight:800;font-size:40px;letter-spacing:.25em;color:var(--ambar);margin-bottom:28px}
+  body.inst .eyebrow{color:var(--cel)} body.crema .eyebrow{color:var(--vio)}
+  h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:124px;line-height:.98;letter-spacing:-.02em}
+  h1.m{font-size:104px} h1.s{font-size:88px}
+  em{font-style:normal;color:var(--ambar)} body.crema em{color:var(--vio)}
+  .texto{font-size:46px;font-weight:600;line-height:1.3;margin-top:34px;color:var(--gris)} body.crema .texto{color:#24324f}
+  .cards{margin-top:48px;display:flex;flex-direction:column;gap:26px}
+  .card{display:flex;align-items:center;gap:30px;border-radius:28px;padding:36px 40px;border:3px solid rgba(96,165,250,.45)}
+  .card.fill{background:var(--blanco);color:var(--deep);border-color:transparent;box-shadow:0 16px 40px rgba(0,0,0,.25)}
+  body.crema .card{border-color:rgba(10,25,47,.25)} body.crema .card.fill{background:#fff}
+  .check{flex:0 0 76px;height:76px;border-radius:50%;background:var(--menta);display:flex;align-items:center;justify-content:center}
+  .card span{font-weight:700;font-size:46px;line-height:1.15}
+  .sticker{align-self:flex-start;margin-top:56px;background:var(--ambar);color:var(--deep);font-family:'Montserrat',sans-serif;font-weight:900;font-size:64px;
+           padding:22px 40px;border-radius:14px;transform:rotate(-3.5deg);box-shadow:0 14px 30px rgba(0,0,0,.25)}
+  .zone{height:300px;margin-top:40px}
+  .foot{position:absolute;left:0;right:0;bottom:400px;text-align:center;font-weight:600;font-size:30px;color:var(--gris);opacity:.85}
+  body.crema .foot{color:#3b4a66}
+</style>
+</head>
+<body>
+<svg class="globe" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.2">
+  <circle cx="100" cy="100" r="96"/><ellipse cx="100" cy="100" rx="48" ry="96"/><ellipse cx="100" cy="100" rx="16" ry="96"/>
+  <line x1="4" y1="100" x2="196" y2="100"/><path d="M14 56 H186 M14 144 H186"/>
+</svg>
+<div class="safe" id="safe"></div>
+<div class="foot">@estudioierlip</div>
+<script>
+(function(){
+  const P = window.PIEZA || {fondo:"navy", eyebrow:"¿SABÍAS QUE?", titulo:"El monotributo vence el *20* de cada mes", tarjetas:[{t:"Pagalo con VEP o débito", relleno:true},{t:"Si cae feriado, pasa al día hábil siguiente"}], sticker:"GUARDALO 📌"};
+  const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  const mark = s => esc(s).replace(/\*(.+?)\*/g,"<em>$1</em>");
+  document.body.className = P.fondo || "navy";
+  document.querySelector(".globe").style.color = P.fondo === "crema" ? "#0F2B5C" : "#F5F5F0";
+  const len = (P.titulo || "").replace(/\*/g,"").length;
+  const size = len > 60 ? "s" : len > 38 ? "m" : "";
+  const check = `<div class="check"><svg width="44" height="44" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#0A192F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
+  const cards = (P.tarjetas || []).slice(0,3).map(c => `<div class="card ${c.relleno ? "fill" : ""}">${check}<span>${mark(c.t)}</span></div>`).join("");
+  document.getElementById("safe").innerHTML =
+    (P.eyebrow ? `<div class="eyebrow">${esc(P.eyebrow)}</div>` : "") +
+    `<h1 class="${size}">${mark(P.titulo)}</h1>` +
+    (P.texto ? `<div class="texto">${mark(P.texto)}</div>` : "") +
+    (cards ? `<div class="cards">${cards}</div>` : "") +
+    (P.sticker ? `<div class="sticker">${esc(P.sticker)}</div>` : "") +
+    (P.sticker_zone ? `<div class="zone"></div>` : "");
+  window.__READY = true;
+})();
+</script>
+</body>
+</html>

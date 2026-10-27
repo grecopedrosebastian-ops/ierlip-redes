@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+  Estilo C · Tipográfico · placa de debate 1080x1350 (4:5). Lo renderiza scripts/render.mjs.
+  window.PIEZA = {
+    eyebrow: "DEBATE",
+    titulo: "¿Ingresos Brutos *debería existir?*",   // *x* = palabra en ámbar
+    dato: "Se calcula sobre lo que facturás, no sobre lo que ganás.",
+    fuente: "Fuente: arba.gov.ar",
+    sticker: "TE LEEMOS EN COMENTARIOS 👇"
+  }
+  Seguir docs/linea-editorial.md (debate con criterio).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/800.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/inter/500.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/inter/700.css">
+<style>
+  :root{--deep:#0A192F;--navy:#0F1A30;--cel:#60A5FA;--ambar:#F5B335;--menta:#3FD0A5;--blanco:#F5F5F0;--gris:#E2E8F0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1350px;overflow:hidden}
+  body{position:relative;background:var(--navy);color:var(--blanco);font-family:'Inter',sans-serif}
+  .globe{position:absolute;width:1300px;height:1300px;right:-560px;top:-260px;opacity:.07;color:#F5F5F0}
+  .wrap{position:absolute;inset:110px 72px 120px;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-weight:800;font-size:40px;letter-spacing:.28em;color:var(--cel);margin-bottom:26px}
+  h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:104px;line-height:.98;letter-spacing:-.02em}
+  h1.m{font-size:90px} h1.s{font-size:76px}
+  em{font-style:normal;color:var(--ambar)}
+  .dato{margin-top:52px;background:var(--blanco);color:var(--deep);border-radius:28px;padding:36px 40px;display:flex;gap:28px;align-items:flex-start;box-shadow:0 16px 40px rgba(0,0,0,.28)}
+  .check{flex:0 0 70px;height:70px;border-radius:50%;background:var(--menta);display:flex;align-items:center;justify-content:center}
+  .dato p{font-weight:700;font-size:40px;line-height:1.2}
+  .dato small{display:block;font-weight:500;font-size:24px;color:#4a5568;margin-top:12px}
+  .sticker{align-self:flex-start;margin-top:52px;background:var(--ambar);color:var(--deep);font-family:'Montserrat',sans-serif;font-weight:900;font-size:46px;
+           padding:20px 34px;border-radius:12px;transform:rotate(-3deg);box-shadow:0 14px 30px rgba(0,0,0,.28)}
+  .foot{position:absolute;left:72px;right:72px;bottom:60px;display:flex;justify-content:space-between;font-weight:700;font-size:28px;color:var(--gris);opacity:.85}
+</style>
+</head>
+<body>
+<svg class="globe" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.2">
+  <circle cx="100" cy="100" r="96"/><ellipse cx="100" cy="100" rx="48" ry="96"/><ellipse cx="100" cy="100" rx="16" ry="96"/>
+  <line x1="4" y1="100" x2="196" y2="100"/><path d="M14 56 H186 M14 144 H186"/>
+</svg>
+<div class="wrap" id="wrap"></div>
+<div class="foot"><span>Estudio IERLIP</span><span>@estudioierlip</span></div>
+<script>
+(function(){
+  const P = window.PIEZA || {eyebrow:"DEBATE", titulo:"¿Ingresos Brutos *debería existir?*", dato:"Se calcula sobre lo que facturás, no sobre lo que ganás.", fuente:"Fuente: verificar en arba.gov.ar / agip.gob.ar", sticker:"TE LEEMOS EN COMENTARIOS 👇"};
+  const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  const mark = s => esc(s).replace(/\*(.+?)\*/g,"<em>$1</em>");
+  const len = (P.titulo || "").replace(/\*/g,"").length;
+  const size = len > 55 ? "s" : len > 34 ? "m" : "";
+  const check = `<div class="check"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#0A192F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
+  document.getElementById("wrap").innerHTML =
+    `<div class="eyebrow">${esc(P.eyebrow || "DEBATE")}</div><h1 class="${size}">${mark(P.titulo)}</h1>` +
+    (P.dato ? `<div class="dato">${check}<p>${mark(P.dato)}${P.fuente ? `<small>${esc(P.fuente)}</small>` : ""}</p></div>` : "") +
+    `<div class="sticker">${esc(P.sticker || "TE LEEMOS EN COMENTARIOS 👇")}</div>`;
+  window.__READY = true;
+})();
+</script>
+</body>
+</html>

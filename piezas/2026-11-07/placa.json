@@ -1,0 +1,44 @@
+{
+  "template": "placa-papel",
+  "out": "output/2026-11-07/placa",
+  "slides": [
+    {
+      "variant": "portada",
+      "eyebrow": "laboral · sin enredos",
+      "titulo": "Tu *recibo de sueldo* ahora tiene 4 partes",
+      "bajada": "lo importante, sin vueltas"
+    },
+    {
+      "variant": "items",
+      "eyebrow": "laboral · sin enredos",
+      "titulo": "Las *4 secciones* del recibo",
+      "items": [
+        {
+          "t": "Datos de las partes",
+          "d": "Empleador con su CUIT y trabajador con su CUIL, categoría y fecha de ingreso."
+        },
+        {
+          "t": "Contribuciones del empleador",
+          "d": "Lo que aporta tu empleador además de tu sueldo."
+        },
+        {
+          "t": "Bruto y deducciones",
+          "d": "Tu remuneración, cómo se calculó y los descuentos."
+        },
+        {
+          "t": "Remuneración neta",
+          "d": "Lo que cobrás, en números y en letras."
+        }
+      ]
+    },
+    {
+      "variant": "tip",
+      "eyebrow": "además",
+      "titulo": "Lo nuevo que vas a *ver*",
+      "texto": "El frente del recibo tiene que mostrar un resumen del costo laboral total. Y podés firmarlo en papel o de forma digital."
+    },
+    {
+      "variant": "cierre"
+    }
+  ]
+}

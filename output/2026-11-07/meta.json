@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-11-07",
+  "dia": "sab",
+  "pilar": "Laboral",
+  "titulo": "Tu recibo de sueldo ahora tiene 4 partes",
+  "publicar_placa": "2026-11-07T11:00:00-03:00",
+  "publicar_historia": "2026-11-07T09:00:00-03:00",
+  "sticker_nativo": null,
+  "sources": [
+    "https://www.argentina.gob.ar/normativa/nacional/norma-423680/texto (Ley 27.802, arts. 139 y 140 LCT)",
+    "https://www.argentina.gob.ar/normativa/nacional/norma-426270/texto (Decreto 407/2026)"
+  ],
+  "needs_review": [
+    "Releer el Decreto 407/2026: que el detalle de cada sección (categoría y fecha de ingreso en la 1, «cómo se calculó» en la 3) coincida con el texto.",
+    "Que la obligación del resumen del costo laboral en el frente ya esté vigente (fecha de aplicación del decreto)."
+  ],
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+}

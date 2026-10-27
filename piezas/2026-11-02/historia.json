@@ -1,0 +1,21 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-02/historia",
+  "slides": [
+    {
+      "eyebrow": "esta semana",
+      "titulo": "Arrancá noviembre *ordenado*",
+      "sticker_zone": true,
+      "tarjetas": [
+        {
+          "t": "Juntá tus comprobantes",
+          "d": "Facturas emitidas y recibidas de octubre, en una sola carpeta."
+        },
+        {
+          "t": "Revisá tu cuenta corriente",
+          "d": "En ARCA, para ver si quedó alguna deuda pendiente."
+        }
+      ]
+    }
+  ]
+}

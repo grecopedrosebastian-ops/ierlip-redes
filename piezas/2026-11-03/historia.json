@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-03/historia",
+  "slides": [
+    {
+      "eyebrow": "quiz",
+      "titulo": "¿Ingresos Brutos es *nacional o provincial?*",
+      "texto": "Respondé acá abajo.",
+      "sticker_zone": true
+    }
+  ]
+}

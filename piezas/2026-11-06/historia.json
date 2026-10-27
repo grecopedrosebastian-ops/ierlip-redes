@@ -1,0 +1,12 @@
+{
+  "template": "historia-papel",
+  "out": "output/2026-11-06/historia",
+  "slides": [
+    {
+      "eyebrow": "preguntanos",
+      "titulo": "¿Qué *trámite* de ARCA te cuesta más?",
+      "texto": "Dejanos tu pregunta y la respondemos en historias.",
+      "sticker_zone": true
+    }
+  ]
+}
