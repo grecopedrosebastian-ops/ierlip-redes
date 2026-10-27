@@ -14,5 +14,11 @@
     "Leer la RG 4172 en boletinoficial.gob.ar.",
     "Si ARBA corre vencimientos por el feriado del 11/11 (pista no oficial: RN ARBA 21/2026, al 12/11) y si AGIP corre los del 10/11."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408363934,
+    "estado": "borrador"
+  }
 }

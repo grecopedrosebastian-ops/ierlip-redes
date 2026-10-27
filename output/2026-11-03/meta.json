@@ -16,5 +16,11 @@
     "Definición de IIBB («sobre lo que facturás») y quién debe inscribirse: confirmar con el Código Fiscal de PBA en arba.gov.ar.",
     "Que quien tiene actividad en CABA quede fuera del Simplificado de PBA: solo visto en un fragmento de ARBA."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408363906,
+    "estado": "borrador"
+  }
 }

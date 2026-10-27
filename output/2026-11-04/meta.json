@@ -13,5 +13,11 @@
     "La noticia oficial es del 28/10/2025: confirmar en agip.gob.ar que sigue vigente y que no hubo cambios en los niveles.",
     "Número de Boti 11-5050-0147: confirmar en buenosaires.gob.ar."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408363919,
+    "estado": "borrador"
+  }
 }

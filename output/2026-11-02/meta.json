@@ -12,5 +12,11 @@
   "needs_review": [
     "Entrar a ARCA y confirmar que el servicio sigue llamándose «Presentación de DDJJ y Pagos» el día de publicación."
   ],
-  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza."
+  "notes": "Verificado el 27/10/2026. Las fuentes no van en la pieza.",
+  "metricool": {
+    "placa": true,
+    "historia": false,
+    "placa_post_id": 408363874,
+    "estado": "borrador"
+  }
 }
