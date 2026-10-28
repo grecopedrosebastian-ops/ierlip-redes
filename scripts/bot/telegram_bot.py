@@ -7,6 +7,7 @@ Comandos (solo se aceptan desde TELEGRAM_CHAT_ID):
   /aviso <texto>      placa de aviso urgente + texto para WhatsApp
   /encuesta [tema]    historia para pegar el sticker de encuesta (o: pregunta | opción 1 | opción 2)
   /cambiar <pedido>   rehace la última pieza con ese cambio
+  /video [formato] [tema]  pide un video al repo ierlip-video-diario (vencimientos, conversacion u oficina)
   /estado             si las tareas de hoy corrieron
   /ayuda              lista de comandos
 
@@ -21,6 +22,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -42,9 +44,10 @@ AYUDA = """🤖 COMANDOS
 /historia <tema> — historia informativa
 /encuesta [tema] — historia de encuesta (o: pregunta | opción 1 | opción 2)
 /cambiar <pedido> — rehace lo último con ese cambio
+/video [formato] [tema] — pide un video (formato: vencimientos, conversacion u oficina; el tema es opcional)
 /estado — si las tareas de hoy corrieron
 
-Ejemplo: /placa fondo de asistencia laboral
+Ejemplos: /placa fondo de asistencia laboral · /video vencimientos IVA de noviembre
 Tarda entre 3 y 8 minutos. Todo llega como archivo para que lo revises y lo publiques vos."""
 
 
@@ -94,6 +97,35 @@ def estado():
     return txt + "\nVideos: si no te llegó el de hoy, mirá Actions en el repo ierlip-video-diario."
 
 
+FORMATOS = {"vencimientos": "vencimientos", "vencimiento": "vencimientos",
+            "conversacion": "situacion-graciosa", "conversación": "situacion-graciosa", "graciosa": "situacion-graciosa",
+            "situacion-graciosa": "situacion-graciosa", "oficina": "personaje-oficina", "personaje-oficina": "personaje-oficina"}
+VIDEOS_REPO = "grecopedrosebastian-ops/ierlip-video-diario"
+
+
+def pedir_video(arg):
+    """Lanza el workflow del repo de videos (necesita el secreto VIDEOS_TOKEN con permiso de Actions en ese repo)."""
+    token = os.environ.get("VIDEOS_TOKEN", "").strip()
+    if not token:
+        return "Para pedir videos falta cargar el secreto VIDEOS_TOKEN en el repo ierlip-redes."
+    palabras = arg.split(maxsplit=1)
+    formato = "auto"
+    if palabras and palabras[0].lower() in FORMATOS:
+        formato = FORMATOS[palabras[0].lower()]
+        arg = palabras[1] if len(palabras) > 1 else ""
+    body = json.dumps({"ref": "main", "inputs": {"format": formato, "topic": arg.strip()}}).encode()
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{VIDEOS_REPO}/actions/workflows/daily-video.yml/dispatches", data=body, method="POST",
+        headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json", "Content-Type": "application/json"})
+    try:
+        urllib.request.urlopen(req, timeout=30)
+    except urllib.error.HTTPError as e:
+        return f"❌ No pude pedir el video (GitHub respondió {e.code}). Revisá el secreto VIDEOS_TOKEN."
+    tema = f" sobre «{arg.strip()}»" if arg.strip() else ""
+    return (f"🎬 Pedí un video ({formato}){tema}. Tarda entre 10 y 20 minutos y te llega por acá, "
+            "como los diarios. Usa crédito de la IA igual que los videos automáticos.")
+
+
 def leer():
     chat = os.environ["TELEGRAM_CHAT_ID"].strip()
     # Si otro sistema dejó un webhook en el bot, getUpdates no funciona: se saca.
@@ -121,6 +153,8 @@ def leer():
                 break  # un pedido con IA por corrida; los demás quedan para la próxima
         elif cmd == "estado":
             tg.texto(estado())
+        elif cmd == "video":
+            tg.texto(pedir_video(arg))
         elif cmd in {"ayuda", "start", "help"}:
             tg.texto(AYUDA)
         else:

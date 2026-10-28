@@ -1,4 +1,4 @@
-# Bot de comandos de Telegram (/placa, /historia, /aviso, /encuesta, /cambiar, /estado).
+# Bot de comandos de Telegram (/placa, /historia, /aviso, /encuesta, /cambiar, /video, /estado).
 # Cada 5 minutos revisa si Seba escribió. Si hay un pedido, Claude arma la pieza verificando datos en la web,
 # se renderiza con los templates del proyecto y se manda por Telegram como archivo. No publica nada.
 name: Telegram bot (comandos)
@@ -26,6 +26,7 @@ jobs:
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      VIDEOS_TOKEN: ${{ secrets.VIDEOS_TOKEN }}   # token con permiso de Actions en ierlip-video-diario (para /video)
     steps:
       - uses: actions/checkout@v4
 
@@ -52,6 +53,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ""
           TELEGRAM_CHAT_ID: ""
           TELEGRAM_THREAD_ID: ""
+          VIDEOS_TOKEN: ""
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
