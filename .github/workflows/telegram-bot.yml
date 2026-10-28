@@ -1,0 +1,86 @@
+# Bot de comandos de Telegram (/placa, /historia, /aviso, /encuesta, /cambiar, /estado).
+# Cada 5 minutos revisa si Seba escribió. Si hay un pedido, Claude arma la pieza verificando datos en la web,
+# se renderiza con los templates del proyecto y se manda por Telegram como archivo. No publica nada.
+name: Telegram bot (comandos)
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: telegram-bot
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # guardar state/bot-ultimo.json para /cambiar
+  id-token: write   # requerido por claude-code-action
+  actions: read     # /estado consulta las corridas de hoy
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Leer mensajes
+        id: leer
+        run: python3 scripts/bot/telegram_bot.py leer
+
+      - uses: actions/setup-node@v4
+        if: steps.leer.outputs.hay_pedido == 'true'
+        with:
+          node-version: 22
+
+      - name: Preparar render (Playwright y fuentes)
+        if: steps.leer.outputs.hay_pedido == 'true'
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      # Claude arma la pieza. NO recibe los secretos de Telegram.
+      - name: Claude arma la pieza
+        if: steps.leer.outputs.hay_pedido == 'true'
+        uses: anthropics/claude-code-action@v1
+        env:
+          TELEGRAM_BOT_TOKEN: ""
+          TELEGRAM_CHAT_ID: ""
+          TELEGRAM_THREAD_ID: ""
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: "/bot-pedido"
+          claude_args: >-
+            --model ${{ vars.CLAUDE_MODEL || 'claude-sonnet-5-5' }}
+            --max-turns 60
+            --allowedTools "Skill,Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
+
+      - name: Renderizar
+        if: steps.leer.outputs.hay_pedido == 'true'
+        run: node scripts/render.mjs bot/salida/spec.json
+
+      - name: Mandar por Telegram
+        if: steps.leer.outputs.hay_pedido == 'true'
+        run: python3 scripts/bot/telegram_bot.py enviar
+
+      - name: Guardar la última pieza (para /cambiar)
+        if: steps.leer.outputs.hay_pedido == 'true'
+        run: |
+          git config user.name "ierlip-redes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state/bot-ultimo.json
+          if git diff --cached --quiet; then echo "sin cambios"; else
+            git commit -m "bot: última pieza"
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Avisar el error por Telegram
+        if: failure() && steps.leer.outputs.hay_pedido == 'true'
+        run: python3 scripts/bot/telegram_bot.py error

@@ -68,6 +68,13 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - Horarios (datos de la cuenta): Instagram a las 10 h los días hábiles y a las 18 h como segundo pico; TikTok a las 10, 12 y 18 h. Videos a las 10:00 o 18:00 según el calendario. Placas: 12:00 en días hábiles y 11:00 los fines de semana. Historias: 09:00. Zona horaria America/Buenos_Aires.
 - Metricool (blogId 6874988) queda conectado pero sin uso.
 
+## Bot de comandos de Telegram (`.github/workflows/telegram-bot.yml`)
+- Cada 5 minutos lee los mensajes del chat de Seba (solo ese chat). Comandos: `/placa`, `/historia`, `/aviso`, `/encuesta`, `/cambiar`, `/estado`, `/ayuda`.
+- Claude arma la pieza con la skill `.claude/skills/bot-pedido`, verificando datos en fuentes oficiales; se renderiza con los templates del proyecto y se manda como archivo. No publica nada.
+- `state/bot-ultimo.json` guarda la última pieza para `/cambiar`. Código: `scripts/bot/telegram_bot.py`.
+- Necesita en los Secrets del repo: `TELEGRAM_*` (ya cargados) y `CLAUDE_CODE_OAUTH_TOKEN` o `ANTHROPIC_API_KEY`.
+- Reemplaza al bot armado en Cowork, que dejó de funcionar el 28/10.
+
 ## Reglas no negociables
 - No publicar, no programar con publicación automática y no hacer push sin el OK de Seba. Mostrar los cambios antes.
 - Verificar todo dato fiscal en fuentes oficiales. Lo dudoso va a "VERIFICAR ANTES DE PUBLICAR".
