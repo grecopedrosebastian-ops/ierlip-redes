@@ -75,6 +75,11 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - Necesita en los Secrets del repo: `TELEGRAM_*` (ya cargados) y `CLAUDE_CODE_OAUTH_TOKEN` o `ANTHROPIC_API_KEY`.
 - Reemplaza al bot armado en Cowork, que dejó de funcionar el 28/10.
 
+## Novedades de ARCA, placa diaria (`.github/workflows/arca-diario.yml`)
+- De lunes a viernes a las 08:00 (o a mano desde Actions) revisa las novedades oficiales de ARCA y el Boletín Oficial de los últimos 3 días, elige la más útil y arma un carrusel con nuestro estilo: misma información, redacción propia y un juego de palabras en el título. Skill: `.claude/skills/arca-diario`.
+- Llega por Telegram con caption y lista de verificar. Se puede retocar con `/cambiar`. `state/arca-vistas.json` evita repetir novedades.
+- El Instagram de ARCA no se lee de forma automática (pide login): se usan las fuentes oficiales de donde salen esas publicaciones. Nunca copiar textos, imágenes ni logo de ARCA.
+
 ## Reglas no negociables
 - No publicar, no programar con publicación automática y no hacer push sin el OK de Seba. Mostrar los cambios antes.
 - Verificar todo dato fiscal en fuentes oficiales. Lo dudoso va a "VERIFICAR ANTES DE PUBLICAR".

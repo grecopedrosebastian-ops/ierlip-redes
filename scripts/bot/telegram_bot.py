@@ -205,4 +205,7 @@ def error(motivo=""):
 
 
 if __name__ == "__main__":
-    {"leer": leer, "enviar": enviar, "error": error}[sys.argv[1]]()
+    if sys.argv[1] == "texto":  # manda un mensaje suelto (lo usa arca-diario)
+        tg.texto(sys.argv[2])
+    else:
+        {"leer": leer, "enviar": enviar, "error": error}[sys.argv[1]]()

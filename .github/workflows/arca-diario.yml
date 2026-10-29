@@ -1,0 +1,94 @@
+# Todos los días revisa las novedades oficiales de ARCA (lo mismo que publica en su Instagram) y arma una placa
+# con el estilo de @estudioierlip: misma información, redacción propia y juego de palabras. Llega por Telegram.
+# No publica nada.
+name: Novedades ARCA (placa diaria)
+
+on:
+  schedule:
+    - cron: "0 11 * * 1-5"   # 11:00 UTC = 08:00 en Buenos Aires, de lunes a viernes
+  workflow_dispatch:
+
+concurrency:
+  group: arca-diario
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # guardar state/arca-vistas.json y state/bot-ultimo.json
+  id-token: write   # requerido por claude-code-action
+
+jobs:
+  arca:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Preparar render (Playwright y fuentes)
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Preparar la clave de Claude
+        env:
+          CLAVE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          limpia="$(printf '%s' "$CLAVE" | tr -d '[:space:]')"
+          echo "::add-mask::$limpia"
+          echo "CLAVE_CLAUDE=$limpia" >> "$GITHUB_ENV"
+          mkdir -p bot
+          echo '{"comando": "placa", "pedido": "novedad ARCA del día"}' > bot/pedido.json
+
+      # Claude busca la novedad y arma la placa. NO recibe los secretos de Telegram.
+      - name: Claude arma la placa
+        uses: anthropics/claude-code-action@v1
+        env:
+          TELEGRAM_BOT_TOKEN: ""
+          TELEGRAM_CHAT_ID: ""
+          TELEGRAM_THREAD_ID: ""
+        with:
+          claude_code_oauth_token: ${{ env.CLAVE_CLAUDE }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: "/arca-diario"
+          claude_args: >-
+            --model ${{ vars.CLAUDE_MODEL || 'claude-opus-5-5' }}
+            --max-turns 80
+            --allowedTools "Skill,Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
+
+      - name: Sin novedades
+        id: sin
+        run: |
+          if [ -f bot/salida/sin-novedades.txt ]; then
+            python3 scripts/bot/telegram_bot.py texto "📰 Novedades ARCA: hoy no hay nada nuevo para placa. $(head -c 300 bot/salida/sin-novedades.txt)"
+            echo "nada=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Renderizar
+        if: steps.sin.outputs.nada != 'true'
+        run: node scripts/render.mjs bot/salida/spec.json
+
+      - name: Mandar por Telegram
+        if: steps.sin.outputs.nada != 'true'
+        run: python3 scripts/bot/telegram_bot.py enviar
+
+      - name: Guardar lo usado
+        run: |
+          git config user.name "ierlip-redes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state/arca-vistas.json state/bot-ultimo.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "sin cambios"; else
+            git commit -m "arca-diario: novedad usada"
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Avisar el error por Telegram
+        if: failure()
+        run: python3 scripts/bot/telegram_bot.py texto "❌ No pude armar la placa de novedades de ARCA de hoy. Revisá Actions en el repo ierlip-redes."
