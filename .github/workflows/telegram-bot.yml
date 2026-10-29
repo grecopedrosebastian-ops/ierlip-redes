@@ -45,6 +45,16 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium
 
+      # Limpia espacios o saltos de línea que se cuelan al pegar la clave en GitHub (y la sigue ocultando en el log).
+      - name: Preparar la clave de Claude
+        if: steps.leer.outputs.hay_pedido == 'true'
+        env:
+          CLAVE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          limpia="$(printf '%s' "$CLAVE" | tr -d '[:space:]')"
+          echo "::add-mask::$limpia"
+          echo "CLAVE_CLAUDE=$limpia" >> "$GITHUB_ENV"
+
       # Claude arma la pieza. NO recibe los secretos de Telegram.
       - name: Claude arma la pieza
         if: steps.leer.outputs.hay_pedido == 'true'
@@ -55,7 +65,7 @@ jobs:
           TELEGRAM_THREAD_ID: ""
           VIDEOS_TOKEN: ""
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ env.CLAVE_CLAUDE }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: "/bot-pedido"
