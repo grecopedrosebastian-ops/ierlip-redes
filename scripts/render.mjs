@@ -16,7 +16,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SIZES = {
-  "placa-papel": [1080, 1350],
+  "placa-papel": [1080, 1080],
   "placa-debate": [1080, 1350],
   "historia-tipografica": [1080, 1920],
   "historia-papel": [1080, 1920],

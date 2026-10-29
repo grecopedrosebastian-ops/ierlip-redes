@@ -1,7 +1,7 @@
 # Estilos visuales · placas e historias (aprobados el 27/10/2026)
 
 Formatos:
-- **Feed (placas y carruseles): 4:5, 1080×1350.** La grilla del perfil se ve en 3:4, así que 4:5 casi no se recorta. Margen seguro: 72 px a los lados y 90 px arriba y abajo.
+- **Feed (placas y carruseles): 1:1, 1080×1080** (cambio del 29/10/2026: en 4:5, al subir desde el celular se cortaba el logo). Las placas del 1 al 20/11 ya programadas en Metricool quedaron en 4:5 y se publican por API sin recorte.
 - **Historias: 9:16, 1080×1920.** Zonas libres: 250 px arriba y 380 px abajo (interfaz de Instagram). Márgenes laterales: 72 px.
 - Se exporta en PNG con `scripts/render.mjs`. **No se reescribe el layout:** se cambian los datos.
 

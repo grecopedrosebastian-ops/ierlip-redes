@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Estilo B · Papel IERLIP · 1080x1350 (4:5). Lo renderiza scripts/render.mjs.
+  Estilo B · Papel IERLIP · 1080x1080 (1:1; antes 4:5, cambiado el 29/10/2026 porque al subir desde el celular se cortaba el logo). Lo renderiza scripts/render.mjs.
   Aprobado en Design el 27/10/2026 (referencia: "resumen impositivo · 17/10/2026").
   Datos: window.PIEZA (una slide). Variantes:
     {variant:"portada", eyebrow, titulo, bajada}
@@ -21,11 +21,11 @@
   :root{--deep:#0F1A30;--fondo:#F3EEE2;--papel:rgba(251,248,241,.96);--azul:#1F3A7A;--vio:#892CA0;
         --mostaza:#E9B949;--terra:#C8643B;--txt:#1D2A44}
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:1080px;height:1350px;overflow:hidden}
+  html,body{width:1080px;height:1080px;overflow:hidden}
   body{position:relative;background:var(--fondo);color:var(--deep);font-family:'Source Serif 4',serif}
   .blob{position:absolute}
   .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;mix-blend-mode:multiply;pointer-events:none}
-  .counter{position:absolute;top:72px;right:72px;font-family:'Patrick Hand',cursive;font-size:40px;color:#F5F1E8}
+  .counter{position:absolute;top:56px;right:64px;font-family:'Patrick Hand',cursive;font-size:36px;color:#F5F1E8}
   .hand{align-self:flex-start;display:flex;flex-direction:column;gap:2px}
   .hand div{font-family:'Patrick Hand',cursive}
   .wave{display:block;width:100%;height:16px}
@@ -33,17 +33,17 @@
   .wrap{position:absolute;left:80px;right:80px;display:flex;flex-direction:column}
   .card{position:relative;background:var(--papel);border-radius:12px;box-shadow:0 18px 40px rgba(10,25,47,.16)}
   .tape1,.tape2{position:absolute;left:50%;background:rgba(233,185,73,.6)}
-  .tape1{top:-26px;width:220px;height:40px;margin-left:-120px;transform:rotate(-4deg)}
-  .tape2{top:-8px;width:200px;height:36px;margin-left:-96px;background:rgba(233,185,73,.5);transform:rotate(3deg)}
-  .item{display:flex;gap:28px;align-items:flex-start}
-  .num{flex:0 0 72px;height:72px;border:4px solid var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;
-       font-family:'Patrick Hand',cursive;font-size:42px;color:var(--terra)}
-  .it h3{font-weight:800;font-size:46px;line-height:1.1}
-  .it p{font-weight:700;font-size:28px;line-height:1.3;color:var(--txt);margin-top:6px}
-  .pocos{padding-top:60px!important;padding-bottom:56px!important;gap:26px!important}
-  .pocos .it h3{font-size:54px} .pocos .it p{font-size:34px}
-  .logo{position:absolute;left:0;right:0;bottom:48px;display:flex;justify-content:center}
-  .logo img{height:96px;display:block}
+  .tape1{top:-22px;width:190px;height:34px;margin-left:-104px;transform:rotate(-4deg)}
+  .tape2{top:-6px;width:170px;height:30px;margin-left:-82px;background:rgba(233,185,73,.5);transform:rotate(3deg)}
+  .item{display:flex;gap:24px;align-items:flex-start}
+  .num{flex:0 0 60px;height:60px;border:4px solid var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;
+       font-family:'Patrick Hand',cursive;font-size:36px;color:var(--terra)}
+  .it h3{font-weight:800;font-size:38px;line-height:1.1}
+  .it p{font-weight:700;font-size:24px;line-height:1.28;color:var(--txt);margin-top:4px}
+  .pocos{padding-top:46px!important;padding-bottom:42px!important;gap:18px!important}
+  .pocos .it h3{font-size:44px} .pocos .it p{font-size:28px}
+  .logo{position:absolute;left:0;right:0;bottom:30px;display:flex;justify-content:center}
+  .logo img{height:78px;display:block}
   .logo span{font-weight:900;font-size:36px;color:var(--azul)}
 </style>
 </head>
@@ -66,45 +66,45 @@
   const v = P.variant;
   // Manchas: azul arriba a la derecha (ahí va el contador), violeta a la izquierda, mostaza y terracota abajo.
   document.getElementById("blobs").innerHTML =
-    blob(560,440,"right:-170px;top:-180px","#1F3A7A",26) +
-    (v === "cierre" || v === "tip" ? blob(460,420,"left:-190px;top:-180px","#892CA0",-18) : blob(280,440,"left:-160px;top:400px","#892CA0",-7)) +
-    blob(480,460,"left:-170px;bottom:-210px","#E9B949",8) +
-    blob(420,420,"right:-150px;bottom:-170px","#C8643B",-14);
+    blob(500,400,"right:-170px;top:-170px","#1F3A7A",26) +
+    (v === "cierre" || v === "tip" ? blob(420,380,"left:-190px;top:-170px","#892CA0",-18) : blob(260,400,"left:-160px;top:330px","#892CA0",-7)) +
+    blob(420,400,"left:-170px;bottom:-200px","#E9B949",8) +
+    blob(380,380,"right:-150px;bottom:-170px","#C8643B",-14);
   if (M.total > 1) document.getElementById("counter").textContent = `${M.n}/${M.total}`;
   const W = document.getElementById("wrap");
   if (v === "portada") {
-    W.className = "wrap"; W.style.cssText = "left:110px;right:110px;top:300px;gap:34px";
-    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,46,"#1F3A7A","#1F3A7A") : "") +
-      `<div style="font-weight:900;font-size:${(P.titulo||"").length > 60 ? 92 : 108}px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo)}</div>` +
-      (P.bajada ? hand(P.bajada,50,"#C8643B","#E9B949") : "");
+    W.className = "wrap"; W.style.cssText = "left:100px;right:100px;top:190px;gap:26px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,40,"#1F3A7A","#1F3A7A") : "") +
+      `<div style="font-weight:900;font-size:${(P.titulo||"").length > 60 ? 78 : 92}px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo)}</div>` +
+      (P.bajada ? hand(P.bajada,44,"#C8643B","#E9B949") : "");
     const lg = document.getElementById("logo");
-    lg.style.cssText = "bottom:80px;flex-direction:column;align-items:center;gap:26px";
-    lg.insertAdjacentHTML("afterbegin", `<div style="font-family:'Patrick Hand',cursive;font-size:40px;color:#1F3A7A">deslizá →</div>`);
-    lg.querySelector("img") && (lg.querySelector("img").style.height = "104px");
+    lg.style.cssText = "bottom:44px;flex-direction:column;align-items:center;gap:18px";
+    lg.insertAdjacentHTML("afterbegin", `<div style="font-family:'Patrick Hand',cursive;font-size:34px;color:#1F3A7A">deslizá →</div>`);
+    lg.querySelector("img") && (lg.querySelector("img").style.height = "88px");
   } else if (v === "items") {
-    W.className = "wrap"; W.style.cssText = "top:70px;bottom:180px;gap:14px";
+    W.className = "wrap"; W.style.cssText = "top:52px;bottom:120px;gap:10px";
     const pocos = (P.items || []).length <= 3;
     const start = P.desde || 1;
     const items = (P.items || []).map((it,i) => `${i ? wave("#E9B949",14) : ""}<div class="item"><div class="num">${start+i}</div><div class="it"><h3>${mark(it.t)}</h3>${it.d ? `<p>${mark(it.d)}</p>` : ""}</div></div>`).join("");
-    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,44,"#1F3A7A","#1F3A7A") : "") +
-      `<div style="font-weight:800;font-size:66px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
-      `<div class="card ${pocos ? "pocos" : ""}" style="margin:56px -8px 0;padding:48px 52px 40px;display:flex;flex-direction:column;gap:14px">${tapes}${items}</div>`;
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,"#1F3A7A","#1F3A7A") : "") +
+      `<div style="font-weight:800;font-size:54px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
+      `<div class="card ${pocos ? "pocos" : ""}" style="margin:40px -8px 0;padding:36px 44px 30px;display:flex;flex-direction:column;gap:8px">${tapes}${items}</div>`;
   } else if (v === "tip") {
-    W.className = "wrap"; W.style.cssText = "top:0;bottom:140px;justify-content:center;gap:16px";
-    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,44,"#1F3A7A","#1F3A7A") : "") +
-      `<div style="font-weight:800;font-size:72px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
-      `<div class="card" style="margin-top:56px;padding:64px 60px 60px">${tapes}
-        <div style="display:inline-flex;flex-direction:column"><div style="font-family:'Patrick Hand',cursive;font-size:66px;color:#C8643B;line-height:1">ojo</div>${wave("#C8643B",14)}</div>
-        <div style="font-weight:700;font-size:50px;line-height:1.28;margin-top:26px;color:#1D2A44">${mark(P.texto)}</div></div>`;
+    W.className = "wrap"; W.style.cssText = "top:0;bottom:110px;justify-content:center;gap:12px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,"#1F3A7A","#1F3A7A") : "") +
+      `<div style="font-weight:800;font-size:60px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
+      `<div class="card" style="margin-top:42px;padding:48px 50px 44px">${tapes}
+        <div style="display:inline-flex;flex-direction:column"><div style="font-family:'Patrick Hand',cursive;font-size:54px;color:#C8643B;line-height:1">ojo</div>${wave("#C8643B",14)}</div>
+        <div style="font-weight:700;font-size:42px;line-height:1.26;margin-top:20px;color:#1D2A44">${mark(P.texto)}</div></div>`;
   } else {
-    W.className = "wrap"; W.style.cssText = "left:90px;right:90px;top:0;bottom:150px;justify-content:center;align-items:center;text-align:center;gap:12px";
-    W.innerHTML = `<div style="font-family:'Patrick Hand',cursive;font-size:50px;color:#1F3A7A">¿te sirvió?</div>
-      <div style="font-weight:900;font-size:104px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo || "*Guardalo* para cuando lo necesites")}</div>
-      <div class="card" style="width:100%;margin-top:70px;padding:60px 48px 52px;display:flex;flex-direction:column;align-items:center;gap:10px">${tapes}
-        <div style="font-family:'Patrick Hand',cursive;font-size:46px;color:#C8643B">escribinos por WhatsApp</div>
-        <div style="font-weight:900;font-size:84px;line-height:1.1;color:#1F3A7A">+54 11 4992-2513</div>
+    W.className = "wrap"; W.style.cssText = "left:90px;right:90px;top:0;bottom:120px;justify-content:center;align-items:center;text-align:center;gap:10px";
+    W.innerHTML = `<div style="font-family:'Patrick Hand',cursive;font-size:44px;color:#1F3A7A">¿te sirvió?</div>
+      <div style="font-weight:900;font-size:84px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo || "*Guardalo* para cuando lo necesites")}</div>
+      <div class="card" style="width:100%;margin-top:50px;padding:46px 40px 40px;display:flex;flex-direction:column;align-items:center;gap:10px">${tapes}
+        <div style="font-family:'Patrick Hand',cursive;font-size:40px;color:#C8643B">escribinos por WhatsApp</div>
+        <div style="font-weight:900;font-size:72px;line-height:1.1;color:#1F3A7A">+54 11 4992-2513</div>
         <div style="width:70%;margin:8px 0">${wave("#E9B949",14)}</div>
-        <div style="font-weight:700;font-size:34px;color:#1D2A44">@estudioierlip · estudioierlip.com</div></div>`;
+        <div style="font-weight:700;font-size:30px;color:#1D2A44">@estudioierlip · estudioierlip.com</div></div>`;
   }
   window.__READY = true;
 })();

@@ -5,12 +5,12 @@ Contenido de Instagram y TikTok para **Estudio Integral IERLIP** (@estudioierlip
 ## Objetivo
 Noviembre 2026 con contenido todos los días, **sin publicar nada sin el OK de Seba**:
 - **20 videos** (Reels y TikTok) del proyecto hermano `../ierlip-video-diario/ierlip-video-diario`. Llegan por Telegram y se programan en **TikTok Studio** (TikTok) y **Zoho Social** (Reels de Instagram), con el OK de Seba.
-- **1 placa por día** (feed 4:5) y **1 historia por día** (9:16), informativas y de aprendizaje sobre ARCA, ARBA y AGIP. Las produce **este** proyecto.
+- **1 placa por día** (feed 1:1) y **1 historia por día** (9:16), informativas y de aprendizaje sobre ARCA, ARBA y AGIP. Las produce **este** proyecto.
 - **1 video de "debate con criterio" por semana** (los martes), con @elpyme como referencia de energía.
 
 ## Decisiones aprobadas (27/10/2026)
 1. Línea "debate con criterio", 1 por semana. Reglas en `docs/linea-editorial.md`.
-2. Formatos: feed **4:5 (1080×1350)** e historias **9:16 (1080×1920)**.
+2. Formatos: feed **1:1 (1080×1080)** desde el 29/10 (antes 4:5; al subir desde el celular se cortaba el logo) e historias **9:16 (1080×1920)**.
 3. Estilos: **B · Papel** para las placas y **C · Tipográfico** para las historias y el debate. Detalle en `docs/estilos.md`.
 4. **Carga (decidido el 27/10): Zoho Social Free** para Instagram y Facebook (1 marca, publicaciones sin límite) + **TikTok Studio** para TikTok (programador nativo, hasta ~10 días antes). Todo gratis. Metricool gratis (20 por mes) y Postiz en servidor propio quedaron descartados; la instalación de Postiz queda archivada en `infra/postiz/`. Nada se programa sin el OK de Seba.
 

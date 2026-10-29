@@ -1,6 +1,6 @@
 ---
 name: contenido-diario
-description: Produce la placa (feed 4:5, estilo Papel crema) y la historia (9:16, estilo Papel oscuro) del día para @estudioierlip a partir de config/calendario-<mes>.json, las renderiza a PNG y prepara caption + checklist de verificación. Usar con /contenido-diario [YYYY-MM-DD] o cuando Seba pida "la placa de hoy", "las historias de la semana", etc.
+description: Produce la placa (feed 1:1, estilo Papel crema) y la historia (9:16, estilo Papel oscuro) del día para @estudioierlip a partir de config/calendario-<mes>.json, las renderiza a PNG y prepara caption + checklist de verificación. Usar con /contenido-diario [YYYY-MM-DD] o cuando Seba pida "la placa de hoy", "las historias de la semana", etc.
 ---
 
 # contenido-diario
