@@ -1,0 +1,68 @@
+{
+  "comando": "placa",
+  "pedido": "fondo de asistencia laboral",
+  "spec": {
+    "template": "placa-papel",
+    "out": "bot/salida/pieza",
+    "slides": [
+      {
+        "variant": "portada",
+        "eyebrow": "novedad laboral · empleadores",
+        "titulo": "*Fondo de Asistencia Laboral*: qué cambia",
+        "bajada": "lo importante, sin vueltas"
+      },
+      {
+        "variant": "items",
+        "eyebrow": "lo que tenés que saber",
+        "titulo": "El FAL en *4 puntos*",
+        "items": [
+          {
+            "t": "Arranca el 1 de diciembre",
+            "d": "Se prorrogó: rige desde el período devengado diciembre de 2026, no desde noviembre."
+          },
+          {
+            "t": "2,5% pymes, 1% el resto",
+            "d": "Se calcula sobre la misma base que las contribuciones patronales al SIPA."
+          },
+          {
+            "t": "No suma un costo extra",
+            "d": "Se descuenta de las contribuciones patronales que ya pagás, hasta ese límite."
+          },
+          {
+            "t": "Validá tu ID FAL",
+            "d": "Se informa en «Simplificación Registral» de ARCA, menú «Datos del Empleador»."
+          }
+        ]
+      },
+      {
+        "variant": "tip",
+        "eyebrow": "dato clave",
+        "titulo": "Si no elegís, *te asignan*",
+        "texto": "Si no informás un ID FAL válido, la CNV te asigna un fondo de oficio. Revisalo con tiempo."
+      },
+      {
+        "variant": "cierre"
+      }
+    ]
+  },
+  "texto": "👷 ¿Tenés empleados? Llega el Fondo de Asistencia Laboral (FAL), el fondo para afrontar indemnizaciones:\n\n1. Arranca el 1 de diciembre de 2026 (se prorrogó, no es en noviembre).\n2. Es el 2,5% para pymes y el 1% para el resto de los empleadores privados.\n3. No suma un costo extra: se descuenta de las contribuciones patronales.\n4. Tenés que validar tu ID FAL en «Simplificación Registral» de ARCA.\n\nOjo: si no informás un ID FAL válido, te asignan un fondo de oficio.\n\nGuardalo para cuando lo necesites 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #ARCA #FAL #FondoDeAsistenciaLaboral #Empleadores #Pymes #Sueldos\n",
+  "meta": {
+    "resumen": "Placa carrusel (4 slides) sobre el Fondo de Asistencia Laboral (FAL): vigencia desde el 1/12/2026, alícuotas, descuento de contribuciones e ID FAL.",
+    "sources": [
+      "https://www.boletinoficial.gob.ar/detalleAviso/primera/348365/20261001",
+      "https://www.argentina.gob.ar/normativa/nacional/norma-430768/texto",
+      "https://www.boletinoficial.gob.ar/detalleAviso/primera/349294/20261020",
+      "https://www.argentina.gob.ar/normativa/nacional/norma-431406/texto",
+      "https://servicioscf.afip.gob.ar/publico/sitio/contenido/novedad/ver.aspx?id=5983",
+      "https://www.argentina.gob.ar/noticias/prorroga-de-la-implementacion-del-fondo-de-asistencia-laboral",
+      "https://www.afip.gob.ar/fal/caracteristicas/procedimiento.asp",
+      "https://www.afip.gob.ar/fal/"
+    ],
+    "needs_review": [
+      "Vigencia: la RG 5907/2026 decía 1/11/2026, pero el Decreto 1228/2026 y la RG 5915/2026 (novedad de ARCA del 26/10) la pasaron al 1/12/2026. No pude leer el texto completo de la RG 5915: confirmar que no cambie nada más (por ejemplo, el plazo para declarar en Simplificación Registral).",
+      "Alícuotas 2,5% / 1% y descuento de las contribuciones (SIPA, INSSJP, FNE y Asignaciones Familiares, hasta su límite): salen de la RG 5907/2026, arts. 8 y 9. Confirmar que la RG 5915 no los haya modificado.",
+      "El 2,5% exige certificado MiPyME vigente: no entró en la placa. Evaluar si conviene aclararlo en el caption.",
+      "Asignación de oficio por la CNV: el Decreto 408/2026 la prevé si pasa un mes desde el vencimiento sin un ID FAL válido. La placa no menciona el plazo."
+    ]
+  }
+}
