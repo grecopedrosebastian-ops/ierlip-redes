@@ -85,7 +85,11 @@ jobs:
 
       - name: Mostrar el error de Claude
         if: failure() && steps.leer.outputs.hay_pedido == 'true'
+        env:
+          CLAVE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
+          # Diagnóstico de la clave sin mostrarla: largo, prefijo y si tiene espacios o saltos de línea.
+          python3 -c "import os;k=os.environ.get('CLAVE','');print('clave: largo',len(k),'| empieza bien:',k.strip().startswith('sk-ant-oat01-'),'| espacios o saltos:',any(c.isspace() for c in k),'| tiene export o =:',('export' in k) or ('=' in k))"
           f="$RUNNER_TEMP/claude-execution-output.json"
           [ -f "$f" ] && python3 -c "import json,sys;d=json.load(open(sys.argv[1]));[print(json.dumps(x,ensure_ascii=False)[:1500]) for x in (d if isinstance(d,list) else [d]) if x.get('type') in ('result','assistant','user')]" "$f" || echo "sin log de Claude"
 
