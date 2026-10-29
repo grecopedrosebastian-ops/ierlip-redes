@@ -4,7 +4,7 @@ Contenido de Instagram y TikTok para **Estudio Integral IERLIP** (@estudioierlip
 
 ## Objetivo
 Noviembre 2026 con contenido todos los días, **sin publicar nada sin el OK de Seba**:
-- **20 videos** (Reels y TikTok) del proyecto hermano `../ierlip-video-diario/ierlip-video-diario`. Llegan por Telegram y se programan en **TikTok Studio** (TikTok) y **Zoho Social** (Reels de Instagram), con el OK de Seba.
+- **Videos** (Reels y TikTok) del proyecto hermano, solo lunes y jueves (vencimientos) desde el 29/10; martes, viernes y domingos van historias animadas. Antes eran 20 videos `../ierlip-video-diario/ierlip-video-diario`. Llegan por Telegram y se programan en **TikTok Studio** (TikTok) y **Zoho Social** (Reels de Instagram), con el OK de Seba.
 - **1 placa por día** (feed 1:1) y **1 historia por día** (9:16), informativas y de aprendizaje sobre ARCA, ARBA y AGIP. Las produce **este** proyecto.
 - **1 video de "debate con criterio" por semana** (los martes), con @elpyme como referencia de energía.
 
@@ -79,6 +79,11 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - De lunes a viernes a las 08:00 (o a mano desde Actions) revisa las novedades oficiales de ARCA y el Boletín Oficial de los últimos 3 días, elige la más útil y arma un carrusel con nuestro estilo: misma información, redacción propia y un juego de palabras en el título. Skill: `.claude/skills/arca-diario`.
 - Llega por Telegram con caption y lista de verificar. Se puede retocar con `/cambiar`. `state/arca-vistas.json` evita repetir novedades.
 - El Instagram de ARCA no se lee de forma automática (pide login): se usan las fuentes oficiales de donde salen esas publicaciones. Nunca copiar textos, imágenes ni logo de ARCA.
+
+## Historias animadas (`.github/workflows/historia-animada.yml`)
+- Martes, viernes y domingos a las 06:30 reemplazan a los videos de situación graciosa, que quedaron apagados el 29/10 (el repo de videos corre solo lunes y jueves, vencimientos).
+- Claude elige el tema (próximo vencimiento o tema del calendario), lo verifica y escribe los textos con la skill `.claude/skills/historia-animada`. Se renderiza `templates/historia-animada.html` (12 s, con el sonido de `assets/audio/historia-animada.wav`) y llega por Telegram como MP4.
+- `state/animadas-vistas.json` evita repetir temas. Para una con textos a mano: `node scripts/render-animada.mjs --datos datos.json ...`.
 
 ## Reglas no negociables
 - No publicar, no programar con publicación automática y no hacer push sin el OK de Seba. Mostrar los cambios antes.

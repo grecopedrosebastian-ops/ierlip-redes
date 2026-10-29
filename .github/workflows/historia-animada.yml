@@ -1,0 +1,83 @@
+# Martes, viernes y domingos (en lugar de los videos de situación graciosa): historia animada de 12 s con sonido,
+# con el tema del día verificado. Llega por Telegram como archivo para subirla a mano. No publica nada.
+name: Historia animada (mar, vie y dom)
+
+on:
+  schedule:
+    - cron: "30 9 * * 0,2,5"   # 09:30 UTC = 06:30 en Buenos Aires
+  workflow_dispatch:
+
+concurrency:
+  group: historia-animada
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # guardar state/animadas-vistas.json
+  id-token: write   # requerido por claude-code-action
+
+jobs:
+  animada:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Preparar render (Playwright, fuentes y ffmpeg)
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y -q ffmpeg > /dev/null
+
+      - name: Preparar la clave de Claude
+        env:
+          CLAVE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          limpia="$(printf '%s' "$CLAVE" | tr -d '[:space:]')"
+          echo "::add-mask::$limpia"
+          echo "CLAVE_CLAUDE=$limpia" >> "$GITHUB_ENV"
+          mkdir -p bot/salida
+
+      # Claude elige el tema y escribe los textos. NO recibe los secretos de Telegram.
+      - name: Claude escribe la historia
+        uses: anthropics/claude-code-action@v1
+        env:
+          TELEGRAM_BOT_TOKEN: ""
+          TELEGRAM_CHAT_ID: ""
+          TELEGRAM_THREAD_ID: ""
+        with:
+          claude_code_oauth_token: ${{ env.CLAVE_CLAUDE }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: "/historia-animada"
+          claude_args: >-
+            --model ${{ vars.CLAUDE_MODEL || 'claude-opus-5-5' }}
+            --max-turns 60
+            --allowedTools "Skill,Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
+
+      - name: Renderizar el video con sonido
+        run: node scripts/render-animada.mjs --datos bot/salida/animada.json templates/historia-animada.html bot/salida/historia-animada.mp4 12 30 assets/audio/historia-animada.wav
+
+      - name: Mandar por Telegram
+        run: python3 scripts/bot/telegram_bot.py animada
+
+      - name: Guardar el tema usado
+        run: |
+          git config user.name "ierlip-redes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state/animadas-vistas.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "sin cambios"; else
+            git commit -m "historia-animada: tema usado"
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Avisar el error por Telegram
+        if: failure()
+        run: python3 scripts/bot/telegram_bot.py texto "❌ No pude armar la historia animada de hoy. Revisá Actions en el repo ierlip-redes."
