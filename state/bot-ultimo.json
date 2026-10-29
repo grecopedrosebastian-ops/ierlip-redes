@@ -1,68 +1,62 @@
 {
   "comando": "placa",
-  "pedido": "fondo de asistencia laboral",
+  "pedido": "novedad ARCA del día",
   "spec": {
     "template": "placa-papel",
     "out": "bot/salida/pieza",
     "slides": [
       {
         "variant": "portada",
-        "eyebrow": "novedad laboral · empleadores",
-        "titulo": "*Fondo de Asistencia Laboral*: qué cambia",
+        "eyebrow": "novedad ARCA · 29/10/2026",
+        "titulo": "Ganancias simplificada: *sin techo* para entrar",
         "bajada": "lo importante, sin vueltas"
       },
       {
         "variant": "items",
-        "eyebrow": "lo que tenés que saber",
-        "titulo": "El FAL en *4 puntos*",
+        "eyebrow": "qué cambia",
+        "titulo": "Lo nuevo, *en 4 puntos*",
         "items": [
           {
-            "t": "Arranca el 1 de diciembre",
-            "d": "Se prorrogó: rige desde el período devengado diciembre de 2026, no desde noviembre."
+            "t": "Chau topes de ingresos",
+            "d": "Los límites de ingresos y patrimonio ya no son requisito para entrar ni para quedarte."
           },
           {
-            "t": "2,5% pymes, 1% el resto",
-            "d": "Se calcula sobre la misma base que las contribuciones patronales al SIPA."
+            "t": "La clave: ser residente",
+            "d": "Desde el período 2026, tenés que ser residente fiscal en el país todo el año."
           },
           {
-            "t": "No suma un costo extra",
-            "d": "Se descuenta de las contribuciones patronales que ya pagás, hasta ese límite."
+            "t": "El 2025 tiene revancha",
+            "d": "Si presentaste por el régimen general, podés pasarte y presentar de nuevo por la simplificada."
           },
           {
-            "t": "Validá tu ID FAL",
-            "d": "Se informa en «Simplificación Registral» de ARCA, menú «Datos del Empleador»."
+            "t": "Plazo: viernes 30 de octubre",
+            "d": "Es la fecha especial para presentar la declaración jurada 2025 de personas humanas."
           }
         ]
       },
       {
         "variant": "tip",
         "eyebrow": "dato clave",
-        "titulo": "Si no elegís, *te asignan*",
-        "texto": "Si no informás un ID FAL válido, la CNV te asigna un fondo de oficio. Revisalo con tiempo."
+        "titulo": "El *pago* tiene que estar",
+        "texto": "Para pasarte por el 2025, el saldo tenía que estar pagado en término. Si al presentar surge una diferencia, la pagás con intereses hasta el 30/10."
       },
       {
         "variant": "cierre"
       }
     ]
   },
-  "texto": "👷 ¿Tenés empleados? Llega el Fondo de Asistencia Laboral (FAL), el fondo para afrontar indemnizaciones:\n\n1. Arranca el 1 de diciembre de 2026 (se prorrogó, no es en noviembre).\n2. Es el 2,5% para pymes y el 1% para el resto de los empleadores privados.\n3. No suma un costo extra: se descuenta de las contribuciones patronales.\n4. Tenés que validar tu ID FAL en «Simplificación Registral» de ARCA.\n\nOjo: si no informás un ID FAL válido, te asignan un fondo de oficio.\n\nGuardalo para cuando lo necesites 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #ARCA #FAL #FondoDeAsistenciaLaboral #Empleadores #Pymes #Sueldos\n",
+  "texto": "🧾 Ganancias simplificada: ARCA sacó los topes de ingresos y patrimonio para entrar.\n\n✔️ Ahora el requisito central es ser residente fiscal en el país (desde el período 2026).\n✔️ Si ya presentaste tu Ganancias 2025 por el régimen general, podés pasarte a la simplificada y presentar de nuevo.\n✔️ El plazo especial para presentar la declaración 2025 es este viernes 30 de octubre.\n✔️ Ojo: para pasarte, el saldo tenía que estar pagado en término. Si surge una diferencia, se paga con intereses al presentar.\n\n¿No sabés si te conviene? Lo vemos con vos.\n\nGuardalo para cuando lo necesites 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #ARCA #Ganancias #GananciasSimplificada #Autonomos #Impuestos #Contador\n",
   "meta": {
-    "resumen": "Placa carrusel (4 slides) sobre el Fondo de Asistencia Laboral (FAL): vigencia desde el 1/12/2026, alícuotas, descuento de contribuciones e ID FAL.",
+    "resumen": "Novedad ARCA: RG 5916/2026, Ganancias simplificada sin topes de ingresos y patrimonio; opción de pasarse por el 2025 hasta el 30/10",
     "sources": [
-      "https://www.boletinoficial.gob.ar/detalleAviso/primera/348365/20261001",
-      "https://www.argentina.gob.ar/normativa/nacional/norma-430768/texto",
-      "https://www.boletinoficial.gob.ar/detalleAviso/primera/349294/20261020",
-      "https://www.argentina.gob.ar/normativa/nacional/norma-431406/texto",
-      "https://servicioscf.afip.gob.ar/publico/sitio/contenido/novedad/ver.aspx?id=5983",
-      "https://www.argentina.gob.ar/noticias/prorroga-de-la-implementacion-del-fondo-de-asistencia-laboral",
-      "https://www.afip.gob.ar/fal/caracteristicas/procedimiento.asp",
-      "https://www.afip.gob.ar/fal/"
+      "https://servicioscf.afip.gob.ar/publico/sitio/contenido/novedad/ver.aspx?id=5982",
+      "https://biblioteca.arca.gob.ar/search/query/norma.aspx?p=t:RAG|n:5916|o:9|a:2026|f:23/10/2026",
+      "https://servicioscf.afip.gob.ar/publico/sitio/contenido/novedad/ver.aspx?id=5957"
     ],
     "needs_review": [
-      "Vigencia: la RG 5907/2026 decía 1/11/2026, pero el Decreto 1228/2026 y la RG 5915/2026 (novedad de ARCA del 26/10) la pasaron al 1/12/2026. No pude leer el texto completo de la RG 5915: confirmar que no cambie nada más (por ejemplo, el plazo para declarar en Simplificación Registral).",
-      "Alícuotas 2,5% / 1% y descuento de las contribuciones (SIPA, INSSJP, FNE y Asignaciones Familiares, hasta su límite): salen de la RG 5907/2026, arts. 8 y 9. Confirmar que la RG 5915 no los haya modificado.",
-      "El 2,5% exige certificado MiPyME vigente: no entró en la placa. Evaluar si conviene aclararlo en el caption.",
-      "Asignación de oficio por la CNV: el Decreto 408/2026 la prevé si pasa un mes desde el vencimiento sin un ID FAL válido. La placa no menciona el plazo."
+      "Confirmar que el plazo especial de presentación de Ganancias 2025 de personas humanas sigue siendo el viernes 30/10/2026 (RG 5911/2026) y que no hubo una prórroga nueva antes de publicar. Si se publica después del 30/10, sacar el ítem 4 y la mención del plazo en el tip y en el caption.",
+      "El requisito de residencia fiscal rige desde el período 2026 (para 2025 no se exige): está así en la RG 5916 y en la novedad de ARCA; revisar que se entienda bien en el ítem 2.",
+      "Grandes contribuyentes nacionales y funcionarios públicos pueden adherir solo para presentar y pagar, sin los beneficios del régimen: no se incluyó en la pieza para no cargarla; evaluar si sumarlo al caption."
     ]
   }
 }
