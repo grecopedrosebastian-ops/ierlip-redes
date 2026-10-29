@@ -209,14 +209,11 @@ if __name__ == "__main__":
         tg.texto(sys.argv[2])
     elif sys.argv[1] == "animada":  # manda la historia animada (lo usa historia-animada)
         meta = json.loads((SALIDA / "meta.json").read_text(encoding="utf-8")) if (SALIDA / "meta.json").exists() else {}
-        tg.texto("🎬 " + meta.get("resumen", "Historia animada") + "
-Revisala antes de subirla.")
+        tg.texto("🎬 " + meta.get("resumen", "Historia animada") + "\nRevisala antes de subirla.")
         tg.documentos([SALIDA / "historia-animada.mp4"])
         if (SALIDA / "texto.txt").exists():
             tg.texto((SALIDA / "texto.txt").read_text(encoding="utf-8").strip())
         if meta.get("needs_review"):
-            tg.texto("🔎 VERIFICAR ANTES DE SUBIR
-" + "
-".join(f"• {n}" for n in meta["needs_review"]))
+            tg.texto("🔎 VERIFICAR ANTES DE SUBIR\n" + "\n".join(f"• {n}" for n in meta["needs_review"]))
     else:
         {"leer": leer, "enviar": enviar, "error": error}[sys.argv[1]]()
