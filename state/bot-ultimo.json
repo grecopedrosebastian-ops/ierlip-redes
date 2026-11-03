@@ -7,56 +7,56 @@
     "slides": [
       {
         "variant": "portada",
-        "eyebrow": "novedad ARCA · 30/10/2026",
-        "titulo": "Ganancias 2025: te *ganaste* unos días más",
+        "eyebrow": "novedad ARCA · 03/11/2026",
+        "titulo": "Agentes de IVA: *retené* esta fecha",
         "bajada": "lo importante, sin vueltas"
       },
       {
         "variant": "items",
-        "eyebrow": "qué cambió",
-        "titulo": "Nueva fecha: *lunes 16/11*",
+        "eyebrow": "qué cambia",
+        "titulo": "Más retenciones *pasan al SIRE*",
         "items": [
           {
-            "t": "Se corre la presentación",
-            "d": "La declaración jurada de Ganancias 2025 vencía el 30/10 y ahora vence el lunes 16/11."
+            "t": "Chau SICORE para más regímenes",
+            "d": "Varias retenciones y percepciones de IVA se van a informar y pagar por SIRE."
           },
           {
-            "t": "A quién le toca",
-            "d": "Personas humanas y sucesiones indivisas, del régimen general o de la declaración simplificada."
+            "t": "Les toca a los agentes",
+            "d": "Por ejemplo, de honorarios profesionales, limpieza, seguridad, servicios públicos y varias actividades agropecuarias."
           },
           {
-            "t": "Por qué se movió",
-            "d": "Los cambios nuevos de Ganancias simplificada impactan en la liquidación del período 2025."
+            "t": "Obligatorio desde el 1/4/2027",
+            "d": "Desde el 1/12/2026 podés pasarte antes, de forma optativa."
           },
           {
-            "t": "Qué hacer ahora",
-            "d": "Revisá tu liquidación con los cambios nuevos y presentala antes del 16/11."
+            "t": "Alta en Registro Tributario",
+            "d": "Con clave fiscal, sumá cada régimen con el código SIRE-IVA y pedí la baja en SICORE."
           }
         ]
       },
       {
         "variant": "tip",
         "eyebrow": "el dato clave",
-        "titulo": "El *pago* no se movió",
-        "texto": "La prórroga es solo para presentar. El saldo a pagar vencía el 27/07/2026: si quedó pendiente, regularizalo cuanto antes."
+        "titulo": "Adelantarte *no tiene vuelta*",
+        "texto": "Si te pasás al SIRE antes de abril de 2027, después no podés volver a SICORE. Y si ya usabas SIRE en algún régimen, seguís igual."
       },
       {
         "variant": "cierre"
       }
     ]
   },
-  "texto": "⏳ ¿Te faltaba presentar Ganancias 2025? Ganaste unos días más.\n\nARCA extendió hasta el lunes 16 de noviembre de 2026 la presentación de la declaración jurada de Ganancias del período 2025 para personas humanas y sucesiones indivisas, tanto del régimen general como de la declaración jurada simplificada.\n\nOjo: la prórroga es solo para presentar. El pago del saldo vencía el 27/07/2026 y esa fecha no cambió.\n\nGuardalo para cuando lo necesites 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #ARCA #Ganancias #DeclaracionJurada #Autonomos #Impuestos #Contador\n",
+  "texto": "🧾 ¿Sos agente de retención o percepción de IVA? Agendá esta fecha: más regímenes pasan al SIRE.\n\nDesde el 1/4/2027 es obligatorio informar y pagar por SIRE varias retenciones y percepciones de IVA que hoy van por SICORE (honorarios profesionales, limpieza, seguridad, servicios públicos y actividades agropecuarias, entre otras).\nDesde el 1/12/2026 podés pasarte antes, pero esa elección no tiene vuelta atrás.\nEl alta se hace con clave fiscal en Registro Tributario, régimen por régimen, y después hay que pedir la baja en SICORE.\n\nGuardalo para cuando lo necesites 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #ARCA #IVA #SIRE #Retenciones #Pymes #Impuestos\n",
   "meta": {
-    "resumen": "Novedad ARCA: RG 5918/2026, la presentación de Ganancias 2025 de personas humanas pasa al 16/11/2026 (el pago sigue al 27/07/2026)",
+    "resumen": "Novedad ARCA: RG 5921/2026, más retenciones y percepciones de IVA pasan de SICORE al SIRE (obligatorio desde el 1/4/2027, optativo desde el 1/12/2026)",
     "sources": [
-      "https://www.boletinoficial.gob.ar/detalleAviso/primera/349882/20261030",
-      "https://www.boletinoficial.gob.ar/#!DetalleNorma/349882/QR"
+      "https://www.boletinoficial.gob.ar/seccion/primera",
+      "https://servicioscf.afip.gob.ar/publico/sitio/contenido/novedad/listado.aspx"
     ],
     "needs_review": [
-      "Texto de la RG 5918/2026 leído del PDF oficial del Boletín Oficial (30/10/2026, aviso 81447/26), descargado desde un espejo del CPCE Formosa porque boletinoficial.gob.ar no respondía desde el runner. Confirmar que el link https://www.boletinoficial.gob.ar/detalleAviso/primera/349882/20261030 abra la norma.",
-      "El tip dice 'si quedó pendiente, regularizalo cuanto antes' sin mencionar intereses ni montos: confirmar que el tono te sirva.",
-      "No se incluyó el art. 2 (el proceso de caracterización como 'Pequeño Contribuyente' pasa del 16/11 al 30/11/2026): es poco relevante para el público general.",
-      "Misma semana que la RG 5920/2026 (prórroga al 30/12/2026 de la adhesión a los planes de pago de las RG 5858 y 5875). No se usó: no se pudo leer el texto oficial y queda para otra placa."
+      "No se pudo abrir el texto oficial de la RG 5921/2026 (el Boletín Oficial y el sitio de ARCA no respondieron desde el runner). Los datos salen de dos fuentes secundarias que coinciden y citan el articulado: Microjuris (https://aldiaargentina.microjuris.com/2026/11/03/legislacion-arca-establece-la-ampliacion-del-uso-del-sire-para-los-regimenes-de-retencion-y-percepcion-del-iva/) y Elonce (https://www.elonce.com/economia/arca-modifico-el-sistema-de-retenciones-de-iva-desde-cuando-sera-obligatorio.htm). Confirmar en el Boletín Oficial del 03/11/2026 antes de publicar.",
+      "Confirmar fechas: vigencia 01/12/2026 (martes), uso obligatorio desde el 01/04/2027 (jueves) y opción anticipada irrevocable desde la vigencia.",
+      "Confirmar la lista de regímenes de ejemplo (honorarios profesionales RG 1105, limpieza y seguridad RG 3164, servicios públicos RG 3130, agropecuarios) y que el alta sea en 'Registro Tributario' del 'Sistema Registral' con el código 'SIRE-IVA' y baja posterior en SICORE.",
+      "Confirmar que quienes ya usaban SIRE por la RG 4523 siguen igual para esos regímenes."
     ]
   }
 }
