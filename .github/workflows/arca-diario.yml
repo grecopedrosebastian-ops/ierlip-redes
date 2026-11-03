@@ -5,7 +5,7 @@ name: Novedades ARCA (placa diaria)
 
 on:
   schedule:
-    - cron: "0 11 * * 1-5"   # 11:00 UTC = 08:00 en Buenos Aires, de lunes a viernes
+    - cron: "23 7 * * 1-5"   # 07:23 UTC = 04:23 en Buenos Aires, de lunes a viernes (adelantado: GitHub atrasa los cron varias horas)
   workflow_dispatch:
 
 concurrency:

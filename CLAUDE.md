@@ -76,12 +76,12 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - Reemplaza al bot armado en Cowork, que dejó de funcionar el 28/10.
 
 ## Novedades de ARCA, placa diaria (`.github/workflows/arca-diario.yml`)
-- De lunes a viernes a las 08:00 (o a mano desde Actions) revisa las novedades oficiales de ARCA y el Boletín Oficial de los últimos 3 días, elige la más útil y arma un carrusel con nuestro estilo: misma información, redacción propia y un juego de palabras en el título. Skill: `.claude/skills/arca-diario`.
+- De lunes a viernes a las 04:23 (o a mano desde Actions) revisa las novedades oficiales de ARCA y el Boletín Oficial de los últimos 3 días, elige la más útil y arma un carrusel con nuestro estilo: misma información, redacción propia y un juego de palabras en el título. Skill: `.claude/skills/arca-diario`.
 - Llega por Telegram con caption y lista de verificar. Se puede retocar con `/cambiar`. `state/arca-vistas.json` evita repetir novedades.
 - El Instagram de ARCA no se lee de forma automática (pide login): se usan las fuentes oficiales de donde salen esas publicaciones. Nunca copiar textos, imágenes ni logo de ARCA.
 
 ## Historias animadas (`.github/workflows/historia-animada.yml`)
-- Martes, viernes y domingos a las 06:30 reemplazan a los videos de situación graciosa, que quedaron apagados el 29/10 (el repo de videos corre solo lunes y jueves, vencimientos).
+- Martes, viernes y domingos a las 03:17 reemplazan a los videos de situación graciosa, que quedaron apagados el 29/10 (el repo de videos corre solo lunes y jueves, vencimientos).
 - Claude elige el tema (próximo vencimiento o tema del calendario), lo verifica y escribe los textos con la skill `.claude/skills/historia-animada`. Se renderiza `templates/historia-animada.html` (12 s, con el sonido de `assets/audio/historia-animada.wav`) y llega por Telegram como MP4.
 - `state/animadas-vistas.json` evita repetir temas. Para una con textos a mano: `node scripts/render-animada.mjs --datos datos.json ...`.
 

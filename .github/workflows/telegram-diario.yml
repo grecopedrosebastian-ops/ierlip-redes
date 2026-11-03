@@ -5,7 +5,7 @@ name: Telegram diario (placas e historias)
 
 on:
   schedule:
-    - cron: "30 10 * * *"   # 10:30 UTC = 07:30 en Buenos Aires
+    - cron: "47 6 * * *"   # 06:47 UTC = 03:47 en Buenos Aires (adelantado: GitHub atrasa los cron varias horas)
   workflow_dispatch:
     inputs:
       fecha:
