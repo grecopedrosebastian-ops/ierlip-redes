@@ -3,12 +3,16 @@
   Estilo B · Papel IERLIP · 1080x1080 (1:1; antes 4:5, cambiado el 29/10/2026 porque al subir desde el celular se cortaba el logo). Lo renderiza scripts/render.mjs.
   Aprobado en Design el 27/10/2026 (referencia: "resumen impositivo · 17/10/2026").
   Datos: window.PIEZA (una slide). Variantes:
-    {variant:"portada", eyebrow, titulo, bajada}
-    {variant:"items",   eyebrow, titulo, items:[{t, d}], desde:1}
-    {variant:"tip",     eyebrow, titulo, texto}
-    {variant:"cierre",  titulo?}
-  window.META = {n, total}  (contador del carrusel; total 1 = sin contador)
-  En los textos, *palabra* = resaltado (subrayado terracota).
+    {variant:"portada",  eyebrow, titulo, bajada}
+    {variant:"numero",   eyebrow, numero, titulo, bajada?}      portada con un número o fecha gigante ("20/11", "9 y 10", "45 días")
+    {variant:"pregunta", eyebrow, titulo, respuesta}            portada con la pregunta y una nota pegada con la respuesta corta
+    {variant:"items",    eyebrow, titulo, items:[{t, d}], desde:1}
+    {variant:"versus",   eyebrow, titulo, mito, realidad}       "lo que se cree" tachado vs. lo correcto
+    {variant:"tip",      eyebrow, titulo, texto}
+    {variant:"cierre",   titulo?}
+  window.META = {n, total, tema}  (contador del carrusel; total 1 = sin contador)
+  tema (en la spec: "tema"): "crema" (por defecto) | "azul" | "violeta". Cambia el fondo; las tarjetas siguen siendo papel claro.
+  En los textos, *palabra* = resaltado (subrayado terracota, o mostaza en los temas oscuros).
 -->
 <html lang="es">
 <head>
@@ -19,19 +23,22 @@
 <link rel="stylesheet" href="../node_modules/@fontsource/patrick-hand/400.css">
 <style>
   :root{--deep:#0F1A30;--fondo:#F3EEE2;--papel:rgba(251,248,241,.96);--azul:#1F3A7A;--vio:#892CA0;
-        --mostaza:#E9B949;--terra:#C8643B;--txt:#1D2A44}
+        --mostaza:#E9B949;--terra:#C8643B;--txt:#1D2A44;--ink:#0F1A30;--em:rgba(200,100,59,.45)}
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:1080px;height:1080px;overflow:hidden}
-  body{position:relative;background:var(--fondo);color:var(--deep);font-family:'Source Serif 4',serif}
+  body{position:relative;background:var(--fondo);color:var(--ink);font-family:'Source Serif 4',serif}
   .blob{position:absolute}
   .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;mix-blend-mode:multiply;pointer-events:none}
+  .oscuro .tex{mix-blend-mode:normal;opacity:.9}
   .counter{position:absolute;top:56px;right:64px;font-family:'Patrick Hand',cursive;font-size:36px;color:#F5F1E8}
   .hand{align-self:flex-start;display:flex;flex-direction:column;gap:2px}
   .hand div{font-family:'Patrick Hand',cursive}
   .wave{display:block;width:100%;height:16px}
-  em{font-style:normal;background:linear-gradient(transparent 68%, rgba(200,100,59,.45) 68%)}
+  em{font-style:normal;background:linear-gradient(transparent 68%, var(--em) 68%)}
+  .card em{background:linear-gradient(transparent 68%, rgba(200,100,59,.45) 68%)}
   .wrap{position:absolute;left:80px;right:80px;display:flex;flex-direction:column}
-  .card{position:relative;background:var(--papel);border-radius:12px;box-shadow:0 18px 40px rgba(10,25,47,.16)}
+  .card{position:relative;background:var(--papel);border-radius:12px;box-shadow:0 18px 40px rgba(10,25,47,.16);color:var(--deep)}
+  .oscuro .card{box-shadow:0 18px 44px rgba(0,0,0,.35)}
   .tape1,.tape2{position:absolute;left:50%;background:rgba(233,185,73,.6)}
   .tape1{top:-22px;width:190px;height:34px;margin-left:-104px;transform:rotate(-4deg)}
   .tape2{top:-6px;width:170px;height:30px;margin-left:-82px;background:rgba(233,185,73,.5);transform:rotate(3deg)}
@@ -42,21 +49,44 @@
   .it p{font-weight:700;font-size:24px;line-height:1.28;color:var(--txt);margin-top:4px}
   .pocos{padding-top:46px!important;padding-bottom:42px!important;gap:18px!important}
   .pocos .it h3{font-size:44px} .pocos .it p{font-size:28px}
+  .vs{display:flex;flex-direction:column;gap:30px;margin-top:40px}
+  .vs .card{padding:34px 44px 30px}
+  .vs .tag{font-family:'Patrick Hand',cursive;font-size:40px;line-height:1}
+  .vs .tx{font-weight:800;font-size:40px;line-height:1.18;margin-top:10px}
+  .mito .tx{color:#6B7385;text-decoration:line-through;text-decoration-color:rgba(200,100,59,.8);text-decoration-thickness:4px}
   .logo{position:absolute;left:0;right:0;bottom:30px;display:flex;justify-content:center}
   .logo img{height:78px;display:block}
   .logo span{font-weight:900;font-size:36px;color:var(--azul)}
+  .oscuro .logo span{color:#F5F1E8}
 </style>
 </head>
 <body>
 <div id="blobs"></div>
-<img class="tex" src="../assets/textura-papel.png" alt="">
+<img class="tex" id="tex" src="../assets/textura-papel.png" alt="">
 <div class="counter" id="counter"></div>
 <div id="wrap"></div>
-<div class="logo" id="logo"><img src="../assets/logo/ierlip-logo-color.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'ESTUDIO IERLIP'}))"></div>
+<div class="logo" id="logo"><img id="logoimg" src="../assets/logo/ierlip-logo-color.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'ESTUDIO IERLIP'}))"></div>
 <script>
 (function(){
   const P = window.PIEZA || {variant:"portada", eyebrow:"tutorial ARCA · paso a paso", titulo:"Cómo generar un *VEP* para pagar el monotributo", bajada:"lo importante, sin vueltas"};
   const M = window.META || {n:1,total:1};
+  // Temas: mismo estilo Papel, cambia el fondo. Las tarjetas siguen claras para que el texto largo se lea igual.
+  const TEMAS = {
+    crema:   {bg:"#F3EEE2", ink:"#0F1A30", h1:"#1F3A7A", h2:"#C8643B", w2:"#E9B949", em:"rgba(200,100,59,.45)", num:"#C8643B",
+              blobs:["#1F3A7A","#892CA0","#E9B949","#C8643B"]},
+    azul:    {bg:"#16295C", ink:"#F7F3EA", h1:"#E9B949", h2:"#F4C7B2", w2:"#E9B949", em:"rgba(233,185,73,.55)", num:"#E9B949",
+              blobs:["#2E56B0","#892CA0","#E9B949","#C8643B"], oscuro:true},
+    violeta: {bg:"#6D2483", ink:"#FBF7F0", h1:"#E9B949", h2:"#FFD6C4", w2:"#E9B949", em:"rgba(233,185,73,.55)", num:"#E9B949",
+              blobs:["#1F3A7A","#A94BC4","#E9B949","#C8643B"], oscuro:true},
+  };
+  const T = TEMAS[M.tema || P.tema] || TEMAS.crema;
+  const R = document.documentElement.style;
+  R.setProperty("--fondo", T.bg); R.setProperty("--ink", T.ink); R.setProperty("--em", T.em);
+  if (T.oscuro) {
+    document.body.classList.add("oscuro");
+    document.getElementById("tex").src = "../assets/textura-papel-oscuro.png";
+    document.getElementById("logoimg").src = "../assets/logo/ierlip-logo-claro.png";
+  }
   const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;");
   const mark = s => esc(s).replace(/\*(.+?)\*/g,"<em>$1</em>");
   const wave = (c,h=16) => `<svg class="wave" style="height:${h}px" viewBox="0 0 600 16" preserveAspectRatio="none"><path d="M0 8 Q 15 0 30 8 T 60 8 T 90 8 T 120 8 T 150 8 T 180 8 T 210 8 T 240 8 T 270 8 T 300 8 T 330 8 T 360 8 T 390 8 T 420 8 T 450 8 T 480 8 T 510 8 T 540 8 T 570 8 T 600 8" fill="none" stroke="${c}" stroke-width="3"/></svg>`;
@@ -64,41 +94,68 @@
   const hand = (txt,size,col,wcol) => `<div class="hand"><div style="font-size:${size}px;color:${col}">${esc(txt)}</div>${wave(wcol)}</div>`;
   const tapes = `<div class="tape1"></div><div class="tape2"></div>`;
   const v = P.variant;
+  const [bA, bV, bM, bT] = T.blobs;
   // Manchas: azul arriba a la derecha (ahí va el contador), violeta a la izquierda, mostaza y terracota abajo.
   document.getElementById("blobs").innerHTML =
-    blob(500,400,"right:-170px;top:-170px","#1F3A7A",26) +
-    (v === "cierre" || v === "tip" ? blob(420,380,"left:-190px;top:-170px","#892CA0",-18) : blob(260,400,"left:-160px;top:330px","#892CA0",-7)) +
-    blob(420,400,"left:-170px;bottom:-200px","#E9B949",8) +
-    blob(380,380,"right:-150px;bottom:-170px","#C8643B",-14);
+    blob(500,400,"right:-170px;top:-170px",bA,26) +
+    (["cierre","tip","numero"].includes(v) ? blob(420,380,"left:-190px;top:-170px",bV,-18) : blob(260,400,"left:-160px;top:330px",bV,-7)) +
+    blob(420,400,"left:-170px;bottom:-200px",bM,8) +
+    blob(380,380,"right:-150px;bottom:-170px",bT,-14);
   if (M.total > 1) document.getElementById("counter").textContent = `${M.n}/${M.total}`;
   const W = document.getElementById("wrap");
+  const deslizar = (bottom=44) => {
+    const lg = document.getElementById("logo");
+    lg.style.cssText = `bottom:${bottom}px;flex-direction:column;align-items:center;gap:18px`;
+    if (M.total > 1) lg.insertAdjacentHTML("afterbegin", `<div style="font-family:'Patrick Hand',cursive;font-size:34px;color:${T.h1}">deslizá →</div>`);
+    lg.querySelector("img") && (lg.querySelector("img").style.height = "88px");
+  };
   if (v === "portada") {
     W.className = "wrap"; W.style.cssText = "left:100px;right:100px;top:190px;gap:26px";
-    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,40,"#1F3A7A","#1F3A7A") : "") +
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,40,T.h1,T.h1) : "") +
       `<div style="font-weight:900;font-size:${(P.titulo||"").length > 60 ? 78 : 92}px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo)}</div>` +
-      (P.bajada ? hand(P.bajada,44,"#C8643B","#E9B949") : "");
-    const lg = document.getElementById("logo");
-    lg.style.cssText = "bottom:44px;flex-direction:column;align-items:center;gap:18px";
-    lg.insertAdjacentHTML("afterbegin", `<div style="font-family:'Patrick Hand',cursive;font-size:34px;color:#1F3A7A">deslizá →</div>`);
-    lg.querySelector("img") && (lg.querySelector("img").style.height = "88px");
+      (P.bajada ? hand(P.bajada,44,T.h2,T.w2) : "");
+    deslizar();
+  } else if (v === "numero") {
+    const n = String(P.numero || "");
+    W.className = "wrap"; W.style.cssText = "left:100px;right:100px;top:150px;gap:8px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,40,T.h1,T.h1) : "") +
+      `<div style="font-weight:900;font-size:${n.length > 6 ? 170 : n.length > 4 ? 210 : 260}px;line-height:.95;letter-spacing:-.03em;color:${T.num};margin-top:18px">${esc(n)}</div>` +
+      `<div style="font-weight:900;font-size:${(P.titulo||"").length > 45 ? 58 : 68}px;line-height:1.05;letter-spacing:-.01em;max-width:820px;margin-top:6px">${mark(P.titulo)}</div>` +
+      (P.bajada ? `<div style="margin-top:22px">${hand(P.bajada,40,T.h2,T.w2)}</div>` : "");
+    deslizar();
+  } else if (v === "pregunta") {
+    W.className = "wrap"; W.style.cssText = "left:100px;right:100px;top:150px;gap:22px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,40,T.h1,T.h1) : "") +
+      `<div style="font-weight:900;font-size:${(P.titulo||"").length > 55 ? 76 : 88}px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo)}</div>` +
+      `<div class="card" style="align-self:flex-start;margin-top:34px;padding:30px 40px 26px;max-width:720px;transform:rotate(-2deg)">${tapes}
+         <div style="font-family:'Patrick Hand',cursive;font-size:46px;line-height:1.1;color:#C8643B">${esc(P.respuesta || "te lo contamos →")}</div></div>`;
+    deslizar();
   } else if (v === "items") {
     W.className = "wrap"; W.style.cssText = "top:52px;bottom:120px;gap:10px";
     const pocos = (P.items || []).length <= 3;
     const start = P.desde || 1;
     const items = (P.items || []).map((it,i) => `${i ? wave("#E9B949",14) : ""}<div class="item"><div class="num">${start+i}</div><div class="it"><h3>${mark(it.t)}</h3>${it.d ? `<p>${mark(it.d)}</p>` : ""}</div></div>`).join("");
-    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,"#1F3A7A","#1F3A7A") : "") +
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,T.h1,T.h1) : "") +
       `<div style="font-weight:800;font-size:54px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
       `<div class="card ${pocos ? "pocos" : ""}" style="margin:40px -8px 0;padding:36px 44px 30px;display:flex;flex-direction:column;gap:8px">${tapes}${items}</div>`;
+  } else if (v === "versus") {
+    W.className = "wrap"; W.style.cssText = "top:60px;bottom:120px;gap:10px";
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,T.h1,T.h1) : "") +
+      `<div style="font-weight:800;font-size:54px;line-height:1.08;letter-spacing:-.01em;max-width:780px">${mark(P.titulo)}</div>` +
+      `<div class="vs">
+         <div class="card mito" style="transform:rotate(-1.2deg)"><div class="tag" style="color:#6B7385">lo que se cree ✗</div><div class="tx">${mark(P.mito)}</div></div>
+         <div class="card" style="transform:rotate(.8deg)">${tapes}<div class="tag" style="color:#C8643B">lo que es ✓</div><div class="tx">${mark(P.realidad)}</div></div>
+       </div>`;
   } else if (v === "tip") {
     W.className = "wrap"; W.style.cssText = "top:0;bottom:110px;justify-content:center;gap:12px";
-    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,"#1F3A7A","#1F3A7A") : "") +
+    W.innerHTML = (P.eyebrow ? hand(P.eyebrow,38,T.h1,T.h1) : "") +
       `<div style="font-weight:800;font-size:60px;line-height:1.08;letter-spacing:-.01em;max-width:760px">${mark(P.titulo)}</div>` +
       `<div class="card" style="margin-top:42px;padding:48px 50px 44px">${tapes}
         <div style="display:inline-flex;flex-direction:column"><div style="font-family:'Patrick Hand',cursive;font-size:54px;color:#C8643B;line-height:1">ojo</div>${wave("#C8643B",14)}</div>
         <div style="font-weight:700;font-size:42px;line-height:1.26;margin-top:20px;color:#1D2A44">${mark(P.texto)}</div></div>`;
   } else {
     W.className = "wrap"; W.style.cssText = "left:90px;right:90px;top:0;bottom:120px;justify-content:center;align-items:center;text-align:center;gap:10px";
-    W.innerHTML = `<div style="font-family:'Patrick Hand',cursive;font-size:44px;color:#1F3A7A">¿te sirvió?</div>
+    W.innerHTML = `<div style="font-family:'Patrick Hand',cursive;font-size:44px;color:${T.h1}">¿te sirvió?</div>
       <div style="font-weight:900;font-size:84px;line-height:1.02;letter-spacing:-.01em">${mark(P.titulo || "*Guardalo* para cuando lo necesites")}</div>
       <div class="card" style="width:100%;margin-top:50px;padding:46px 40px 40px;display:flex;flex-direction:column;align-items:center;gap:10px">${tapes}
         <div style="font-family:'Patrick Hand',cursive;font-size:40px;color:#C8643B">escribinos por WhatsApp</div>

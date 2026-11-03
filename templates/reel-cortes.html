@@ -1,0 +1,121 @@
+<!doctype html>
+<!--
+  Reel 1080x1920 con cortes secos, 8 escenas de 2,4 s (19,2 s). Referencia: el reel "¿Cómo estás con ARCA?" que Seba aprobó (03/11/2026).
+  La música (scripts/audio-reel.py) va a 100 BPM: cada corte cae justo en el primer tiempo de un compás.
+  Datos en window.PIEZA:
+    {gancho, eyebrow, bajada, intro:{arriba, numero, abajo}, pasos:[{etiqueta, texto, nota?} x3], variante: 1|2|3}
+  En gancho y bajada, *palabra* = color mostaza. La exporta scripts/render-animada.mjs (19.2 s, 30 fps).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel con cortes</title>
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/600.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/700.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/800.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/900.css">
+<style>
+  :root{--deep:#0B1830;--azul:#14295E;--vio:#892CA0;--crema:#F3EEE2;--mostaza:#F2B33D;--celeste:#7FA7E8;--verde:#2BB673}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--deep)}
+  body{font-family:'Montserrat',sans-serif;color:#fff}
+  .sc{position:absolute;inset:0;opacity:0;overflow:hidden}
+  .z{position:absolute;inset:0}
+  .izq{position:absolute;left:84px;right:84px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center}
+  .cen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  b.m{color:var(--mostaza);font-weight:inherit}
+  .claro{color:var(--deep)} .claro b.m{color:var(--vio)}
+  .gancho{font-weight:900;font-size:150px;line-height:1.02;text-transform:uppercase;letter-spacing:-.01em}
+  .eyebrow{font-weight:800;font-size:34px;letter-spacing:.12em;color:var(--mostaza);text-transform:uppercase}
+  .claro .eyebrow{color:var(--vio)}
+  .bajada{font-weight:800;font-size:118px;line-height:1.08;margin-top:26px}
+  .arriba{font-weight:700;font-size:40px;letter-spacing:.14em;color:var(--celeste);text-transform:uppercase}
+  .claro .arriba{color:var(--vio)}
+  .numero{font-weight:900;font-size:440px;line-height:1;color:var(--mostaza)}
+  .claro .numero{color:var(--vio)}
+  .abajo{font-weight:900;font-size:160px;line-height:1;margin-top:-10px}
+  .pnum{font-weight:900;font-size:330px;line-height:.9;color:var(--mostaza)}
+  .claro .pnum{color:var(--vio)}
+  .etq{font-weight:800;font-size:36px;letter-spacing:.12em;color:var(--celeste);text-transform:uppercase;margin-top:26px}
+  .claro .etq{color:var(--vio)}
+  .card{margin-top:30px;background:#FBF8F1;color:var(--deep);border-radius:28px;padding:44px 50px;display:flex;gap:30px;align-items:center;
+        box-shadow:0 30px 60px rgba(0,0,0,.28)}
+  .check{flex:0 0 74px;height:74px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center}
+  .card .tx{font-weight:800;font-size:70px;line-height:1.1}
+  .nota{font-weight:700;font-size:44px;line-height:1.25;margin-top:30px;opacity:.9}
+  .globo{position:absolute;left:-260px;top:420px;width:1150px;height:1150px;opacity:.10}
+  .wcard{background:#FBF8F1;color:var(--deep);border-radius:36px;padding:60px 70px;margin-top:60px;display:flex;flex-direction:column;align-items:center;gap:18px;
+         box-shadow:0 30px 60px rgba(0,0,0,.3)}
+  .wcard .t1{font-weight:900;font-size:66px;line-height:1.05;text-transform:uppercase}
+  .wcard .t2{font-weight:900;font-size:84px;color:var(--azul)}
+  .handle{font-weight:700;font-size:40px;margin-top:40px;opacity:.9}
+  /* entradas: las arma el script con el inicio de cada escena */
+  @keyframes vis{from,to{opacity:1}}
+  @keyframes zoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+  @keyframes sube{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+  @keyframes pop{0%{opacity:0;transform:scale(.35)}70%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+  @keyframes cae{0%{opacity:0;transform:translateY(-160px) rotate(-5deg)}70%{opacity:1;transform:translateY(14px) rotate(1deg)}100%{opacity:1;transform:none}}
+  @keyframes izq{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:none}}
+  @keyframes deriva{from{transform:rotate(-4deg) scale(1)}to{transform:rotate(4deg) scale(1.05)}}
+</style>
+</head>
+<body>
+<div id="reel"></div>
+<script>
+(function(){
+  const P = window.PIEZA || {
+    gancho: "¿Cómo estás con *ARCA*?",
+    eyebrow: "Monotributo · Pymes",
+    bajada: "Chequealo antes que *te avisen*",
+    intro: {arriba: "Un chequeo en", numero: "3", abajo: "pasos"},
+    pasos: [
+      {etiqueta: "Deudas y saldos", texto: "Mirá tu Sistema de Cuentas Tributarias"},
+      {etiqueta: "Facturación", texto: "Revisá que tus facturas estén completas"},
+      {etiqueta: "Notificaciones", texto: "Leé tu Domicilio Fiscal Electrónico", nota: "Ahí te llegan los avisos de ARCA"}
+    ],
+    variante: 1
+  };
+  const ESC = 2.4;  // segundos por escena = 1 compás a 100 BPM
+  const C = {d: "#0B1830", a: "#14295E", v: "#892CA0", c: "#F3EEE2"};
+  // Orden de fondos por escena: gancho, bajada, intro, paso 1, paso 2, paso 3, logo, WhatsApp.
+  const ORDEN = {1: "dvacdvda", 2: "vdcavdda", 3: "acvdcadv"}[P.variante] || "dvacdvda";
+  const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  const mark = s => esc(s).replace(/\*(.+?)\*/g,'<b class="m">$1</b>');
+  const globo = `<svg class="globo" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="5"><circle cx="50" cy="50" r="44"/><ellipse cx="50" cy="50" rx="19" ry="44"/><path d="M6 50h88M14 27h72M14 73h72M50 6v88"/></svg>`;
+  const check = `<div class="check"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>`;
+  const wapp = `<svg width="110" height="110" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#25D366"/><path fill="#fff" d="M16 7.2a8.7 8.7 0 0 0-7.5 13.1L7.3 24.8l4.6-1.2A8.7 8.7 0 1 0 16 7.2zm5.1 12.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.6 11.6 11.6 0 0 1-4.4-3.9c-.3-.5-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>`;
+  const escenas = [
+    `${globo}<div class="izq"><div class="gancho a" data-a="izq" data-d=".05">${mark(P.gancho)}</div></div>`,
+    `<div class="izq"><div class="eyebrow a" data-a="sube" data-d=".05">${esc(P.eyebrow)}</div><div class="bajada a" data-a="sube" data-d=".25">${mark(P.bajada)}</div></div>`,
+    `<div class="cen"><div class="arriba a" data-a="sube" data-d=".05">${esc(P.intro?.arriba)}</div><div class="numero a" data-a="pop" data-d=".2">${esc(P.intro?.numero)}</div><div class="abajo a" data-a="sube" data-d=".5">${esc(P.intro?.abajo)}</div></div>`,
+    ...(P.pasos || []).slice(0,3).map((p,i) => `<div class="izq"><div class="pnum a" data-a="pop" data-d=".05">${i+1}</div><div class="etq a" data-a="sube" data-d=".25">${esc(p.etiqueta)}</div>
+       <div class="card a" data-a="cae" data-d=".45">${check}<div class="tx">${esc(p.texto)}</div></div>${p.nota ? `<div class="nota a" data-a="sube" data-d=".9">${esc(p.nota)}</div>` : ""}</div>`),
+    `<div class="cen"><img class="a" data-a="pop" data-d=".1" src="../assets/logo/ierlip-logo-claro.png" style="width:900px"><div class="a" data-a="sube" data-d=".5" style="font-weight:600;font-size:44px;margin-top:30px;opacity:.9">Tu contabilidad siempre ordenada</div></div>`,
+    `<div class="cen" style="padding:0 90px"><img class="a" data-a="sube" data-d=".05" src="../assets/logo/ierlip-logo-claro.png" style="width:620px">
+       <div class="wcard a" data-a="cae" data-d=".3">${wapp}<div class="t1">Escribinos por WhatsApp</div><div class="t2">+54 11 4992-2513</div></div>
+       <div class="handle a" data-a="sube" data-d=".7">@estudioierlip · estudioierlip.com</div></div>`,
+  ];
+  const R = document.getElementById("reel");
+  R.innerHTML = escenas.map((h,i) => {
+    const bg = ORDEN[i] || "d";
+    return `<div class="sc ${bg === "c" ? "claro" : ""}" style="background:${C[bg]};animation:vis ${ESC}s linear ${i*ESC}s 1 none"><div class="z" style="animation:zoom ${ESC}s cubic-bezier(.2,.8,.3,1) ${i*ESC}s 1 both">${h}</div></div>`;
+  }).join("");
+  [...R.querySelectorAll(".sc")].forEach((sc,i) => {
+    sc.querySelectorAll(".a").forEach(el => {
+      const d = i*ESC + Number(el.dataset.d || 0);
+      el.style.animation = `${el.dataset.a} .5s cubic-bezier(.2,.9,.3,1.15) ${d}s 1 both`;
+    });
+    const g = sc.querySelector(".globo");
+    if (g) g.style.animation = `deriva ${ESC}s linear ${i*ESC}s 1 both`;
+  });
+  // Achica los textos largos para que no se salgan del cuadro.
+  const fit = (sel, max) => R.querySelectorAll(sel).forEach(el => {
+    let fs = parseFloat(getComputedStyle(el).fontSize);
+    while ((el.scrollWidth > el.clientWidth + 2 || el.offsetHeight > max) && fs > 30) { fs -= 4; el.style.fontSize = fs + "px"; }
+  });
+  document.fonts.ready.then(() => { fit(".gancho", 1100); fit(".bajada", 1000); fit(".card .tx", 420); fit(".abajo", 400); fit(".numero", 600); });
+  window.__READY = true;
+})();
+</script>
+</body>
+</html>

@@ -21,7 +21,8 @@ docs/linea-editorial.md            tono, pilares, reglas del debate
 docs/estilos.md                    especificación visual B y C (colores, tipografías, medidas)
 docs/referentes.md                 qué tomar de @contadoresenred, @elpyme y @arca_informa
 config/calendario-noviembre-2026.json  30 días: placa + historia por día (tema, puntos, qué verificar)
-templates/placa-papel.html         estilo B (portada / items / tip / cierre)
+templates/placa-papel.html         estilo B (portada / numero / pregunta / items / versus / tip / cierre; tema crema, azul o violeta)
+templates/reel-cortes.html         reel 9:16 con cortes cada 2,4 s (música: scripts/audio-reel.py)
 templates/historia-tipografica.html estilo C, historia
 templates/placa-debate.html        estilo C, placa de debate
 scripts/render.mjs                 JSON → PNG con Playwright
@@ -76,15 +77,12 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - Necesita en los Secrets del repo: `TELEGRAM_*` (ya cargados) y `CLAUDE_CODE_OAUTH_TOKEN` o `ANTHROPIC_API_KEY`.
 - Reemplaza al bot armado en Cowork, que dejó de funcionar el 28/10.
 
-## Novedades de ARCA, placa diaria (`.github/workflows/arca-diario.yml`)
-- De lunes a viernes a las 04:23 (o a mano desde Actions) revisa las novedades oficiales de ARCA y el Boletín Oficial de los últimos 3 días, elige la más útil y arma un carrusel con nuestro estilo: misma información, redacción propia y un juego de palabras en el título. Skill: `.claude/skills/arca-diario`.
-- Llega por Telegram con caption y lista de verificar. Se puede retocar con `/cambiar`. `state/arca-vistas.json` evita repetir novedades.
-- El Instagram de ARCA no se lee de forma automática (pide login): se usan las fuentes oficiales de donde salen esas publicaciones. Nunca copiar textos, imágenes ni logo de ARCA.
-
-## Historias animadas (`.github/workflows/historia-animada.yml`)
-- Martes, viernes y domingos a las 03:17 reemplazan a los videos de situación graciosa, que quedaron apagados el 29/10 (el repo de videos corre solo lunes y jueves, vencimientos).
-- Claude elige el tema (próximo vencimiento o tema del calendario), lo verifica y escribe los textos con la skill `.claude/skills/historia-animada`. Se renderiza `templates/historia-animada.html` (12 s, con el sonido de `assets/audio/historia-animada.wav`) y llega por Telegram como MP4.
-- `state/animadas-vistas.json` evita repetir temas. Para una con textos a mano: `node scripts/render-animada.mjs --datos datos.json ...`.
+## Paquete diario: 2 placas + 1 reel (`.github/workflows/paquete-diario.yml`, desde el 03/11)
+- Todos los días a las 03:07 (o a mano desde Actions), aparte de lo que se carga solo. Skill: `.claude/skills/paquete-diario`.
+- **Placa 1 (actualidad):** la novedad de ARCA de los últimos 3 días (si no hay, de ARBA o AGIP, o el próximo vencimiento). **Placa 2 (servicio):** la pregunta frecuente, mito o realidad, un trámite o el dato del mes. Horarios sugeridos: 10:00 y 15:00.
+- **Reel:** `templates/reel-cortes.html`, 8 escenas de 2,4 s con cortes secos, y música de `assets/audio/reel-<1|2|3>.wav` (`scripts/audio-reel.py`, 100 BPM: cada corte cae en el primer tiempo). Hora sugerida: 18:00 (lun y jue, 20:00).
+- **Variedad:** `placa-papel` tiene `tema` crema, azul o violeta, y portadas `portada`, `numero` o `pregunta`, más el interior `versus`. La skill rota todo con `state/paquete-vistas.json`.
+- Reemplaza a `arca-diario.yml` y a `historia-animada.yml`, que quedaron sin cron (se pueden correr a mano). El Instagram de ARCA no se lee de forma automática: se usan las fuentes oficiales. Nunca copiar textos, imágenes ni logo de ARCA.
 
 ## Reglas no negociables
 - No publicar, no programar con publicación automática y no hacer push sin el OK de Seba. Mostrar los cambios antes.

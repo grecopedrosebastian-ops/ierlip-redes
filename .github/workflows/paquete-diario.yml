@@ -1,0 +1,94 @@
+# Todos los días: 2 carruseles para el feed + 1 reel con cortes y música, verificados y listos para subir.
+# Aparte de lo que se carga solo (Metricool y la historia diaria). Llega por Telegram. No publica nada.
+# Reemplaza a arca-diario (la novedad de ARCA ahora es la placa 1) y a historia-animada (ahora es el reel).
+name: Paquete diario (2 placas + reel)
+
+on:
+  schedule:
+    - cron: "7 6 * * *"   # 06:07 UTC = 03:07 en Buenos Aires (adelantado: GitHub atrasa los cron varias horas)
+  workflow_dispatch:
+
+concurrency:
+  group: paquete-diario
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # guardar state/paquete-vistas.json y state/arca-vistas.json
+  id-token: write   # requerido por claude-code-action
+
+jobs:
+  paquete:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Preparar render (Playwright, fuentes y ffmpeg)
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y -q ffmpeg > /dev/null
+
+      - name: Preparar la clave de Claude
+        env:
+          CLAVE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          limpia="$(printf '%s' "$CLAVE" | tr -d '[:space:]')"
+          echo "::add-mask::$limpia"
+          echo "CLAVE_CLAUDE=$limpia" >> "$GITHUB_ENV"
+          mkdir -p bot/salida/placa1 bot/salida/placa2 bot/salida/reel
+
+      # Claude elige los temas, verifica y escribe. NO recibe los secretos de Telegram.
+      - name: Claude arma el paquete
+        uses: anthropics/claude-code-action@v1
+        env:
+          TELEGRAM_BOT_TOKEN: ""
+          TELEGRAM_CHAT_ID: ""
+          TELEGRAM_THREAD_ID: ""
+        with:
+          claude_code_oauth_token: ${{ env.CLAVE_CLAUDE }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: "/paquete-diario"
+          claude_args: >-
+            --model ${{ vars.CLAUDE_MODEL || 'claude-opus-5-5' }}
+            --max-turns 150
+            --allowedTools "Skill,Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
+
+      - name: Renderizar las placas
+        run: |
+          for p in placa1 placa2; do
+            if [ -f "bot/salida/$p/spec.json" ]; then node scripts/render.mjs "bot/salida/$p/spec.json"; fi
+          done
+
+      - name: Renderizar el reel con música
+        if: hashFiles('bot/salida/reel/reel.json') != ''
+        run: |
+          v="$(python3 -c "import json;v=json.load(open('bot/salida/reel/reel.json')).get('variante',1);print(v if v in (1,2,3) else 1)")"
+          node scripts/render-animada.mjs --datos bot/salida/reel/reel.json templates/reel-cortes.html bot/salida/reel/reel.mp4 19.2 30 "assets/audio/reel-$v.wav"
+
+      - name: Mandar por Telegram
+        run: python3 scripts/bot/telegram_bot.py paquete
+
+      - name: Guardar lo usado
+        if: always()
+        run: |
+          git config user.name "ierlip-redes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state/paquete-vistas.json state/arca-vistas.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "sin cambios"; else
+            git commit -m "paquete-diario: temas usados"
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Avisar el error por Telegram
+        if: failure()
+        run: python3 scripts/bot/telegram_bot.py texto "❌ No pude armar el paquete de hoy (2 placas + reel). Revisá Actions en el repo ierlip-redes."

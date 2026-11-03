@@ -4,8 +4,7 @@
 name: Novedades ARCA (placa diaria)
 
 on:
-  schedule:
-    - cron: "23 7 * * 1-5"   # 07:23 UTC = 04:23 en Buenos Aires, de lunes a viernes (adelantado: GitHub atrasa los cron varias horas)
+  # Apagado el 03/11/2026: la novedad de ARCA ahora sale en paquete-diario (placa 1). Queda para correrlo a mano.
   workflow_dispatch:
 
 concurrency:

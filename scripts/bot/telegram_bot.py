@@ -215,5 +215,29 @@ if __name__ == "__main__":
             tg.texto((SALIDA / "texto.txt").read_text(encoding="utf-8").strip())
         if meta.get("needs_review"):
             tg.texto("🔎 VERIFICAR ANTES DE SUBIR\n" + "\n".join(f"• {n}" for n in meta["needs_review"]))
+    elif sys.argv[1] == "paquete":  # manda las 2 placas y el reel del día (lo usa paquete-diario)
+        meta = json.loads((SALIDA / "meta.json").read_text(encoding="utf-8")) if (SALIDA / "meta.json").exists() else {}
+        resumen = meta.get("resumen") if isinstance(meta.get("resumen"), dict) else {}
+        hubo = False
+        for i, p in enumerate(("placa1", "placa2"), 1):
+            pngs = sorted((SALIDA / p).glob("pieza*.png"), key=lambda f: int(f.stem.split("-")[1]) if "-" in f.stem else 0)
+            if not pngs:
+                continue
+            hubo = True
+            tg.texto(f"🗞️ Placa {i} de 2: " + resumen.get(p, "carrusel para el feed"))
+            for k in range(0, len(pngs), 10):
+                tg.documentos(pngs[k:k + 10])
+            if (SALIDA / p / "texto.txt").exists():
+                tg.texto((SALIDA / p / "texto.txt").read_text(encoding="utf-8").strip())
+        if (SALIDA / "reel" / "reel.mp4").exists():
+            hubo = True
+            tg.texto("🎬 Reel: " + resumen.get("reel", "reel del día"))
+            tg.documentos([SALIDA / "reel" / "reel.mp4"])
+            if (SALIDA / "reel" / "texto.txt").exists():
+                tg.texto((SALIDA / "reel" / "texto.txt").read_text(encoding="utf-8").strip())
+        if not hubo:
+            sys.exit("El paquete vino vacío")
+        if meta.get("needs_review"):
+            tg.texto("🔎 VERIFICAR ANTES DE PUBLICAR\n" + "\n".join(f"• {n}" for n in meta["needs_review"]))
     else:
         {"leer": leer, "enviar": enviar, "error": error}[sys.argv[1]]()

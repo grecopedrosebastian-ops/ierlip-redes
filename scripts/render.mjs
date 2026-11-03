@@ -8,6 +8,7 @@
 //   "template": "placa-papel" | "placa-debate" | "historia-tipografica",
 //   "slides": [ { ...datos de window.PIEZA... }, ... ],   // 1 = pieza simple, 2+ = carrusel
 //   "out": "output/2026-11-02/placa"                      // genera placa-1.png, placa-2.png, ...
+//   "tema": "crema" | "azul" | "violeta"                   // opcional, solo placa-papel: color de fondo
 // }
 import { chromium } from "playwright";
 import fs from "node:fs";
@@ -42,7 +43,7 @@ try {
     for (let i = 0; i < total; i++) {
       const page = await browser.newPage({ viewport: { width: size[0], height: size[1] }, deviceScaleFactor: 1 });
       const data = JSON.stringify(spec.slides[i]);
-      const meta = JSON.stringify({ n: i + 1, total });
+      const meta = JSON.stringify({ n: i + 1, total, tema: spec.tema });
       await page.addInitScript(`window.PIEZA = ${data}; window.META = ${meta};`);
       await page.goto(tpl);
       await page.waitForFunction(() => window.__READY === true);
