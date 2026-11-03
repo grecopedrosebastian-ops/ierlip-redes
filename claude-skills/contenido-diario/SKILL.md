@@ -8,7 +8,7 @@ description: Produce la placa (feed 1:1, estilo Papel crema) y la historia (9:16
 Producís **una placa (carrusel o simple) y una historia** para el día pedido (por defecto hoy, ART). No publicás nada.
 
 ## 1. Contexto (leer siempre)
-1. `CLAUDE.md`, `docs/linea-editorial.md` y `docs/estilos.md`.
+1. `CLAUDE.md`, `docs/linea-editorial.md`, `docs/estilos.md` y `docs/referentes.md` (qué tomar y qué no de @contadoresenred, @elpyme y @arca_informa).
 2. `config/calendario-noviembre-2026.json` (o el del mes que corresponda): entrada de la fecha, `pilares`, `historias_por_dia` y `horarios`.
 3. Si la fecha no está en el calendario, elegí un tema del pilar del día que no se haya usado en los últimos 60 días (mirá `output/*/meta.json`).
 

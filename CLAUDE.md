@@ -19,6 +19,7 @@ Noviembre 2026 con contenido todos los días, **sin publicar nada sin el OK de S
 CLAUDE.md                          este archivo
 docs/linea-editorial.md            tono, pilares, reglas del debate
 docs/estilos.md                    especificación visual B y C (colores, tipografías, medidas)
+docs/referentes.md                 qué tomar de @contadoresenred, @elpyme y @arca_informa
 config/calendario-noviembre-2026.json  30 días: placa + historia por día (tema, puntos, qué verificar)
 templates/placa-papel.html         estilo B (portada / items / tip / cierre)
 templates/historia-tipografica.html estilo C, historia

@@ -8,7 +8,7 @@ description: Revisa las novedades oficiales de ARCA del día (lo mismo que ARCA 
 Corrés sin supervisión dentro de GitHub Actions: **no hagas preguntas**, decidí con criterio y anotá lo dudoso. No uses git, no mandes mensajes y no busques tokens: el render y el envío los hace el workflow.
 
 ## 1. Contexto
-1. `CLAUDE.md`, `docs/linea-editorial.md` y `docs/estilos.md`.
+1. `CLAUDE.md`, `docs/linea-editorial.md`, `docs/estilos.md` y `docs/referentes.md` (qué tomar y qué no de @contadoresenred, @elpyme y @arca_informa).
 2. `state/arca-vistas.json`: lista de novedades que ya se usaron (`{"vistas": [{"id", "titulo", "fecha"}]}`). Si no existe, empezá vacía.
 3. Ejemplos aprobados del estilo: `piezas/2026-11-09/placa.json` (carrusel) y `output/2026-11-09/caption.txt`.
 
@@ -35,10 +35,12 @@ Si no hay ninguna novedad útil y nueva, creá solo `bot/salida/sin-novedades.tx
   3. `tip`: el error más probable o el dato clave. El eyebrow no puede ser "ojo".
   4. `cierre`.
 - Las fuentes **nunca** van en la pieza.
+- Si el tema se presta, la portada puede ser una pregunta que se haría el contribuyente ("¿Pagaste dos veces el monotributo?"), al estilo de las guías de ARCA pero con nuestro juego de palabras.
+- El slide `tip` cuenta el error típico que la comunicación oficial no menciona ("ojo con…").
 
 ## 5. Entregar en `bot/salida/`
 - `spec.json`: la especificación para `scripts/render.mjs`.
-- `texto.txt`: el caption: gancho con emoji, 2 a 4 líneas de valor, "Guardalo para cuando lo necesites 📌", "Escribinos por WhatsApp: +54 11 4992-2513", "@estudioierlip · estudioierlip.com" y 5 a 8 hashtags con #EstudioIERLIP.
+- `texto.txt`: el caption: primera línea con emoji + **Organismo · Tema** (por ejemplo "📑 ARCA · Ganancias Simplificado"), después un gancho, 2 a 4 líneas de valor, "Guardalo para cuando lo necesites 📌", "Escribinos por WhatsApp: +54 11 4992-2513", "@estudioierlip · estudioierlip.com" y 5 a 8 hashtags con #EstudioIERLIP.
 - `meta.json`: `{"resumen": "Novedad ARCA: <tema en una línea>", "sources": [urls oficiales], "needs_review": [...]}`.
 - Agregá la novedad usada a `state/arca-vistas.json` (`id` = URL o número de la norma, `titulo`, `fecha` de hoy), conservando las anteriores.
 

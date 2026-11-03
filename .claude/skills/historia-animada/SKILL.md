@@ -8,7 +8,7 @@ description: Elige el tema del día y escribe los textos de la historia animada 
 Corrés sin supervisión dentro de GitHub Actions: **no hagas preguntas**, decidí con criterio y anotá lo dudoso. No uses git, no mandes mensajes y no busques tokens. El render del video (`templates/historia-animada.html`), el sonido y el envío los hace el workflow.
 
 ## 1. Contexto
-1. `CLAUDE.md` y `docs/linea-editorial.md`.
+1. `CLAUDE.md`, `docs/linea-editorial.md` y `docs/referentes.md` (qué tomar y qué no de @contadoresenred, @elpyme y @arca_informa).
 2. `config/calendario-noviembre-2026.json` (o el del mes que corresponda): la entrada de hoy (fecha del sistema, Buenos Aires).
 3. `state/animadas-vistas.json` (si existe): temas ya usados, para no repetir.
 4. Ejemplo aprobado: `templates/historia-animada.html` con sus textos por defecto (vence el monotributo el 20/11).

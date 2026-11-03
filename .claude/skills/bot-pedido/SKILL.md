@@ -9,7 +9,7 @@ Corrés sin supervisión dentro de GitHub Actions: **no hagas preguntas**, decid
 
 ## 1. Contexto (leer siempre)
 1. `bot/pedido.json`: `comando`, `pedido` (el texto de Seba) y, si es `/cambiar`, `anterior` (la pieza previa: `comando`, `pedido`, `spec`, `texto`, `meta`).
-2. `CLAUDE.md`, `docs/linea-editorial.md` y `docs/estilos.md`.
+2. `CLAUDE.md`, `docs/linea-editorial.md`, `docs/estilos.md` y `docs/referentes.md` (qué tomar y qué no de @contadoresenred, @elpyme y @arca_informa).
 3. Un ejemplo aprobado del mismo tipo para copiar el tono y la estructura: `piezas/2026-11-09/placa.json` (carrusel), `piezas/2026-11-08/historia.json` (historia) y el `output/2026-11-09/caption.txt` correspondiente.
 
 ## 2. Verificar antes de escribir

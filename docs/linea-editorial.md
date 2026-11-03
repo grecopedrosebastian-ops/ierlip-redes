@@ -17,7 +17,7 @@
 - El chiste es la situación, nunca la persona. Siempre cierra con un dato útil y correcto.
 
 ### 3. Debate con criterio (1 video por semana, los martes, más placa opcional)
-Referencia de **energía**, no de contenido: @elpyme (la voz de la pyme frente a la burocracia). No copiar sus formatos, parodias ni personas.
+Referencia de **energía**, no de contenido: @elpyme (la voz de la pyme frente a la burocracia). No copiar sus formatos, parodias ni personas. Sí tomar: un título-frase que se pueda compartir ("el socio que nadie eligió"), el foco en el costo de cumplir, un dato con fuente y una pregunta abierta al final. Detalle en `docs/referentes.md`.
 
 **Sí:**
 - Temas que generan opinión desde la **experiencia del contribuyente**: burocracia, cantidad de trámites, tiempo perdido, Ingresos Brutos sobre la facturación, saldos a favor que se acumulan, carga administrativa de tener empleados.
