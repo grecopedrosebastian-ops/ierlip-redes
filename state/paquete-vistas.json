@@ -2,9 +2,37 @@
   "dias": [
     {
       "fecha": "2026-11-03",
-      "placa1": {"tema": "ARCA RG 5920/2026: adhesión a planes de pago especiales hasta el 30/12/2026", "fondo": "azul", "portada": "numero"},
-      "placa2": {"tema": "Empleadores: el período de prueba se registra desde el día 1 (mito o realidad)", "fondo": "crema", "portada": "pregunta"},
-      "reel": {"tema": "Antes de facturar: tope de la categoría, datos del cliente y punto de venta", "variante": 2}
+      "placa1": {
+        "tema": "ARCA RG 5920/2026: adhesión a planes de pago especiales hasta el 30/12/2026",
+        "fondo": "azul",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "Empleadores: el período de prueba se registra desde el día 1 (mito o realidad)",
+        "fondo": "crema",
+        "portada": "pregunta"
+      },
+      "reel": {
+        "tema": "Antes de facturar: tope de la categoría, datos del cliente y punto de venta",
+        "variante": 2
+      }
+    },
+    {
+      "fecha": "2026-11-04",
+      "placa1": {
+        "tema": "ARCA RG 5893/2026: factura electrónica obligatoria para monotributistas sociales y promovidos desde el 1/11/2026",
+        "fondo": "violeta",
+        "portada": "pregunta"
+      },
+      "placa2": {
+        "tema": "Autónomos: vencimientos del aporte de noviembre por CUIT, mito del aporte sin facturar y reintegro por débito",
+        "fondo": "azul",
+        "portada": "numero"
+      },
+      "reel": {
+        "tema": "¿Cómo estás con ARCA?: deuda en Cuentas Tributarias, Domicilio Fiscal Electrónico y constancia",
+        "variante": 3
+      }
     }
   ]
 }
