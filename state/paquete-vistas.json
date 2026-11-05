@@ -33,6 +33,23 @@
         "tema": "¿Cómo estás con ARCA?: deuda en Cuentas Tributarias, Domicilio Fiscal Electrónico y constancia",
         "variante": 3
       }
+    },
+    {
+      "fecha": "2026-11-05",
+      "placa1": {
+        "tema": "Empleadores: vencimientos de la DDJJ (11, 12 y 13/11 por CUIT) y casas particulares el 11/11",
+        "fondo": "crema",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "ARBA: Ingresos Brutos Simplificado junto con el monotributo (mito o realidad + requisitos)",
+        "fondo": "violeta",
+        "portada": "pregunta"
+      },
+      "reel": {
+        "tema": "Clave fiscal: no compartirla, delegar con el Administrador de Relaciones y revisar las autorizaciones",
+        "variante": 1
+      }
     }
   ]
 }
