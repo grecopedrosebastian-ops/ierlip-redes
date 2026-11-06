@@ -1,14 +1,15 @@
-"""Voz en off para los reels explicados (templates/reel-explicado.html), con voz neural gratis y sin clave (edge-tts).
+"""Voz en off para los reels explicados (templates/reel-explicado.html).
 
-Uso:  python scripts/voz-reel.py guion.json carpeta_salida [voz=es-AR-TomasNeural | eleven | eleven:<voice_id>] [velocidad=+6%]
-Con "eleven" usa ElevenLabs (ELEVENLABS_API_KEY y ELEVENLABS_VOICE_ID en .env, que no se versiona).
-guion.json: [[inicio_seg, duración_seg, "texto"], ...], una entrada por escena del template (texto "" = sin voz).
-Cada escena dura lo que pide el template o lo que tarda la voz en decir su frase (+0,6 s), lo que sea mayor:
-la voz va a ritmo natural y es el video el que se acomoda. Deja en la carpeta:
+Uso:  python scripts/voz-reel.py reel.json carpeta_salida [voz=eleven | eleven:<voice_id> | es-AR-TomasNeural] [velocidad=+6%]
+reel.json: la pieza del template ({"escenas": [{"tipo", "voz", ...}]}); también acepta [[inicio, duración, "texto"], ...].
+Voz: "eleven" usa ElevenLabs (ELEVENLABS_API_KEY y ELEVENLABS_VOICE_ID del entorno o de .env, que no se versiona);
+cualquier otro nombre es una voz de edge-tts (gratis, sin clave), que sirve de respaldo.
+Cada escena dura su base (DUR, igual que en el template) o lo que tarda la voz en decir su frase (+0,6 s), lo que sea
+mayor: la voz va a ritmo natural y es el video el que se acomoda. Deja en la carpeta:
   voz.wav       la voz sola, ya ubicada en cada escena
-  tiempos.json  {"TIEMPOS": [[inicio, duración], ...], "total": seg, "original": [[inicio, duración], ...]}
-Después: scripts/audio-explicado.py arma la música con esos tiempos y scripts/mezcla-voz.sh junta todo.
-Requiere: pip install edge-tts, y ffmpeg en el PATH.
+  datos.json    la pieza + TIEMPOS ([[inicio, duración], ...]), total y pops (para la música); va a render-animada --datos
+Después: scripts/audio-explicado.py arma la música con datos.json, y ffmpeg mezcla (ver paquete-diario.yml).
+Requiere: pip install edge-tts numpy, y ffmpeg en el PATH.
 """
 import asyncio, json, os, subprocess, sys, wave
 import numpy as np
@@ -16,9 +17,14 @@ import edge_tts
 
 SR = 44100
 guion_f, carpeta = sys.argv[1:3]
-VOZ = sys.argv[3] if len(sys.argv) > 3 else "es-AR-TomasNeural"
+VOZ = sys.argv[3] if len(sys.argv) > 3 else "eleven"
 VEL = sys.argv[4] if len(sys.argv) > 4 else "+6%"
-guion = json.load(open(guion_f, encoding="utf-8"))
+DUR = {"texto": 3.2, "barras": 0.8, "ticket": 7, "cifra": 4, "lista": 6.5, "cierre": 4.5}   # igual que en el template
+pieza = json.load(open(guion_f, encoding="utf-8"))
+if isinstance(pieza, dict):
+    guion = [[0, e.get("dur") or DUR.get(e.get("tipo"), 3), e.get("voz", "")] for e in pieza["escenas"]]
+else:
+    guion, pieza = pieza, {}
 os.makedirs(carpeta, exist_ok=True)
 
 def leer(path):
@@ -77,6 +83,13 @@ for (t0, d), s, (_, dur, texto) in zip(tiempos, frases, guion):
 voz = voz / max(1e-6, np.max(np.abs(voz))) * 0.9
 with wave.open(os.path.join(carpeta, "voz.wav"), "wb") as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((voz * 32767).astype(np.int16).tobytes())
-json.dump({"TIEMPOS": tiempos, "total": total, "original": [[g[0], g[1]] for g in guion]},
-          open(os.path.join(carpeta, "tiempos.json"), "w"), indent=1)
+# Pops de la música: mismos momentos que en el template (total del ticket, cifra, botón del cierre).
+pops = []
+for e, (t0, d) in zip(pieza.get("escenas", []), tiempos):
+    tipo = e.get("tipo")
+    if tipo == "ticket" and e.get("total"): pops.append(t0 + max(1.6, d - 1.5))
+    elif tipo == "cifra": pops.append(t0 + 0.15)
+    elif tipo == "cierre": pops.append(t0 + 0.9)
+datos = dict(pieza, TIEMPOS=tiempos, total=total, pops=[round(p, 2) for p in pops])
+json.dump(datos, open(os.path.join(carpeta, "datos.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print("total", total, "s ·", VOZ)

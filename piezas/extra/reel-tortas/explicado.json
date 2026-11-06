@@ -1,0 +1,17 @@
+{
+ "pie": "lo que te diría tu contador",
+ "escenas": [
+  {"tipo": "texto", "lineas": [{"t": "¿Garpa vender"}, {"t": "tortas", "tam": "xl", "color": "vio"}, {"t": "desde casa?", "hl": true}], "mano": "— un ejemplo con números", "voz": "¿Garpa vender tortas desde tu casa? Hagamos un ejemplo con números."},
+  {"tipo": "texto", "lineas": [{"t": "40 tortas", "tam": "xl"}, {"t": "por mes", "peso": 3}, {"t": "a $25.000", "hl": true}], "voz": "Supongamos que vendés cuarenta tortas por mes, a veinticinco mil pesos cada una."},
+  {"tipo": "texto", "centro": true, "lineas": [{"t": "Lo que te diría", "peso": 3, "tam": "md"}, {"t": "tu contador", "hl": true}], "voz": "Hagamos la cuenta, como tu contador."},
+  {"tipo": "barras"},
+  {"tipo": "ticket", "arriba": "Por mes · *tu cocina*", "titulo": "Lo que entra y lo que sale",
+   "filas": [["Ventas", "$1.000.000"], ["Ingredientes", "−$400.000", "menos"], ["Cajas y envíos", "−$80.000", "menos"], ["Monotributo A", "−$49.527", "menos"]],
+   "total": ["Te queda", "$470.473"], "nota": "Ejemplo con valores redondos. Cuota de monotributo vigente desde el 1/8/2026.",
+   "voz": "Vendés un millón. Le restás ingredientes, cajas y envíos, y la cuota del monotributo, categoría A. Te quedan unos cuatrocientos setenta mil por mes."},
+  {"tipo": "cifra", "numero": "$11.762", "texto": "de ganancia *por torta*", "mano": "¿garpa?", "voz": "Son unos once mil setecientos pesos por torta. ¿Garpa?"},
+  {"tipo": "lista", "titulo": "Pero…", "bajada": "la cuenta no muestra:", "items": ["Tus horas", "La habilitación", "El tope de la A"], "voz": "La cuenta no muestra tus horas de trabajo, la habilitación para vender alimentos, ni el tope de tu categoría."},
+  {"tipo": "texto", "lineas": [{"t": "Con una torta más", "peso": 3, "tam": "md"}, {"t": "por mes,", "peso": 3, "tam": "md"}, {"t": "ojo:", "hl": true}, {"t": "pasás a la *categoría B.*", "tam": "md"}], "voz": "Y ojo: con una torta más por mes, pasás el tope de la categoría A y te toca recategorizarte."},
+  {"tipo": "cierre", "arriba": "La cuenta no es", "abajo": "solo el número.", "boton": "La hacemos con tus datos", "voz": "La cuenta no es solo el número. Escribinos y la hacemos con tus datos."}
+ ]
+}

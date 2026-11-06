@@ -1,6 +1,6 @@
 ---
 name: paquete-diario
-description: Arma el paquete del día para @estudioierlip: 2 carruseles para el feed (1:1, estilo Papel con fondos y armados que van rotando) y 1 reel con cortes y música, todo verificado en fuentes oficiales. Lo llama el workflow paquete-diario todos los días; no publica ni manda nada.
+description: Arma el paquete del día para @estudioierlip: 2 carruseles para el feed (1:1, estilo Papel con fondos y armados que van rotando) y 1 reel "Lo que te diría tu contador" (un caso con números para emprendedores y pymes, con voz en off), todo verificado en fuentes oficiales. Lo llama el workflow paquete-diario todos los días; no publica ni manda nada.
 ---
 
 # paquete-diario
@@ -18,7 +18,7 @@ Esto es **aparte** de lo que ya se carga solo (la placa del calendario en Metric
 ## 2. Elegir los 3 temas (distintos entre sí y a los de los últimos 30 días)
 - **Placa 1, actualidad:** una novedad de ARCA de los últimos 3 días que no esté en `arca-vistas.json`. Buscala y elegila con los pasos 2 y 3 de `.claude/skills/arca-diario/SKILL.md`. Si no hay ninguna útil, usá una novedad de ARBA o AGIP, o el próximo vencimiento importante (de 3 a 10 días).
 - **Placa 2, servicio:** algo que el contribuyente busca y guarda. Las ideas salen de `docs/referentes.md`: la pregunta frecuente al estilo de las guías de ARCA ("¿Pagaste dos veces…?", "¿Vas a inscribirte…?"), mito o realidad, cómo hacer un trámite paso a paso, el error típico, o un dato del mes (feriados, cierres bancarios). Rotá el público: monotributo, autónomos, empleadores, pymes e Ingresos Brutos.
-- **Reel:** un chequeo o trámite práctico en 3 pasos (por ejemplo: "¿Cómo estás con ARCA?", "Antes de facturar", "Si contratás a alguien"). Tiene que ser distinto de las dos placas.
+- **Reel "Lo que te diría tu contador":** el caso con números de la línea del día (lunes ¿Te conviene?, martes ¿Garpa?, miércoles Primeros pasos, jueves Pagar tarde sale caro, viernes Pyme: ¿cuánto cuesta de verdad?, sábado ¿Garpa? desde casa, domingo Consejo con números). Todo el detalle está en `reel-explicado.md`, en esta misma carpeta: leelo entero. Tiene que ser distinto de las dos placas.
 
 ## 3. Verificar
 Todo dato (fechas, montos, alícuotas, a quién alcanza, rutas de los servicios) se confirma con WebSearch/WebFetch en fuentes oficiales: arca.gob.ar o afip.gob.ar, boletinoficial.gob.ar, arba.gov.ar, agip.gob.ar o argentina.gob.ar. Comprobá con código el día de la semana de cada fecha. Lo que no puedas confirmar no va: reformulalo sin el dato o cambiá de tema, y anotalo en `needs_review`.
@@ -44,14 +44,9 @@ Se mantiene el estilo Papel (template `placa-papel`), pero cada día cambia.
 - **Eyebrows:** manuscritos y en minúscula. Marcá la palabra clave con `*asteriscos*`.
 - **Nunca:** fuentes en la pieza, ni textos, imágenes o logo de ARCA.
 
-## 5. Reel (`templates/reel-cortes.html`, 8 escenas de 2,4 s con música)
-Es un objeto con estas claves:
-- `gancho`: hasta 26 caracteres. Va en MAYÚSCULAS en el video y es una pregunta o frase corta, con la palabra clave entre `*asteriscos*`.
-- `eyebrow`: hasta 26 caracteres (por ejemplo "MONOTRIBUTO · PYMES").
-- `bajada`: hasta 34 caracteres, con una palabra entre `*asteriscos*`.
-- `intro`: `{"arriba"`, hasta 18 caracteres (por ejemplo "UN CHEQUEO EN"); `"numero": "3"`; `"abajo"`, hasta 8 caracteres (por ejemplo "pasos")`}`.
-- `pasos`: exactamente 3, cada uno `{"etiqueta"`, hasta 20 caracteres; `"texto"`, hasta 44, accionable y con voseo; `"nota"`, opcional, hasta 40, como mucho en uno de los pasos`}`.
-- `variante`: 1, 2 o 3 (orden de colores y música). Rotá respecto del último reel de `paquete-vistas.json`.
+## 5. Reel "Lo que te diría tu contador"
+Seguí `reel-explicado.md` (líneas por día, reglas de los números, estructura, voz y formato del JSON). El workflow genera
+la voz, la música y el video a partir de tu JSON.
 
 ## 6. Entregar en `bot/salida/`
 - `placa1/spec.json` y `placa2/spec.json`: la spec para `scripts/render.mjs`, con `"template": "placa-papel"`, `"tema"` y `"out": "bot/salida/placa1/pieza"` (o `placa2`).
@@ -59,14 +54,14 @@ Es un objeto con estas claves:
   - Primera línea: emoji + **Organismo · Tema**.
   - Después, de 2 a 4 líneas de valor, "Guardalo para cuando lo necesites 📌", "Escribinos por WhatsApp: +54 11 4992-2513", "@estudioierlip · estudioierlip.com" y de 5 a 8 hashtags con #EstudioIERLIP.
   - Al final, una línea con la hora sugerida: placa 1 a las 10:00 (11:00 los fines de semana) y placa 2 a las 15:00.
-- `reel/reel.json` y `reel/texto.txt`: el caption del reel (gancho, 2 líneas, WhatsApp, hashtags).
+- `reel/explicado.json` y `reel/texto.txt`, con el formato de `reel-explicado.md`.
   - Hora sugerida: 18:00.
   - Los lunes y jueves, a las 20:00, porque a las 18:00 sale el video de vencimientos.
 - `meta.json`: `{"resumen": {"placa1": "...", "placa2": "...", "reel": "..."}, "sources": [urls oficiales], "needs_review": [...]}`.
 - Agregá el día a `state/paquete-vistas.json`, conservando los anteriores, con este formato:
   ```json
-  {"fecha": "...", "placa1": {"tema": "...", "fondo": "...", "portada": "..."}, "placa2": {"tema": "...", "fondo": "...", "portada": "..."}, "reel": {"tema": "...", "variante": 1}}
+  {"fecha": "...", "placa1": {"tema": "...", "fondo": "...", "portada": "..."}, "placa2": {"tema": "...", "fondo": "...", "portada": "..."}, "reel": {"tema": "...", "linea": "¿Garpa?"}}
   ```
 - Si la placa 1 es una novedad de ARCA, sumala también a `state/arca-vistas.json`.
 
-Antes de terminar, revisá que todos los JSON sean válidos, que ningún texto supere su largo y que los dos carruseles se vean distintos entre sí.
+Antes de terminar, revisá que todos los JSON sean válidos, que ningún texto supere su largo, que los dos carruseles se vean distintos entre sí y que las cuentas del reel coincidan entre la voz y la pantalla.

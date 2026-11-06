@@ -233,6 +233,8 @@ if __name__ == "__main__":
             hubo = True
             tg.texto("🎬 Reel: " + resumen.get("reel", "reel del día"))
             tg.documentos([SALIDA / "reel" / "reel.mp4"])
+            if (SALIDA / "reel" / "reel-armado" / "voz-respaldo.txt").exists():
+                tg.texto("⚠️ ElevenLabs no respondió: este reel salió con la voz de respaldo.")
             if (SALIDA / "reel" / "texto.txt").exists():
                 tg.texto((SALIDA / "reel" / "texto.txt").read_text(encoding="utf-8").strip())
         if not hubo:

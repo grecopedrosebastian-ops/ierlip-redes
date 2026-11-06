@@ -22,6 +22,7 @@ docs/estilos.md                    especificación visual B y C (colores, tipogr
 docs/referentes.md                 qué tomar de @contadoresenred, @elpyme y @arca_informa
 config/calendario-noviembre-2026.json  30 días: placa + historia por día (tema, puntos, qué verificar)
 templates/placa-papel.html         estilo B (portada / numero / pregunta / items / versus / tip / cierre; tema crema, azul o violeta)
+templates/reel-explicado.html      reel "Lo que te diría tu contador" (caso con números, voz en off: scripts/reel-explicado.sh)
 templates/reel-cortes.html         reel 9:16 con cortes cada 2,4 s (música: scripts/audio-reel.py)
 templates/historia-tipografica.html estilo C, historia
 templates/placa-debate.html        estilo C, placa de debate
@@ -80,7 +81,7 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 ## Paquete diario: 2 placas + 1 reel (`.github/workflows/paquete-diario.yml`, desde el 03/11)
 - Todos los días a las 03:07 (o a mano desde Actions), aparte de lo que se carga solo. Skill: `.claude/skills/paquete-diario`.
 - **Placa 1 (actualidad):** la novedad de ARCA de los últimos 3 días (si no hay, de ARBA o AGIP, o el próximo vencimiento). **Placa 2 (servicio):** la pregunta frecuente, mito o realidad, un trámite o el dato del mes. Horarios sugeridos: 10:00 y 15:00.
-- **Reel:** `templates/reel-cortes.html`, 8 escenas de 2,4 s con cortes secos, y música de `assets/audio/reel-<1|2|3>.wav` (`scripts/audio-reel.py`, 100 BPM: cada corte cae en el primer tiempo). Hora sugerida: 18:00 (lun y jue, 20:00).
+- **Reel "Lo que te diría tu contador"** (desde el 07/11): un caso con números para emprendedores, principiantes y pymes, con una línea por día (lun ¿Te conviene?, mar ¿Garpa?, mié Primeros pasos, jue Pagar tarde sale caro, vie Pyme: ¿cuánto cuesta de verdad?, sáb ¿Garpa? desde casa, dom Consejo con números). Detalle en `.claude/skills/paquete-diario/reel-explicado.md`. Se arma con `bash scripts/reel-explicado.sh <explicado.json> <salida.mp4>`: voz de ElevenLabs (Juan; secretos `ELEVENLABS_API_KEY` y `ELEVENLABS_VOICE_ID`, plan Starter: alcanza para uno por día), música de `scripts/audio-explicado.py` y `templates/reel-explicado.html`. Si ElevenLabs falla, sale con la voz gratis de respaldo (edge-tts) y avisa por Telegram. Hora sugerida: 18:00 (lun y jue, 20:00). El reel corto de cortes (`templates/reel-cortes.html`) queda disponible pero ya no sale en el paquete.
 - **Variedad:** `placa-papel` tiene `tema` crema, azul o violeta, y portadas `portada`, `numero` o `pregunta`, más el interior `versus`. La skill rota todo con `state/paquete-vistas.json`.
 - Reemplaza a `arca-diario.yml` y a `historia-animada.yml`, que quedaron sin cron (se pueden correr a mano). El Instagram de ARCA no se lee de forma automática: se usan las fuentes oficiales. Nunca copiar textos, imágenes ni logo de ARCA.
 

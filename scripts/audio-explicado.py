@@ -1,7 +1,7 @@
 """Música del reel explicado (templates/reel-explicado.html): base suave a 92 BPM para ir debajo de la voz en off.
 
-Uso:  python scripts/audio-explicado.py [salida.wav] [duración=43 | tiempos.json]
-Con el tiempos.json de scripts/voz-reel.py, los golpes y pops se corren a donde quedó cada escena.
+Uso:  python scripts/audio-explicado.py [salida.wav] [duración=43 | datos.json]
+Con el datos.json de scripts/voz-reel.py, los golpes y pops caen donde quedó cada escena.
 Cada cambio de escena (CORTES) lleva un golpe suave y un "whoosh" que sube hasta el corte; los números que aparecen
 (POPS) llevan un pop. Va bajita a propósito: la voz manda. Todo sintetizado acá, sin samples de terceros.
 """
@@ -14,15 +14,10 @@ arg = sys.argv[2] if len(sys.argv) > 2 else "43"
 BEAT = 60 / 92
 CORTES = [3.4, 6.6, 8.2, 9.0, 16.0, 23.0, 27.0, 33.5, 38.5]
 POPS = [1.15, 13.6, 20.6, 23.15, 39.9]
-if arg.endswith(".json"):
-    T = json.load(open(arg))
-    def mover(t):   # misma cuenta que hace el template: cada escena se estira en proporción
-        for (o0, od), (n0, nd) in zip(T["original"], T["TIEMPOS"]):
-            if o0 <= t < o0 + od:
-                return n0 + (t - o0) * nd / od
-        return t
+if arg.endswith(".json"):   # datos.json de scripts/voz-reel.py: un golpe en cada cambio de escena y los pops que trae
+    T = json.load(open(arg, encoding="utf-8"))
     CORTES = [n0 for n0, _ in T["TIEMPOS"][1:]]
-    POPS = [mover(p) for p in POPS]
+    POPS = T.get("pops", [])
     DUR = T["total"]
 else:
     DUR = float(arg)

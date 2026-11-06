@@ -1,7 +1,8 @@
-# Todos los días: 2 carruseles para el feed + 1 reel con cortes y música, verificados y listos para subir.
+# Todos los días: 2 carruseles para el feed + 1 reel "Lo que te diría tu contador" (caso con números, voz en off de
+# ElevenLabs y música), verificados y listos para subir.
 # Aparte de lo que se carga solo (Metricool y la historia diaria). Llega por Telegram. No publica nada.
 # Reemplaza a arca-diario (la novedad de ARCA ahora es la placa 1) y a historia-animada (ahora es el reel).
-name: Paquete diario (2 placas + reel)
+name: Paquete diario (2 placas + reel con voz)
 
 on:
   schedule:
@@ -31,11 +32,12 @@ jobs:
         with:
           node-version: 22
 
-      - name: Preparar render (Playwright, fuentes y ffmpeg)
+      - name: Preparar render (Playwright, fuentes, ffmpeg y voz)
         run: |
           npm ci
           npx playwright install --with-deps chromium
           sudo apt-get install -y -q ffmpeg > /dev/null
+          pip install -q numpy edge-tts
 
       - name: Preparar la clave de Claude
         env:
@@ -69,11 +71,13 @@ jobs:
             if [ -f "bot/salida/$p/spec.json" ]; then node scripts/render.mjs "bot/salida/$p/spec.json"; fi
           done
 
-      - name: Renderizar el reel con música
-        if: hashFiles('bot/salida/reel/reel.json') != ''
-        run: |
-          v="$(python3 -c "import json;v=json.load(open('bot/salida/reel/reel.json')).get('variante',1);print(v if v in (1,2,3) else 1)")"
-          node scripts/render-animada.mjs --datos bot/salida/reel/reel.json templates/reel-cortes.html bot/salida/reel/reel.mp4 19.2 30 "assets/audio/reel-$v.wav"
+      # Voz de ElevenLabs (si falla, la voz gratis de respaldo), música a medida y video.
+      - name: Armar el reel con voz
+        if: hashFiles('bot/salida/reel/explicado.json') != ''
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: bash scripts/reel-explicado.sh bot/salida/reel/explicado.json bot/salida/reel/reel.mp4
 
       - name: Mandar por Telegram
         run: python3 scripts/bot/telegram_bot.py paquete
