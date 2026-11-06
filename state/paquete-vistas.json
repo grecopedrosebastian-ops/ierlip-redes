@@ -50,6 +50,23 @@
         "tema": "Clave fiscal: no compartirla, delegar con el Administrador de Relaciones y revisar las autorizaciones",
         "variante": 1
       }
+    },
+    {
+      "fecha": "2026-11-06",
+      "placa1": {
+        "tema": "ARCA RG 5923 y 5924/2026: suspensión de embargos y plan de pagos ampliado hasta el 30/06/2027 (MiPyMEs tramos 1 y 2, pequeños contribuyentes, entidades sin fines de lucro)",
+        "fondo": "azul",
+        "portada": "portada"
+      },
+      "placa2": {
+        "tema": "Monotributo: pagaste dos veces, reimputar el saldo a favor desde el CCMA (mito o realidad + pasos)",
+        "fondo": "violeta",
+        "portada": "numero"
+      },
+      "reel": {
+        "tema": "¿Te mudaste?: cambio de domicilio fiscal en ARCA (Sistema Registral, código por correo, confirmación en 30 días)",
+        "variante": 2
+      }
     }
   ]
 }
