@@ -67,6 +67,23 @@
         "tema": "¿Te mudaste?: cambio de domicilio fiscal en ARCA (Sistema Registral, código por correo, confirmación en 30 días)",
         "variante": 2
       }
+    },
+    {
+      "fecha": "2026-11-06",
+      "placa1": {
+        "tema": "ARCA RG 5922/2026: RIMI, recupero del IVA de las inversiones (presolicitud en el SGI del 1 al 10 de feb/may/ago/nov)",
+        "fondo": "violeta",
+        "portada": "pregunta"
+      },
+      "placa2": {
+        "tema": "Factura electrónica con error: no se borra, se anula con nota de crédito (mito o realidad + pasos)",
+        "fondo": "azul",
+        "portada": "portada"
+      },
+      "reel": {
+        "tema": "Facturar $1.000.000 + IVA como responsable inscripto: IVA, compras e impuesto al cheque, te quedan $692.740",
+        "linea": "Pyme: ¿cuánto cuesta de verdad?"
+      }
     }
   ]
 }
