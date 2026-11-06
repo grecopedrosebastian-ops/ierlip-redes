@@ -1,0 +1,176 @@
+<!doctype html>
+<!--
+  Reel 1080x1920 "lo que te diría tu contador": un caso con números contado con tipografía cinética sobre papel crema.
+  Referencias: el formato de caso de @nogarpa_ y el estilo tipográfico (palabras que entran de a una, texto que se
+  vuelve barras, marco con rayos) que Seba mandó el 06/11/2026. Prueba: todavía no tiene datos por window.PIEZA.
+  Cada escena tiene inicio y duración en segundos; los elementos entran en el segundo absoluto que dice data-t.
+  Lo exporta scripts/render-animada.mjs (--datos con {TIEMPOS}, 30 fps).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel explicado</title>
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/300.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/500.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/700.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/patrick-hand/400.css">
+<style>
+  :root{--deep:#0F1A30;--fondo:#F3EEE2;--papel:#FBF8F1;--azul:#1F3A7A;--vio:#892CA0;--mostaza:#E9B949;--terra:#C8643B;--verde:#2E9E6B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--fondo)}
+  body{font-family:'Montserrat',sans-serif;color:var(--deep)}
+  .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;mix-blend-mode:multiply}
+  .sc{position:absolute;inset:0;opacity:0}
+  .col{position:absolute;left:90px;right:90px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center}
+  .cen{align-items:center;text-align:center}
+  /* tipografía cinética: pesado + liviano, como la referencia */
+  .w9{font-weight:900;text-transform:uppercase;line-height:.98;letter-spacing:-.01em}
+  .w3{font-weight:300;text-transform:uppercase;line-height:1;letter-spacing:-.01em}
+  .xl{font-size:150px} .lg{font-size:118px} .md{font-size:84px} .sm{font-size:56px}
+  .mano{font-family:'Patrick Hand',cursive;font-size:58px;color:var(--terra)}
+  .hl{position:relative;display:inline-block;padding:0 16px;z-index:0}
+  .hl::before{content:"";position:absolute;inset:6px 0 2px;background:var(--mostaza);z-index:-1;transform-origin:left;transform:scaleX(var(--s,1))}
+  .vio{color:var(--vio)}
+  /* barras: el texto "se condensa" antes de cambiar de escena */
+  .barras{display:flex;flex-direction:column;gap:34px;align-items:center}
+  .barras i{display:block;height:58px;background:var(--deep);border-radius:4px}
+  .barras i.m{background:var(--mostaza)}
+  /* ticket */
+  .ticket{background:var(--papel);width:820px;padding:56px 60px 70px;box-shadow:0 30px 70px rgba(15,26,48,.18);position:relative;
+          font-weight:500;font-size:40px;border-radius:10px 10px 0 0}
+  .ticket::after{content:"";position:absolute;left:0;right:0;bottom:-28px;height:28px;
+          background:linear-gradient(-45deg,transparent 14px,var(--papel) 0) 0 0/40px 28px repeat-x,linear-gradient(45deg,transparent 14px,var(--papel) 0) 0 0/40px 28px repeat-x}
+  .ticket h4{font-weight:900;font-size:36px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding-bottom:26px;border-bottom:4px dashed rgba(15,26,48,.35);margin-bottom:24px}
+  .fila{display:flex;justify-content:space-between;padding:14px 0}
+  .fila b{font-weight:900}
+  .fila.menos b{color:var(--terra)}
+  .fila.sub{border-top:3px solid var(--deep);margin-top:8px;padding-top:22px}
+  .fila.por{font-family:'Patrick Hand',cursive;font-size:50px;color:var(--vio)}
+  .total{margin-top:26px;background:var(--deep);color:#fff;border-radius:16px;padding:26px 34px;display:flex;justify-content:space-between;align-items:center}
+  .total span{font-weight:700;font-size:34px;letter-spacing:.08em;text-transform:uppercase}
+  .total b{font-weight:900;font-size:62px;color:var(--mostaza)}
+  .nota{font-weight:500;font-size:30px;opacity:.7;margin-top:56px;text-align:center}
+  /* rayos + tarjeta */
+  .rayos{position:absolute;left:50%;top:50%;width:1500px;height:1500px;margin:-750px 0 0 -750px}
+  .marco{position:relative;background:var(--deep);color:#fff;border-radius:44px;padding:90px 70px;width:800px;text-align:center;
+         box-shadow:0 0 0 14px var(--fondo),0 0 0 22px var(--deep),0 40px 80px rgba(15,26,48,.3)}
+  .marco .big{font-weight:900;font-size:130px;white-space:nowrap;color:var(--mostaza);line-height:1}
+  .marco .chico{font-weight:700;font-size:46px;margin-top:24px;line-height:1.2}
+  /* lista pero */
+  .lista{margin-top:60px;display:flex;flex-direction:column;gap:30px}
+  .item{display:flex;align-items:center;gap:34px;background:var(--papel);border-radius:22px;padding:30px 40px;box-shadow:0 18px 40px rgba(15,26,48,.12)}
+  .item .x{flex:0 0 76px;height:76px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center}
+  .item span{font-weight:900;font-size:62px;text-transform:uppercase}
+  /* cierre */
+  .wpp{margin-top:70px;display:flex;align-items:center;gap:26px;background:var(--deep);color:#fff;border-radius:999px;padding:30px 54px}
+  .wpp b{font-weight:900;font-size:52px}
+  .pie{position:absolute;left:0;right:0;bottom:120px;text-align:center;font-weight:700;font-size:28px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+  /* animaciones (las arranca el script en el segundo de data-t) */
+  @keyframes vis{from,to{opacity:1}}
+  @keyframes sube{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+  @keyframes golpe{0%{opacity:0;transform:scale(1.5)}60%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:none}}
+  @keyframes pop{0%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
+  @keyframes resalta{from{--s:0}to{--s:1}}
+  @keyframes barra{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes fuera{to{opacity:0;transform:scale(.9)}}
+  @keyframes papel{0%{opacity:0;transform:translateY(500px) rotate(4deg)}75%{opacity:1;transform:translateY(-14px) rotate(-1deg)}100%{opacity:1;transform:rotate(-1.2deg)}}
+  @keyframes gira{from{transform:rotate(0) scale(.6)}to{transform:rotate(25deg) scale(1)}}
+  @keyframes tacha{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:none}}
+  @property --s{syntax:'<number>';inherits:false;initial-value:1}
+</style>
+</head>
+<body>
+<img class="tex" src="../assets/textura-papel.png" alt="">
+<div id="reel"></div>
+<script>
+(function(){
+  const X = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
+  const WAPP = `<svg width="64" height="64" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#25D366"/><path fill="#fff" d="M16 7.2a8.7 8.7 0 0 0-7.5 13.1L7.3 24.8l4.6-1.2A8.7 8.7 0 1 0 16 7.2zm5.1 12.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.6 11.6 11.6 0 0 1-4.4-3.9c-.3-.5-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>`;
+  const rayos = (() => { let l = ""; for (let i = 0; i < 36; i++) { const a = i * 10 * Math.PI / 180;
+      l += `<line x1="${750+Math.cos(a)*470}" y1="${750+Math.sin(a)*470}" x2="${750+Math.cos(a)*(i%2?640:720)}" y2="${750+Math.sin(a)*(i%2?640:720)}"/>`; }
+    return `<svg class="rayos a" data-a="gira" data-t="T" data-d="4" viewBox="0 0 1500 1500" stroke="#0F1A30" stroke-width="16" stroke-linecap="round">${l}</svg>`; })();
+  const barras = (t, anchos) => `<div class="col cen"><div class="barras">${anchos.map((w,i) => `<i class="a ${i === anchos.length-1 ? "m" : ""}" data-a="barra" data-t="${t + i*0.06}" style="width:${w}px;transform-origin:${i%2?"right":"left"}"></i>`).join("")}</div></div>`;
+  const fila = (t, a, b, cls = "") => `<div class="fila ${cls} a" data-a="sube" data-t="${t}"><span>${a}</span><b>${b}</b></div>`;
+
+  // [inicio, duración, html]
+  const E = [
+    [0, 3.4, `<div class="col">
+        <div class="w9 lg a" data-a="golpe" data-t="0.1">¿Te pagan</div>
+        <div class="w9 xl a" data-a="golpe" data-t="0.7"><span class="hl a" data-a="resalta" data-t="1.15" data-d=".35">$1.500.000</span></div>
+        <div class="w3 lg a" data-a="golpe" data-t="1.5">por mes?</div>
+        <div class="mano a" data-a="sube" data-t="2.3" style="margin-top:40px">— te ofrecen un trabajo nuevo</div></div>`],
+    [3.4, 3.2, `<div class="col">
+        <div class="w9 xl a" data-a="golpe" data-t="3.5">¿En blanco</div>
+        <div class="w3 lg a" data-a="golpe" data-t="4.1">o</div>
+        <div class="w9 xl vio a" data-a="golpe" data-t="4.5">facturando?</div></div>`],
+    [6.6, 1.6, `<div class="col cen">
+        <div class="w3 md a" data-a="sube" data-t="6.65">Lo que te diría</div>
+        <div class="w9 lg a" data-a="golpe" data-t="7.0"><span class="hl a" data-a="resalta" data-t="7.35" data-d=".35">tu contador</span></div></div>`],
+    [8.2, 0.8, barras(8.2, [820, 640, 780, 520])],
+    [9.0, 7.0, `<div class="col cen">
+        <div class="w9 sm a" data-a="sube" data-t="9.05" style="margin-bottom:50px">Opción 1 · <span class="vio">en blanco</span></div>
+        <div class="ticket a" data-a="papel" data-t="9.2" data-d=".7">
+          <h4>Relación de dependencia</h4>
+          ${fila(9.9, "Sueldo bruto", "$1.500.000")}
+          ${fila(10.7, "Aportes (17%)", "−$255.000", "menos")}
+          ${fila(11.6, "Te queda", "$1.245.000", "sub")}
+          ${fila(12.6, "× 13 sueldos", "con aguinaldo", "por")}
+          <div class="total a" data-a="pop" data-t="13.6"><span>En el año</span><b>$16.185.000</b></div>
+        </div></div>`],
+    [16.0, 7.0, `<div class="col cen">
+        <div class="w9 sm a" data-a="sube" data-t="16.05" style="margin-bottom:50px">Opción 2 · <span class="vio">facturando</span></div>
+        <div class="ticket a" data-a="papel" data-t="16.2" data-d=".7">
+          <h4>Monotributo · categoría C</h4>
+          ${fila(16.9, "Facturás", "$1.500.000")}
+          ${fila(17.7, "Cuota mensual", "−$66.020", "menos")}
+          ${fila(18.6, "Te queda", "$1.433.980", "sub")}
+          ${fila(19.6, "× 12 meses", "sin aguinaldo", "por")}
+          <div class="total a" data-a="pop" data-t="20.6"><span>En el año</span><b>$17.207.759</b></div>
+        </div>
+        <div class="nota a" data-a="sube" data-t="21.2">Servicios, valores vigentes desde el 1/8/2026.<br>Sin Ingresos Brutos.</div></div>`],
+    [23.0, 4.0, `<div class="col cen">${rayos.replace("T", "23.0")}
+        <div class="marco a" data-a="pop" data-t="23.15" data-d=".55">
+          <div class="big">+$1.022.759</div>
+          <div class="chico">al año a favor<br>del monotributo</div></div>
+        <div class="mano a" data-a="sube" data-t="24.6" style="margin-top:80px;position:relative">¿listo, entonces?</div></div>`],
+    [27.0, 6.5, `<div class="col">
+        <div class="w9 xl a" data-a="golpe" data-t="27.1">Pero<span class="vio">…</span></div>
+        <div class="w3 sm a" data-a="sube" data-t="27.6" style="margin-top:14px">facturando no tenés:</div>
+        <div class="lista">
+          ${["Aguinaldo", "Vacaciones pagas", "Indemnización", "ART"].map((s,i) => `<div class="item a" data-a="tacha" data-t="${28.2 + i*0.85}"><div class="x">${X}</div><span>${s}</span></div>`).join("")}
+        </div></div>`],
+    [33.5, 5.0, `<div class="col">
+        <div class="w3 md a" data-a="sube" data-t="33.6">Si es un solo cliente</div>
+        <div class="w3 md a" data-a="sube" data-t="34.2">y con horario fijo,</div>
+        <div class="w9 lg a" data-a="golpe" data-t="35.1" style="margin-top:30px"><span class="hl a" data-a="resalta" data-t="35.45" data-d=".35">ojo:</span></div>
+        <div class="w9 md a" data-a="golpe" data-t="35.9" style="margin-top:20px">puede ser un empleo <span class="vio">encubierto.</span></div></div>`],
+    [38.5, 4.5, `<div class="col cen">
+        <div class="w3 md a" data-a="sube" data-t="38.6">La cuenta no es</div>
+        <div class="w9 lg a" data-a="golpe" data-t="39.0">solo el número.</div>
+        <div class="wpp a" data-a="pop" data-t="39.9">${WAPP}<div><div style="font-weight:700;font-size:32px">La hacemos con tus datos</div><b>+54 11 4992-2513</b></div></div>
+        <img class="a" data-a="sube" data-t="40.6" src="../assets/logo/ierlip-logo-color.png" style="width:520px;margin-top:90px"></div>`],
+  ];
+
+  // window.TIEMPOS = [[inicio, duración], ...] por escena (lo escribe scripts/voz-reel.py según lo que dura la voz).
+  // Las entradas de cada escena se estiran en proporción, para que acompañen lo que se va diciendo.
+  const T = window.TIEMPOS || (window.PIEZA && window.PIEZA.TIEMPOS) || E.map(([t, d]) => [t, d]);
+  const R = document.getElementById("reel");
+  R.innerHTML = E.map(([t, d, h], i) => `<div class="sc" style="animation:vis ${T[i][1]}s linear ${T[i][0]}s 1 none">${h}</div>`).join("")
+    + `<div class="pie">Estudio IERLIP · lo que te diría tu contador</div>`;
+  R.querySelectorAll(".sc").forEach((sc, i) => sc.querySelectorAll(".a").forEach(el => {
+    const k = T[i][1] / E[i][1];
+    const t = T[i][0] + (Number(el.dataset.t) - E[i][0]) * k, d = Number(el.dataset.d || .45) * (el.dataset.a === "gira" ? k : 1);
+    const ease = el.dataset.a === "gira" ? "linear" : "cubic-bezier(.2,.9,.3,1.1)";
+    el.style.animation = `${el.dataset.a} ${d}s ${ease} ${t}s 1 both`;
+  }));
+  // Achica lo que no entra a lo ancho (las palabras largas en mayúscula).
+  document.fonts.ready.then(() => R.querySelectorAll(".w9,.w3,.big").forEach(el => {
+    let fs = parseFloat(getComputedStyle(el).fontSize);
+    while (el.scrollWidth > el.clientWidth + 2 && fs > 30) { fs -= 4; el.style.fontSize = fs + "px"; }
+  }));
+  window.__READY = true;
+})();
+</script>
+</body>
+</html>
