@@ -84,6 +84,23 @@
         "tema": "Facturar $1.000.000 + IVA como responsable inscripto: IVA, compras e impuesto al cheque, te quedan $692.740",
         "linea": "Pyme: ¿cuánto cuesta de verdad?"
       }
+    },
+    {
+      "fecha": "2026-11-07",
+      "placa1": {
+        "tema": "AGIP Ingresos Brutos contribuyentes locales CABA: anticipo 10 vence 11, 12, 13, 16 y 17/11 por CUIT",
+        "fondo": "azul",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "Monotributo: baja automática a los 10 meses sin pagar, la deuda sigue y el reingreso no es automático (mito o realidad + pasos)",
+        "fondo": "crema",
+        "portada": "pregunta"
+      },
+      "reel": {
+        "tema": "Clases de inglés desde casa: 16 clases por semana a $15.000, monotributo A, $12.976 por hora; con 2 clases más se pasa del tope de la A",
+        "linea": "¿Garpa? (desde casa)"
+      }
     }
   ]
 }
