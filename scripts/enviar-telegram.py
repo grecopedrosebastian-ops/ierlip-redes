@@ -19,6 +19,7 @@ import json
 import mimetypes
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
 import uuid
@@ -48,12 +49,22 @@ def api(method, fields, files=None):
     body += f"--{boundary}--\r\n".encode()
     req = urllib.request.Request(f"https://api.telegram.org/bot{token}/{method}", data=body,
                                  headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})
-    try:
-        with urllib.request.urlopen(req, timeout=300) as r:
-            data = json.loads(r.read())
-    except urllib.error.HTTPError as e:
-        # no imprimir la URL: contiene el token
-        sys.exit(f"Telegram respondió {e.code} en {method}: {e.read().decode('utf-8', 'replace')[:300]}")
+    # Telegram a veces corta la conexión (Errno 104) o responde 429/5xx: se reintenta hasta 5 veces.
+    for intento in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=300) as r:
+                data = json.loads(r.read())
+            break
+        except urllib.error.HTTPError as e:
+            if (e.code == 429 or e.code >= 500) and intento < 4:
+                time.sleep(10 * (intento + 1))
+                continue
+            # no imprimir la URL: contiene el token
+            sys.exit(f"Telegram respondió {e.code} en {method}: {e.read().decode('utf-8', 'replace')[:300]}")
+        except (urllib.error.URLError, ConnectionError, TimeoutError) as e:
+            if intento == 4:
+                sys.exit(f"No pude conectar con Telegram en {method}: {getattr(e, 'reason', e)}")
+            time.sleep(10 * (intento + 1))
     if not data.get("ok"):
         sys.exit(f"Telegram devolvió error en {method}: {str(data)[:300]}")
     return data
