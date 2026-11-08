@@ -118,6 +118,23 @@
         "tema": "Tortas por encargo desde casa: 30 por mes a $40.000, monotributo B, te quedan $583.621; con 25 por mes tocás el tope de la A",
         "linea": "¿Garpa? (desde casa)"
       }
+    },
+    {
+      "fecha": "2026-11-08",
+      "placa1": {
+        "tema": "ARBA: cuota 9 del Automotor y cuota 4 del Inmobiliario Rural y Complementario vencen el jueves 12/11 (bonificación del 10%)",
+        "fondo": "azul",
+        "portada": "pregunta"
+      },
+      "placa2": {
+        "tema": "Monotributo + relación de dependencia: pagás solo el impuesto integrado (mito o realidad + pasos + categoría A)",
+        "fondo": "violeta",
+        "portada": "numero"
+      },
+      "reel": {
+        "tema": "Separar el 3,5% de cada cobro para el monotributo: servicios $2 M por mes, categoría C $66.020,12; con $2,1 M pasás a la D y no alcanza",
+        "linea": "Consejo con números"
+      }
     }
   ]
 }
