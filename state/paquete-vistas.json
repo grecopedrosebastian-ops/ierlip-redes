@@ -135,6 +135,23 @@
         "tema": "Separar el 3,5% de cada cobro para el monotributo: servicios $2 M por mes, categoría C $66.020,12; con $2,1 M pasás a la D y no alcanza",
         "linea": "Consejo con números"
       }
+    },
+    {
+      "fecha": "2026-11-09",
+      "placa1": {
+        "tema": "Ganancias 2025 personas humanas: la presentación de la DDJJ vence el lunes 16/11 (RG 5918/2026), presentar no es pagar",
+        "fondo": "violeta",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "IVA responsables inscriptos: el saldo técnico a favor no se devuelve, se usa en los meses siguientes; el de libre disponibilidad sí (mito o realidad + 2 saldos)",
+        "fondo": "crema",
+        "portada": "portada"
+      },
+      "reel": {
+        "tema": "Empleado o monotributista con $1.200.000 por mes: neto $12.948.000 contra $13.723.452 al año (categoría B), +$775.451 a favor de facturar pero sin vacaciones, indemnización ni ART",
+        "linea": "¿Te conviene?"
+      }
     }
   ]
 }
