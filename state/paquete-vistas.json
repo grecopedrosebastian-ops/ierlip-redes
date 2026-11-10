@@ -152,6 +152,23 @@
         "tema": "Empleado o monotributista con $1.200.000 por mes: neto $12.948.000 contra $13.723.452 al año (categoría B), +$775.451 a favor de facturar pero sin vacaciones, indemnización ni ART",
         "linea": "¿Te conviene?"
       }
+    },
+    {
+      "fecha": "2026-11-10",
+      "placa1": {
+        "tema": "ARBA RN 21/2026: cuotas y anticipos de planes de pago vigentes que vencían el 9, 10 u 11/11 pasan al jueves 12/11 (y DDJJ de agentes de recaudación)",
+        "fondo": "azul",
+        "portada": "pregunta"
+      },
+      "placa2": {
+        "tema": "Monotributo: los 4 topes de la categoría (ingresos, superficie, energía y alquileres), mito o realidad + excepción de ciudades de hasta 40.000 habitantes",
+        "fondo": "violeta",
+        "portada": "numero"
+      },
+      "reel": {
+        "tema": "Peluquería de barrio con $8 M: 280 cortes a $14.000, monotributo G, te quedan $2.689.687; con sueldo propio de $1,5 M recuperás en unos 7 meses; con 45 cortes más pasás a la H",
+        "linea": "¿Garpa?"
+      }
     }
   ]
 }
