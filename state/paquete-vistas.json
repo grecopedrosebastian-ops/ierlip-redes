@@ -169,6 +169,23 @@
         "tema": "Peluquería de barrio con $8 M: 280 cortes a $14.000, monotributo G, te quedan $2.689.687; con sueldo propio de $1,5 M recuperás en unos 7 meses; con 45 cortes más pasás a la H",
         "linea": "¿Garpa?"
       }
+    },
+    {
+      "fecha": "2026-11-12",
+      "placa1": {
+        "tema": "ARCA RG 5927/2026: 50% menos en multas formales (vencimientos 2/1 al 8/10/2026), cumpliendo lo omitido hasta el 18/12/2026",
+        "fondo": "violeta",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "Pymes: impuesto al cheque como pago a cuenta de Ganancias con Certificado MiPyME (100% micro y pequeñas, 60% industrial mediana tramo 1), mito o realidad + pasos",
+        "fondo": "crema",
+        "portada": "pregunta"
+      },
+      "reel": {
+        "tema": "IVA de $2.000.000 pagado 4 meses tarde: 2,75% mensual, $220.000 de intereses; multa formal y punitorios del 3,5% si va a juicio",
+        "linea": "Pagar tarde sale caro"
+      }
     }
   ]
 }
