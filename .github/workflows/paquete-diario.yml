@@ -35,8 +35,12 @@ jobs:
       - name: Preparar render (Playwright, fuentes, ffmpeg y voz)
         run: |
           npm ci
-          npx playwright install --with-deps chromium
-          sudo apt-get install -y -q ffmpeg > /dev/null
+          # Los servidores de Ubuntu a veces no responden (DNS): se reintenta hasta 3 veces.
+          for i in 1 2 3; do
+            npx playwright install --with-deps chromium && sudo apt-get install -y -q ffmpeg > /dev/null && break
+            [ "$i" = 3 ] && exit 1
+            echo "Falló la instalación (intento $i), reintento en 60 s"; sleep 60; sudo apt-get update -q || true
+          done
           pip install -q numpy edge-tts
 
       - name: Preparar la clave de Claude
