@@ -186,6 +186,23 @@
         "tema": "IVA de $2.000.000 pagado 4 meses tarde: 2,75% mensual, $220.000 de intereses; multa formal y punitorios del 3,5% si va a juicio",
         "linea": "Pagar tarde sale caro"
       }
+    },
+    {
+      "fecha": "2026-11-13",
+      "placa1": {
+        "tema": "IVA responsables inscriptos: vencimientos de la DDJJ y del Libro de IVA Digital del período octubre, 18, 19, 20, 24 y 25/11 por CUIT",
+        "fondo": "azul",
+        "portada": "pregunta"
+      },
+      "placa2": {
+        "tema": "Factura a consumidor final: DNI, CUIL o CDI recién desde $10.000.000, leyenda siempre, CUIT a pedido para Ganancias (mito o realidad)",
+        "fondo": "violeta",
+        "portada": "numero"
+      },
+      "reel": {
+        "tema": "Un sueldo bruto de $1.000.000 en una pyme: $1.240.000 por mes con 18% + 6% de cargas; con aguinaldo $16.120.000 por año, unos $1.343.333 por mes (+34%); cobra $830.000 en mano",
+        "linea": "Pyme: ¿cuánto cuesta de verdad?"
+      }
     }
   ]
 }
