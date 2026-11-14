@@ -203,6 +203,23 @@
         "tema": "Un sueldo bruto de $1.000.000 en una pyme: $1.240.000 por mes con 18% + 6% de cargas; con aguinaldo $16.120.000 por año, unos $1.343.333 por mes (+34%); cobra $830.000 en mano",
         "linea": "Pyme: ¿cuánto cuesta de verdad?"
       }
+    },
+    {
+      "fecha": "2026-11-14",
+      "placa1": {
+        "tema": "Convenio Multilateral (RG CA 11/2026): anticipo de octubre de Ingresos Brutos en SIFERE vence del 17 al 20/11 según CUIT, por los feriados",
+        "fondo": "azul",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "Monotributo: exportar servicios con factura E (punto de venta nuevo, Comprobantes en línea, CUIT del país, dólar comprador BNA), mito o realidad + pasos",
+        "fondo": "crema",
+        "portada": "pregunta"
+      },
+      "reel": {
+        "tema": "Uñas desde casa: 60 turnos por mes a $25.000, monotributo C $66.020,12, te quedan $1.133.980 (unos $18.900 por turno); más de 58 turnos por mes pasan el tope de la B",
+        "linea": "¿Garpa? (desde casa)"
+      }
     }
   ]
 }
