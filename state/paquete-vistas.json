@@ -237,6 +237,23 @@
         "tema": "Precio con el IVA adentro: RI cobra $1.000.000 final a consumidor final, IVA $173.554 (17,4%), le quedan $826.446; para que queden $1.000.000 cobra $1.210.000 (× 1,21)",
         "linea": "Consejo con números"
       }
+    },
+    {
+      "fecha": "2026-11-16",
+      "placa1": {
+        "tema": "AGIP Res. 383/2026: plan de ABL, Inmobiliario y Patentes con 100% de condonación de resarcitorios al contado (50% en hasta 12 cuotas), deudas vencidas antes del 1/10/2026, hasta el 31/12/2026",
+        "fondo": "azul",
+        "portada": "numero"
+      },
+      "placa2": {
+        "tema": "Empleadores: aguinaldo de diciembre, 50% de la mayor remuneración del semestre, proporcional, vence el 18/12 (mito o realidad + ejemplo)",
+        "fondo": "crema",
+        "portada": "pregunta"
+      },
+      "reel": {
+        "tema": "Local o vender desde casa (ropa): casa $1,4 M, monotributo B, quedan $643.621; local $2 M, alquiler de $4,8 M al año sube a la E ($108.268), quedan $391.732; $251.889 por mes a favor de casa",
+        "linea": "¿Te conviene?"
+      }
     }
   ]
 }
