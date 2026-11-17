@@ -254,6 +254,23 @@
         "tema": "Local o vender desde casa (ropa): casa $1,4 M, monotributo B, quedan $643.621; local $2 M, alquiler de $4,8 M al año sube a la E ($108.268), quedan $391.732; $251.889 por mes a favor de casa",
         "linea": "¿Te conviene?"
       }
+    },
+    {
+      "fecha": "2026-11-17",
+      "placa1": {
+        "tema": "Empleadores: Promoción del Empleo Registrado (RG 5862/2026), adhesión hasta el sábado 28/11/2026, quitas 90/80/70%, hasta 72 cuotas o 50% al contado, 3 pasos",
+        "fondo": "violeta",
+        "portada": "pregunta"
+      },
+      "placa2": {
+        "tema": "Pymes: Factura de Crédito Electrónica MiPyME a grandes empresas desde $5.549.862, listado, CBU y 21 días para aceptar (mito o realidad)",
+        "fondo": "azul",
+        "portada": "portada"
+      },
+      "reel": {
+        "tema": "Lavadero de autos con $10 M: 300 lavados a $12.000, monotributo F $150.784,21, te quedan $2.549.216; con sueldo de $1,2 M recuperás en unos 8 meses; 14 lavados más por mes pasan a la G",
+        "linea": "¿Garpa?"
+      }
     }
   ]
 }
