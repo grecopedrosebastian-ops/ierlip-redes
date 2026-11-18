@@ -85,6 +85,10 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - **Variedad:** `placa-papel` tiene `tema` crema, azul o violeta, y portadas `portada`, `numero` o `pregunta`, más el interior `versus`. La skill rota todo con `state/paquete-vistas.json`.
 - Reemplaza a `arca-diario.yml` y a `historia-animada.yml`, que quedaron sin cron (se pueden correr a mano). El Instagram de ARCA no se lee de forma automática: se usan las fuentes oficiales. Nunca copiar textos, imágenes ni logo de ARCA.
 
+## Publicación automática (`.github/workflows/publicar.yml`, desde el 18/11)
+- El paquete diario llega con los botones "¿Publico el paquete de hoy?" (o `/publicar todo|placas|reel|nada`). Con el OK, `scripts/publicar.py` lo sube a Instagram (y a Facebook si está `FB_PAGE_ID`) por la API de Meta, cada pieza a su hora. Sin OK antes de las 23:00 no sale nada.
+- Las piezas quedan en la rama `publicar` (`cola/<fecha>/`); el repo tiene que seguir público. Secretos: `META_ACCESS_TOKEN`, `IG_USER_ID`, `FB_PAGE_ID`. Configuración y límites: `docs/publicar-meta.md`. Reemplaza a Metricool (se terminó el plan gratis).
+
 ## Reglas no negociables
 - No publicar, no programar con publicación automática y no hacer push sin el OK de Seba. Mostrar los cambios antes.
 - Verificar todo dato fiscal en fuentes oficiales. Lo dudoso va a "VERIFICAR ANTES DE PUBLICAR".

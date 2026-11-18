@@ -9,6 +9,7 @@ Comandos (solo se aceptan desde TELEGRAM_CHAT_ID):
   /cambiar <pedido>   rehace la última pieza con ese cambio
   /video [formato] [tema]  pide un video al repo ierlip-video-diario (vencimientos, conversacion u oficina)
   /estado             si las tareas de hoy corrieron
+  /publicar [alcance] OK para publicar el paquete de hoy (todo, placas, reel o nada); también llega con botones
   /ayuda              lista de comandos
 
 Uso (lo llama .github/workflows/telegram-bot.yml):
@@ -46,6 +47,7 @@ AYUDA = """🤖 COMANDOS
 /cambiar <pedido> — rehace lo último con ese cambio
 /video [formato] [tema] — pide un video (formato: vencimientos, conversacion u oficina; el tema es opcional)
 /estado — si las tareas de hoy corrieron
+/publicar [todo|placas|reel|nada] — da el OK para publicar el paquete de hoy (también con los botones)
 
 Ejemplos: /placa fondo de asistencia laboral · /video vencimientos IVA de noviembre
 Tarda entre 3 y 8 minutos. Todo llega como archivo para que lo revises y lo publiques vos."""
@@ -134,7 +136,16 @@ def leer():
     updates = telegram_get("getUpdates", timeout=0).get("result", [])
     pedido = None
     ultimo_id = None
+    aprobacion = None
     for u in updates:
+        cb = u.get("callback_query")
+        if cb:  # botones de "¿Publico el paquete de hoy?" (ver scripts/publicar.py)
+            datos = cb.get("data", "")
+            if str(cb.get("message", {}).get("chat", {}).get("id")) == chat and datos.startswith("pub:"):
+                _, fecha, alcance = datos.split(":", 2)
+                aprobacion = {"fecha": fecha, "alcance": alcance, "callback_id": cb.get("id")}
+            ultimo_id = u["update_id"]
+            continue
         msg = u.get("message") or u.get("edited_message") or {}
         texto = msg.get("text", "")
         if str(msg.get("chat", {}).get("id")) != chat or not texto.startswith("/"):
@@ -151,6 +162,13 @@ def leer():
                           "fecha": (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=3)).isoformat(timespec="minutes")}
                 ultimo_id = u["update_id"]
                 break  # un pedido con IA por corrida; los demás quedan para la próxima
+        elif cmd == "publicar":  # /publicar [todo|placas|reel|nada] para el paquete de hoy
+            alcance = (arg or "todo").split()[0].lower()
+            if alcance not in {"todo", "placas", "reel", "nada"}:
+                tg.texto("Uso: /publicar todo · /publicar placas · /publicar reel · /publicar nada")
+            else:
+                aprobacion = {"fecha": (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=3)).date().isoformat(),
+                              "alcance": alcance}
         elif cmd == "estado":
             tg.texto(estado())
         elif cmd == "video":
@@ -162,6 +180,10 @@ def leer():
         ultimo_id = u["update_id"]
     if ultimo_id is not None:
         telegram_get("getUpdates", offset=ultimo_id + 1, timeout=0)  # confirma lo leído
+    if aprobacion:
+        BOT.mkdir(exist_ok=True)
+        (BOT / "aprobacion.json").write_text(json.dumps(aprobacion, ensure_ascii=False), encoding="utf-8")
+    salida_gh(hay_aprobacion="true" if aprobacion else "false")
     if not pedido:
         salida_gh(hay_pedido="false")
         return

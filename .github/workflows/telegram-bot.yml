@@ -15,7 +15,7 @@ concurrency:
 permissions:
   contents: write   # guardar state/bot-ultimo.json para /cambiar
   id-token: write   # requerido por claude-code-action
-  actions: read     # /estado consulta las corridas de hoy
+  actions: write    # /estado consulta las corridas de hoy; el OK de publicar lanza publicar.yml
 
 jobs:
   bot:
@@ -33,6 +33,13 @@ jobs:
       - name: Leer mensajes
         id: leer
         run: python3 scripts/bot/telegram_bot.py leer
+
+      # OK para publicar (botón o /publicar): se anota en la rama publicar y se lanza publicar.yml.
+      - name: Anotar el OK para publicar
+        if: steps.leer.outputs.hay_aprobacion == 'true'
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: python3 scripts/publicar.py aprobar-desde bot/aprobacion.json
 
       - uses: actions/setup-node@v4
         if: steps.leer.outputs.hay_pedido == 'true'

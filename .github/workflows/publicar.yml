@@ -1,0 +1,42 @@
+# Publica en Instagram (y Facebook, si está FB_PAGE_ID) el paquete del día, SOLO con el OK de Seba por Telegram.
+# Lo lanza paquete-diario (o el bot, cuando llega el OK). Espera los botones y publica cada pieza a su hora;
+# si la hora ya pasó, enseguida. Lo que no se aprueba antes de las 23:00 no se publica. Código: scripts/publicar.py
+name: Publicar en redes (con tu OK)
+
+on:
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: "Fecha del paquete (AAAA-MM-DD). Vacío = hoy"
+        required: false
+        default: ""
+      prueba:
+        description: "Prueba: no publica, solo muestra lo que haría"
+        type: boolean
+        default: false
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # anotar en la rama publicar lo que ya salió
+  actions: write    # relanzarse si la espera pasa las 5 horas
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_THREAD_ID: ${{ secrets.TELEGRAM_THREAD_ID }}
+      META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PUBLICAR_PRUEBA: ${{ inputs.prueba && '1' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Esperar el OK y publicar
+        run: python3 scripts/publicar.py correr "${{ inputs.fecha }}"
