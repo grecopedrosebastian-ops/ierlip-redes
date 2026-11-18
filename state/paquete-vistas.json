@@ -271,6 +271,23 @@
         "tema": "Lavadero de autos con $10 M: 300 lavados a $12.000, monotributo F $150.784,21, te quedan $2.549.216; con sueldo de $1,2 M recuperás en unos 8 meses; 14 lavados más por mes pasan a la G",
         "linea": "¿Garpa?"
       }
+    },
+    {
+      "fecha": "2026-11-18",
+      "placa1": {
+        "tema": "Convenio Multilateral (Comisión Arbitral RG 12 y 13/2026): Pago Electrónico COMARB para boletas de SIFERE y regímenes, integración gradual, SIRCUPA desde el 1/12/2026",
+        "fondo": "azul",
+        "portada": "portada"
+      },
+      "placa2": {
+        "tema": "Empleados: deducciones de Ganancias 2026 en el SiRADIG hasta el 31/03/2027, después hay que presentar DDJJ propia (mito o realidad + 3 pasos)",
+        "fondo": "crema",
+        "portada": "numero"
+      },
+      "reel": {
+        "tema": "Te inscribís de monotributista: $800.000 por mes, categoría A $49.527,18, $594.326 al año, te quedan $9.005.674; tope de la A $1.000.784 por mes",
+        "linea": "Primeros pasos"
+      }
     }
   ]
 }
