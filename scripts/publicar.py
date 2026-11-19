@@ -47,7 +47,7 @@ ART = dt.timezone(dt.timedelta(hours=-3))
 CIERRE = dt.time(23, 0)          # lo que no se aprueba hasta esta hora, no sale
 ESPACIO = dt.timedelta(minutes=3)  # entre una publicación y otra
 PRUEBA = os.environ.get("PUBLICAR_PRUEBA", "").strip() not in ("", "0")
-NOMBRES = {"placa1": "Placa 1", "placa2": "Placa 2", "reel": "Reel"}
+NOMBRES = {"placa1": "Carrusel", "placa2": "Carrusel 2", "reel": "Reel"}
 ALCANCES = {"todo": {"placa1", "placa2", "reel"}, "placas": {"placa1", "placa2"}, "reel": {"reel"}, "nada": set()}
 
 _spec = importlib.util.spec_from_file_location("tg", ROOT / "scripts" / "enviar-telegram.py")
@@ -149,7 +149,7 @@ def separar_hora(texto, defecto):
 
 def horas_defecto(fecha):
     dia = dt.date.fromisoformat(fecha).weekday()  # 0 = lunes
-    return {"placa1": "11:00" if dia >= 5 else "10:00", "placa2": "15:00", "reel": "20:00" if dia in (0, 3) else "18:00"}
+    return {"placa1": "11:00" if dia >= 5 else "12:00", "placa2": "15:00", "reel": "20:00" if dia == 0 else "18:00"}
 
 
 def a_jpg(png, jpg):
@@ -208,15 +208,16 @@ def armar(fecha):
 def mandar_botones(m):
     lineas = [f"• {NOMBRES[p['id']]}: {p['hora']}" for p in m["piezas"]]
     redes = "Instagram y Facebook" if os.environ.get("FB_PAGE_ID", "").strip() else "Instagram"
-    texto = ("📤 ¿PUBLICO EL PAQUETE DE HOY?\n" + "\n".join(lineas) +
+    texto = ("📤 ¿PUBLICO LO DE HOY?\n" + "\n".join(lineas) +
              f"\n\nSale solo en {redes} a esa hora (si ya pasó, enseguida). Sin tu OK no se publica nada; "
              "lo que no apruebes antes de las 23:00 queda sin publicar.")
     f = m["fecha"]
-    teclado = {"inline_keyboard": [
-        [{"text": "✅ Publicar todo", "callback_data": f"pub:{f}:todo"}],
-        [{"text": "🗞️ Solo placas", "callback_data": f"pub:{f}:placas"},
-         {"text": "🎬 Solo reel", "callback_data": f"pub:{f}:reel"}],
-        [{"text": "❌ No publicar", "callback_data": f"pub:{f}:nada"}]]}
+    filas = [[{"text": "✅ Publicar", "callback_data": f"pub:{f}:todo"}]]
+    if len(m["piezas"]) > 1:
+        filas.append([{"text": "🗞️ Solo carrusel", "callback_data": f"pub:{f}:placas"},
+                      {"text": "🎬 Solo reel", "callback_data": f"pub:{f}:reel"}])
+    filas.append([{"text": "❌ No publicar", "callback_data": f"pub:{f}:nada"}])
+    teclado = {"inline_keyboard": filas}
     r = tg.api("sendMessage", {"text": texto, "reply_markup": json.dumps(teclado)})
     return r["result"]["message_id"]
 
@@ -456,7 +457,7 @@ def publicar_pieza(d, m, pieza):
     guardar(d, f"cola: {pieza['id']} {pieza['estado']} ({m['fecha']})")
     links = " · ".join(f"{n.capitalize()}: {pieza['redes'][n].get('link') or 'publicado'}" for n in hechas)
     if hechas and (pieza["estado"] == "publicada" or not errores):
-        tg.texto(f"✅ {NOMBRES[pieza['id']]} publicada{' (prueba)' if PRUEBA else ''}. {links}")
+        tg.texto(f"✅ Publicado{' (prueba)' if PRUEBA else ''}: {NOMBRES[pieza['id']]}. {links}")
     if errores:
         if pieza["estado"] == "error":
             tg.texto(f"❌ No pude publicar {NOMBRES[pieza['id']]} ({'; '.join(errores)}). "

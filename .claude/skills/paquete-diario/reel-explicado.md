@@ -6,7 +6,7 @@ de Juan (ElevenLabs). Referencia de contenido: @nogarpa_ (casos de negocios con 
 
 Público: **emprendedores, gente que quiere arrancar un negocio, principiantes y pymes**. Lenguaje simple, con voseo.
 
-## Línea de cada día (rotan solas; fecha de Buenos Aires)
+## Líneas (qué día va cada una: tabla de la sección 2 de `SKILL.md`; acá, las ideas)
 | Día | Línea | Qué es | Ejemplos |
 |---|---|---|---|
 | Lun | **¿Te conviene?** | Una decisión A contra B, con los dos números | ¿Monotributo o responsable inscripto? · ¿En blanco o facturando? · ¿Local a la calle o vender online? · ¿Monotributo o SAS? |
@@ -75,6 +75,7 @@ Rotá rubros, públicos y montos. No repitas un caso de los últimos 60 días (`
 - `barras` no lleva voz. Todas las demás escenas llevan `voz`.
 
 ## Texto del reel (`bot/salida/reel/texto.txt`)
-Primera línea: emoji + la pregunta del gancho. Después, 2 o 3 líneas con el resultado y el "pero", "Guardalo para cuando lo
-necesites 📌", "Escribinos por WhatsApp: +54 11 4992-2513", "@estudioierlip · estudioierlip.com" y de 5 a 8 hashtags con
-#EstudioIERLIP y #Emprendedores. Última línea: la hora sugerida (18:00; los lunes y jueves, 20:00).
+Primera línea: emoji + la pregunta del gancho. Después, 2 o 3 líneas con el resultado y el "pero", **una pregunta para
+comentar** ("¿Vos cuánto separás de cada cobro? Contanos 👇", "¿Lo harías? 👇"), "Guardalo y mandáselo a quien lo
+necesite 📌", "Escribinos por WhatsApp: +54 11 4992-2513", "@estudioierlip · estudioierlip.com" y de 5 a 8 hashtags con
+#EstudioIERLIP y #Emprendedores. Última línea: la hora sugerida (18:00; los lunes, 20:00).
