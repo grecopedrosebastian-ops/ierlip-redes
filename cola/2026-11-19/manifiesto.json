@@ -36,7 +36,8 @@
       "hora": "18:00",
       "estado": "aprobada",
       "redes": {},
-      "nota": "agregado a mano con el OK de Seba en el chat (19/11)"
+      "nota": "agregado a mano con el OK de Seba en el chat (19/11)",
+      "intentos": 1
     }
   ],
   "mensaje_id": 812,
