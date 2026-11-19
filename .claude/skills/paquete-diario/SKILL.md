@@ -1,6 +1,6 @@
 ---
 name: paquete-diario
-description: Arma la publicación del día para @estudioierlip, una sola por día y alternada: un reel "Lo que te diría tu contador" (lun, mié, vie y dom: un caso con números para emprendedores y pymes, con voz en off) o un carrusel para el feed (mar, jue y sáb: 1:1, estilo Papel). Los jueves suma el guion de un reel a cámara para que lo grabe el estudio. Todo verificado en fuentes oficiales. Lo llama el workflow paquete-diario todos los días; no publica ni manda nada.
+description: Arma la publicación del día para @estudioierlip, una sola por día y alternada: un reel "Lo que te diría tu contador" (lun, mié, vie y dom: un caso con números para emprendedores y pymes, con voz en off) o un carrusel para el feed (mar, jue y sáb: 1:1, estilo Papel). Los jueves suma un reel con voz solo para TikTok (Seba lo sube a mano). Todo verificado en fuentes oficiales. Lo llama el workflow paquete-diario todos los días; no publica ni manda nada.
 ---
 
 # paquete-diario
@@ -28,8 +28,8 @@ pocos seguidores, varias publicaciones por día se reparten el alcance; los reel
 | Lun | Reel | ¿Te conviene? |
 | Mar | Carrusel (`placa1`) | actualidad o servicio |
 | Mié | Reel | ¿Garpa? (un negocio, o un emprendimiento desde casa: alternan semana a semana) |
-| Jue | Carrusel (`placa1`) + **guion a cámara** | actualidad o servicio |
-| Vie | Reel | Pyme: ¿cuánto cuesta de verdad? o Pagar tarde sale caro (alternan) |
+| Jue | Carrusel (`placa1`) + **reel solo para TikTok** | carrusel: actualidad o servicio · reel: Pagar tarde sale caro |
+| Vie | Reel | Pyme: ¿cuánto cuesta de verdad? |
 | Sáb | Carrusel (`placa1`) | actualidad o servicio |
 | Dom | Reel | Consejo con números o Primeros pasos (alternan) |
 
@@ -41,7 +41,7 @@ El tema no puede repetir los de los últimos 30 días.
 - **Servicio:** algo que el contribuyente busca y guarda. Las ideas salen de `docs/referentes.md`: la pregunta frecuente al estilo de las guías de ARCA ("¿Pagaste dos veces…?", "¿Vas a inscribirte…?"), mito o realidad, cómo hacer un trámite paso a paso, el error típico, o un dato del mes (feriados, cierres bancarios). Rotá el público: monotributo, autónomos, empleadores, pymes e Ingresos Brutos.
 - **Reel "Lo que te diría tu contador":** el caso con números de la línea del día (tabla de arriba). Todo el detalle está
   en `reel-explicado.md`, en esta misma carpeta: leelo entero (su tabla de líneas quedó como lista de ideas).
-- **Guion a cámara (solo los jueves):** ver la sección 7.
+- **Reel solo para TikTok (los jueves):** ver la sección 7.
 
 ## 3. Verificar
 Todo dato (fechas, montos, alícuotas, a quién alcanza, rutas de los servicios) se confirma con WebSearch/WebFetch en fuentes oficiales: arca.gob.ar o afip.gob.ar, boletinoficial.gob.ar, arba.gov.ar, agip.gob.ar o argentina.gob.ar. Comprobá con código el día de la semana de cada fecha. Lo que no puedas confirmar no va: reformulalo sin el dato o cambiá de tema, y anotalo en `needs_review`.
@@ -79,24 +79,22 @@ Solo lo que toca hoy (no dejes carpetas con archivos a medias):
   - Al final, una línea con la hora sugerida: 12:00 (11:00 los sábados).
 - **Días de reel:** `reel/explicado.json` y `reel/texto.txt`, con el formato de `reel-explicado.md` (también con la
   pregunta para comentar). Hora sugerida: 18:00; los lunes, 20:00, porque a las 18:00 sale el video de vencimientos.
-- **Jueves:** además, `guion/guion.md` (sección 7).
-- `meta.json`: `{"resumen": {"placa1": "...", "reel": "...", "guion": "..."}, "sources": [urls oficiales], "needs_review": [...]}` (solo las claves de lo que armaste).
+- **Jueves:** además, el reel para TikTok en `reel/` (sección 7).
+- `meta.json`: `{"resumen": {"placa1": "...", "reel": "..."}, "reel_solo_tiktok": true|false, "sources": [urls oficiales], "needs_review": [...]}` (solo las claves de lo que armaste).
 - Agregá el día a `state/paquete-vistas.json`, conservando los anteriores, con este formato:
   ```json
-  {"fecha": "...", "placa1": {"tema": "...", "fondo": "...", "portada": "..."}, "reel": {"tema": "...", "linea": "¿Garpa?"}, "guion": {"tema": "..."}}
+  {"fecha": "...", "placa1": {"tema": "...", "fondo": "...", "portada": "..."}, "reel": {"tema": "...", "linea": "¿Garpa?"}}
   ```
 - Si la placa 1 es una novedad de ARCA, sumala también a `state/arca-vistas.json`.
 
-## 7. Guion de reel a cámara (los jueves)
-Para que alguien del estudio lo grabe con el celular: no se publica solo, llega por Telegram. Una cara real da la
-confianza que las placas no dan. Tema: una duda frecuente de clientes, distinta de lo publicado en la semana.
-`guion/guion.md`:
-- Título, duración (30 a 45 s) y quién conviene que lo diga (el contador o quien atiende a los clientes).
-- **Gancho** (primeros 2 s, mirando a cámara): una frase corta que frene el scroll ("Si sos monotributista, no hagas esto en diciembre").
-- **Desarrollo:** 3 puntos cortos, como se habla, con voseo. Datos verificados en fuentes oficiales.
-- **Cierre:** "Si te pasa, escribinos por WhatsApp" y la pregunta para comentar.
-- **Cómo grabarlo:** vertical, a la altura de los ojos, con luz de frente (una ventana) y sin ruido; 2 o 3 tomas cortas
-  valen más que una larga. Texto en pantalla sugerido para cada parte.
-- El caption listo para pegar, con la misma estructura que los de los reels.
+## 7. Reel solo para TikTok (los jueves)
+Desde el 19/11 (Seba no graba videos a cámara por ahora): los jueves, además del carrusel, armás un reel "Lo que te
+diría tu contador" de la línea **Pagar tarde sale caro**, igual que cualquier reel (`reel/explicado.json` y
+`reel/texto.txt`, formato de `reel-explicado.md`). Diferencias:
+- En `meta.json` poné `"reel_solo_tiktok": true`: así no entra a la cola de Instagram (ese día en Instagram va solo el
+  carrusel) y llega por Telegram para que Seba lo suba a mano a TikTok.
+- `texto.txt` al estilo TikTok: gancho, resultado, la pregunta para comentar y 3 a 5 hashtags (#EstudioIERLIP y
+  #Emprendedores siempre). Sin la línea del sitio web. Última línea: la hora sugerida (18:00).
+- Los demás días `"reel_solo_tiktok"` va en false o no va.
 
 Antes de terminar, revisá que todos los JSON sean válidos, que ningún texto supere su largo, que armaste solo lo que toca hoy y que las cuentas del reel coincidan entre la voz y la pantalla.

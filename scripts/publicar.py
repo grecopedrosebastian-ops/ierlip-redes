@@ -185,7 +185,9 @@ def armar(fecha):
         piezas.append({"id": p, "tipo": "carrusel" if len(archivos) > 1 else "imagen", "archivos": archivos,
                        "caption": caption, "hora": hora, "estado": "pendiente", "redes": {}})
     reel = SALIDA / "reel" / "reel.mp4"
-    if reel.exists() and (SALIDA / "reel" / "texto.txt").exists():
+    meta = json.loads((SALIDA / "meta.json").read_text(encoding="utf-8")) if (SALIDA / "meta.json").exists() else {}
+    solo_tiktok = bool(meta.get("reel_solo_tiktok"))  # los jueves: el reel va a mano a TikTok, no a Instagram
+    if reel.exists() and (SALIDA / "reel" / "texto.txt").exists() and not solo_tiktok:
         (base / "reel").mkdir()
         shutil.copy(reel, base / "reel" / "reel.mp4")
         caption, hora = separar_hora((SALIDA / "reel" / "texto.txt").read_text(encoding="utf-8"), defecto["reel"])

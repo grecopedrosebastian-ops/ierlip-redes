@@ -237,7 +237,7 @@ if __name__ == "__main__":
             tg.texto((SALIDA / "texto.txt").read_text(encoding="utf-8").strip())
         if meta.get("needs_review"):
             tg.texto("🔎 VERIFICAR ANTES DE SUBIR\n" + "\n".join(f"• {n}" for n in meta["needs_review"]))
-    elif sys.argv[1] == "paquete":  # manda la publicación del día (carrusel o reel) y el guion de los jueves (paquete-diario)
+    elif sys.argv[1] == "paquete":  # manda la publicación del día (carrusel o reel) y, los jueves, el reel para TikTok (paquete-diario)
         meta = json.loads((SALIDA / "meta.json").read_text(encoding="utf-8")) if (SALIDA / "meta.json").exists() else {}
         resumen = meta.get("resumen") if isinstance(meta.get("resumen"), dict) else {}
         hubo = False
@@ -258,7 +258,11 @@ if __name__ == "__main__":
                 tg.texto((SALIDA / p / "texto.txt").read_text(encoding="utf-8").strip())
         if (SALIDA / "reel" / "reel.mp4").exists():
             hubo = True
-            tg.texto("🎬 Reel: " + resumen.get("reel", "reel del día"))
+            if meta.get("reel_solo_tiktok"):
+                tg.texto("🎵 REEL PARA TIKTOK (subilo vos; en Instagram hoy va solo el carrusel): "
+                         + resumen.get("reel", "reel del día"))
+            else:
+                tg.texto("🎬 Reel: " + resumen.get("reel", "reel del día"))
             tg.documentos([SALIDA / "reel" / "reel.mp4"])
             if (SALIDA / "reel" / "reel-armado" / "voz-respaldo.txt").exists():
                 tg.texto("⚠️ ElevenLabs no respondió: este reel salió con la voz de respaldo.")
