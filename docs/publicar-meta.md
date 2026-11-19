@@ -16,7 +16,18 @@ imágenes de ahí, por eso el repo tiene que seguir siendo público. El manifies
 **Qué no cubre:** TikTok (la API solo publica en privado hasta que TikTok apruebe la app; sigue por TikTok Studio),
 las historias con sticker (encuesta, link: a mano desde el celular) y lo del proyecto de videos.
 
-## Configuración (una sola vez, la hace Seba)
+## Cómo quedó configurado (18/11/2026)
+La página de Facebook "Estudio Ierlip" y su portfolio se manejan entrando con Instagram, y ningún Facebook personal los
+administra; por eso se usó la **API de Instagram con inicio de sesión unificado** (solo Instagram, sin Facebook):
+- App **IERLIP Publicador** (ID 1532040045428892), con el portfolio Greco Propiedades como dueño administrativo (no
+  comparte nada con ese negocio; no se podían crear más portfolios).
+- Caso de uso *API de Instagram* → *API setup with Unified login* → configuración creada desde plantilla →
+  @estudioierlip como **tester de Instagram** (Roles) → *Genera identificadores de acceso* → **Generar identificador**.
+- Secretos: `META_ACCESS_TOKEN` (ese identificador) e `IG_USER_ID` = 17841438760192798. `FB_PAGE_ID` no se carga.
+- Si el token vence o se revoca, Telegram avisa "No pude publicar": se repite *Generar identificador* y se actualiza el
+  secreto.
+
+## Configuración original (con Facebook; quedó como referencia)
 1. **Instagram profesional vinculado a la página.** En la app de Instagram: Configuración → Tipo de cuenta → cuenta
    de **Empresa**, y en el Centro de cuentas de Meta vinculá la **página de Facebook** del estudio.
 2. **Crear la app.** En developers.facebook.com → Mis apps → Crear app (tipo *Empresa*). Agregá los casos de uso para

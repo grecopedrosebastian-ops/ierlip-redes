@@ -14,6 +14,10 @@ on:
         description: "Prueba: no publica, solo muestra lo que haría"
         type: boolean
         default: false
+      verificar:
+        description: "Solo verificar la conexión con Instagram (no publica)"
+        type: boolean
+        default: false
 
 concurrency:
   group: publicar
@@ -38,5 +42,9 @@ jobs:
       PUBLICAR_PRUEBA: ${{ inputs.prueba && '1' || '' }}
     steps:
       - uses: actions/checkout@v4
+      - name: Verificar la conexión
+        if: inputs.verificar
+        run: python3 scripts/publicar.py verificar
       - name: Esperar el OK y publicar
+        if: ${{ !inputs.verificar }}
         run: python3 scripts/publicar.py correr "${{ inputs.fecha }}"

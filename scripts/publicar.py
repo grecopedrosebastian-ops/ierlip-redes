@@ -38,7 +38,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SALIDA = ROOT / "bot" / "salida"
 RAMA = "publicar"
-GRAPH = "https://graph.facebook.com/" + os.environ.get("GRAPH_VERSION", "v23.0")
+VERSION = os.environ.get("GRAPH_VERSION", "").strip() or "v27.0"
+# Los tokens del inicio de sesión con Instagram empiezan con "IG" y van por graph.instagram.com;
+# los de Facebook (EAA…) por graph.facebook.com.
+_TOKEN = os.environ.get("META_ACCESS_TOKEN", "").strip()
+GRAPH = ("https://graph.instagram.com/" if _TOKEN.startswith("IG") else "https://graph.facebook.com/") + VERSION
 ART = dt.timezone(dt.timedelta(hours=-3))
 CIERRE = dt.time(23, 0)          # lo que no se aprueba hasta esta hora, no sale
 ESPACIO = dt.timedelta(minutes=3)  # entre una publicación y otra
@@ -371,7 +375,7 @@ def instagram(pieza, fecha, d):
         c = graph("POST", f"{ig}/media", {"media_type": "REELS", "upload_type": "resumable", "caption": cap,
                                           "share_to_feed": "true"})
         datos = video.read_bytes()
-        req = urllib.request.Request(f"https://rupload.facebook.com/ig-api-upload/{GRAPH.rsplit('/', 1)[1]}/{c['id']}",
+        req = urllib.request.Request(f"https://rupload.facebook.com/ig-api-upload/{VERSION}/{c['id']}",
                                      data=datos, method="POST",
                                      headers={"Authorization": f"OAuth {meta_token()}", "offset": "0",
                                               "file_size": str(len(datos))})
@@ -524,6 +528,14 @@ if __name__ == "__main__":
     elif cmd == "correr":
         correr(args[1] if len(args) > 1 and args[1] else hoy(),
                float(os.environ.get("PUBLICAR_PRESUPUESTO_MIN", "330")))
+    elif cmd == "verificar":  # solo lee la cuenta: confirma que el token y el ID andan, sin publicar nada
+        try:
+            r = graph("GET", os.environ["IG_USER_ID"].strip(), {"fields": "username,media_count"})
+            msg = f"🔌 Conexión con Instagram OK: @{r.get('username')} ({r.get('media_count')} publicaciones). Ya puedo publicar con tu OK."
+        except Exception as e:
+            msg = f"❌ La conexión con Instagram falló: {e}"
+        log(msg)
+        tg.texto(msg)
     elif cmd == "aprobar":
         aprobar(args[1], args[2])
     elif cmd == "aprobar-desde":
