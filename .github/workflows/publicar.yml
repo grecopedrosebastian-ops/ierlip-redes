@@ -18,6 +18,10 @@ on:
         description: "Solo verificar la conexión con Instagram (no publica)"
         type: boolean
         default: false
+      informe:
+        description: "Solo leer métricas de las últimas publicaciones (no publica)"
+        type: boolean
+        default: false
 
 concurrency:
   group: publicar
@@ -45,6 +49,9 @@ jobs:
       - name: Verificar la conexión
         if: inputs.verificar
         run: python3 scripts/publicar.py verificar
+      - name: Informe de métricas
+        if: inputs.informe
+        run: python3 scripts/publicar.py informe
       - name: Esperar el OK y publicar
-        if: ${{ !inputs.verificar }}
+        if: ${{ !inputs.verificar && !inputs.informe }}
         run: python3 scripts/publicar.py correr "${{ inputs.fecha }}"

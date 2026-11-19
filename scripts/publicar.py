@@ -536,6 +536,21 @@ if __name__ == "__main__":
             msg = f"❌ La conexión con Instagram falló: {e}"
         log(msg)
         tg.texto(msg)
+    elif cmd == "informe":  # solo lectura: métricas de las últimas publicaciones (para la auditoría)
+        ig = os.environ["IG_USER_ID"].strip()
+        cuenta = graph("GET", ig, {"fields": "username,followers_count,follows_count,media_count,biography"})
+        campos = "id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink"
+        items, r = [], graph("GET", f"{ig}/media", {"fields": campos, "limit": "60"})
+        items += r.get("data", [])
+        for it in items:
+            it["caption"] = (it.get("caption") or "").splitlines()[0][:90] if it.get("caption") else ""
+            met = "reach,saved,shares,views,total_interactions"
+            try:
+                ins = graph("GET", f"{it['id']}/insights", {"metric": met})
+                it["insights"] = {d["name"]: d["values"][0]["value"] for d in ins.get("data", [])}
+            except Exception as e:
+                it["insights"] = {"error": str(e)[:120]}
+        print("INFORME_JSON " + json.dumps({"cuenta": cuenta, "media": items}, ensure_ascii=False))
     elif cmd == "aprobar":
         aprobar(args[1], args[2])
     elif cmd == "aprobar-desde":
