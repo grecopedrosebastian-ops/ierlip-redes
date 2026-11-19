@@ -7,7 +7,9 @@ name: Paquete diario (reel o carrusel)
 
 on:
   schedule:
-    - cron: "7 6 * * *"   # 06:07 UTC = 03:07 en Buenos Aires (adelantado: GitHub atrasa los cron varias horas)
+    # Se arma la NOCHE ANTERIOR: 22:07 UTC = 19:07 en Buenos Aires. GitHub atrasa los cron hasta 9 horas, así que
+    # igual queda listo antes de la mañana; los botones para autorizar salen a las 9:00 (scripts/publicar.py).
+    - cron: "7 22 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -45,6 +47,13 @@ jobs:
           done
           pip install -q numpy edge-tts
 
+      # Fecha del paquete: si corre después del mediodía, es para mañana; si corre a la mañana (atrasado), para hoy.
+      - name: Fecha del paquete
+        run: |
+          f="$(python3 -c "import datetime as d;t=d.datetime.now(d.timezone(d.timedelta(hours=-3)));print((t.date()+d.timedelta(days=1 if t.hour>=12 else 0)).isoformat())")"
+          echo "FECHA_PAQUETE=$f" >> "$GITHUB_ENV"
+          echo "Paquete para el $f"
+
       - name: Preparar la clave de Claude
         env:
           CLAVE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -65,7 +74,7 @@ jobs:
           claude_code_oauth_token: ${{ env.CLAVE_CLAUDE }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          prompt: "/paquete-diario"
+          prompt: "/paquete-diario ${{ env.FECHA_PAQUETE }}"
           claude_args: >-
             --model ${{ vars.CLAUDE_MODEL || 'claude-opus-5-5' }}
             --max-turns 150
@@ -96,7 +105,7 @@ jobs:
         run: |
           git config user.name "ierlip-redes-bot"
           git config user.email "actions@users.noreply.github.com"
-          fecha="$(TZ=America/Argentina/Buenos_Aires date +%F)"
+          fecha="$FECHA_PAQUETE"
           python3 scripts/publicar.py armar "$fecha"
           curl -s -X POST -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/publicar.yml/dispatches"             -d "{\"ref\":\"${GITHUB_REF_NAME}\",\"inputs\":{\"fecha\":\"$fecha\"}}"
 

@@ -45,6 +45,8 @@ _TOKEN = os.environ.get("META_ACCESS_TOKEN", "").strip()
 GRAPH = ("https://graph.instagram.com/" if _TOKEN.startswith("IG") else "https://graph.facebook.com/") + VERSION
 ART = dt.timezone(dt.timedelta(hours=-3))
 CIERRE = dt.time(23, 0)          # lo que no se aprueba hasta esta hora, no sale
+PEDIDO = dt.time(9, 0)           # a esta hora llegan los botones para autorizar (antes de las 11:30)
+RECORDATORIO = dt.time(15, 0)    # si sigue sin OK, se vuelven a mandar los botones
 ESPACIO = dt.timedelta(minutes=3)  # entre una publicación y otra
 PRUEBA = os.environ.get("PUBLICAR_PRUEBA", "").strip() not in ("", "0")
 NOMBRES = {"placa1": "Carrusel", "placa2": "Carrusel 2", "reel": "Reel"}
@@ -199,16 +201,27 @@ def armar(fecha):
             shutil.rmtree(vieja)
     escribir_manifiesto(d, m)
     guardar(d, f"cola: paquete del {fecha}")
-    m["mensaje_id"] = mandar_botones(m)
-    escribir_manifiesto(d, m)
-    guardar(d, f"cola: botones del {fecha}")
+    # El paquete se arma la noche anterior: los botones salen a las 9:00 del día (los manda `correr`).
+    # Si se arma de día (a mano), salen enseguida.
+    if ahora() >= dt.datetime.combine(dt.date.fromisoformat(fecha), PEDIDO, ART):
+        m["mensaje_id"] = mandar_botones(m)
+        m["recordatorio"] = ahora() >= dt.datetime.combine(dt.date.fromisoformat(fecha), RECORDATORIO, ART)
+        escribir_manifiesto(d, m)
+        guardar(d, f"cola: botones del {fecha}")
     log(f"Cola del {fecha}: " + ", ".join(f"{p['id']} {p['hora']}" for p in piezas))
 
 
-def mandar_botones(m):
-    lineas = [f"• {NOMBRES[p['id']]}: {p['hora']}" for p in m["piezas"]]
+DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+
+
+def mandar_botones(m, recordatorio=False):
+    lineas = [f"• {NOMBRES[p['id']]}: {p['hora']}" for p in m["piezas"] if p["estado"] == "pendiente"]
     redes = "Instagram y Facebook" if os.environ.get("FB_PAGE_ID", "").strip() else "Instagram"
-    texto = ("📤 ¿PUBLICO LO DE HOY?\n" + "\n".join(lineas) +
+    dia = dt.date.fromisoformat(m["fecha"])
+    cuando = f"{DIAS[dia.weekday()]} {dia.day}/{dia.month}"
+    titulo = (f"⏰ RECORDATORIO: todavía no autorizaste lo del {cuando}" if recordatorio
+              else f"📤 ¿PUBLICO LO DEL {cuando.upper()}?")
+    texto = (titulo + "\n(lo que te llegó con el paquete)\n" + "\n".join(lineas) +
              f"\n\nSale solo en {redes} a esa hora (si ya pasó, enseguida). Sin tu OK no se publica nada; "
              "lo que no apruebes antes de las 23:00 queda sin publicar.")
     f = m["fecha"]
@@ -483,6 +496,20 @@ def correr(fecha, presupuesto_min=330):
             cb = leer_callbacks(fecha)
             if cb:
                 registrar(d, m, cb["alcance"], cb["callback_id"])
+        if not m.get("aprobacion"):
+            dia = dt.date.fromisoformat(fecha)
+            t0 = ahora()
+            if not m.get("mensaje_id") and t0 >= dt.datetime.combine(dia, PEDIDO, ART):
+                m["mensaje_id"] = mandar_botones(m)
+                m["recordatorio"] = t0 >= dt.datetime.combine(dia, RECORDATORIO, ART)  # ya es tarde: sin recordatorio
+                escribir_manifiesto(d, m)
+                guardar(d, f"cola: botones del {fecha}")
+            elif (m.get("mensaje_id") and not m.get("recordatorio")
+                  and dt.datetime.combine(dia, RECORDATORIO, ART) <= t0 < dt.datetime.combine(dia, CIERRE, ART)):
+                m["recordatorio"] = True
+                m["mensaje_id"] = mandar_botones(m, recordatorio=True)
+                escribir_manifiesto(d, m)
+                guardar(d, f"cola: recordatorio del {fecha}")
         if m.get("aprobacion") and falta_meta and any(p["estado"] == "aprobada" for p in m["piezas"]):
             tg.texto("⚠️ Aprobaste, pero faltan los secretos de Meta (META_ACCESS_TOKEN e IG_USER_ID) en GitHub: "
                      "no publiqué nada. Subilo a mano.")

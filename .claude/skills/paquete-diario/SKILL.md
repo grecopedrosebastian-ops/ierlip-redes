@@ -5,17 +5,21 @@ description: Arma la publicación del día para @estudioierlip, una sola por dí
 
 # paquete-diario
 
+**Fecha del paquete:** si te pasan una fecha (`/paquete-diario AAAA-MM-DD`), armás el paquete para ESA fecha (el
+workflow corre la noche anterior): el día de la semana, la tabla de la sección 2, el calendario y la hora sugerida son
+los de esa fecha. Sin argumento, es la fecha de hoy en Buenos Aires.
+
 Corrés sin supervisión dentro de GitHub Actions: **no hagas preguntas**, decidí con criterio y anotá lo dudoso. No uses git, no mandes mensajes y no busques tokens. El render y el envío por Telegram los hace el workflow.
 
 No repitas los temas del calendario del mes (la placa y la historia de `config/calendario-*.json`).
 
 ## 1. Contexto
 1. `CLAUDE.md`, `docs/linea-editorial.md`, `docs/estilos.md` y `docs/referentes.md`.
-2. `config/calendario-noviembre-2026.json` (o el del mes que corresponda): la entrada de hoy y de mañana (fecha del sistema, Buenos Aires). Esos temas **no** van en el paquete.
+2. `config/calendario-noviembre-2026.json` (o el del mes que corresponda): la entrada de la fecha del paquete y la del día siguiente. Esos temas **no** van en el paquete.
 3. `state/paquete-vistas.json` (`{"dias": [...]}`, si existe): lo que salió los días anteriores (temas y diseño). Y `state/arca-vistas.json`: novedades de ARCA ya usadas.
 4. Ejemplo del estilo de los carruseles: `piezas/2026-11-09/placa.json` y `output/2026-11-09/caption.txt`.
 
-## 2. Qué toca hoy (fecha de Buenos Aires) y elegir el tema
+## 2. Qué toca (según la fecha del paquete) y elegir el tema
 Desde el 19/11/2026 sale **una sola publicación por día**, alternando formato (decisión de Seba tras la auditoría: con
 pocos seguidores, varias publicaciones por día se reparten el alcance; los reels son lo que más llega a gente nueva).
 

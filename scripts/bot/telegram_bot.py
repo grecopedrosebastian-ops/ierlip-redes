@@ -241,6 +241,11 @@ if __name__ == "__main__":
         meta = json.loads((SALIDA / "meta.json").read_text(encoding="utf-8")) if (SALIDA / "meta.json").exists() else {}
         resumen = meta.get("resumen") if isinstance(meta.get("resumen"), dict) else {}
         hubo = False
+        if os.environ.get("FECHA_PAQUETE"):
+            f = dt.date.fromisoformat(os.environ["FECHA_PAQUETE"])
+            dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+            tg.texto(f"📦 PAQUETE PARA EL {dias[f.weekday()].upper()} {f.day}/{f.month}. Revisalo tranquilo: "
+                     "mañana a las 9:00 te llegan los botones para autorizar (y a las 15:00 un recordatorio si falta).")
         for i, p in enumerate(("placa1", "placa2"), 1):
             pngs = sorted((SALIDA / p).glob("pieza*.png"), key=lambda f: int(f.stem.split("-")[1]) if "-" in f.stem else 0)
             if not pngs:

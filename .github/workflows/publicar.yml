@@ -24,7 +24,7 @@ on:
         default: false
 
 concurrency:
-  group: publicar
+  group: publicar-${{ inputs.fecha }}
   cancel-in-progress: false
 
 permissions:
