@@ -1,6 +1,9 @@
 {
   "fecha": "2026-11-20",
-  "aprobacion": null,
+  "aprobacion": {
+    "alcance": "todo",
+    "hora": "2026-11-20T09:01-03:00"
+  },
   "piezas": [
     {
       "id": "reel",
@@ -10,7 +13,7 @@
       ],
       "caption": "🏦 ¿Cuánto le cuesta a una pyme mover $15 millones por mes en el banco?\nEl impuesto al cheque se lleva 0,6% cuando entra la plata y otro 0,6% cuando sale: $180.000 por mes, $2.160.000 al año (ejemplo con valores redondos).\nSin certificado, el 33% se descuenta de Ganancias y el costo real queda en $1.447.200 al año. Si sos micro o pequeña con Certificado MiPyME, descontás el 100%.\nPero solo sirve si tenés Ganancias para pagar, y lo que sobra no se cobra.\n¿Vos ya tenés el Certificado MiPyME? Contanos 👇\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n#EstudioIERLIP #Emprendedores #Pymes #ImpuestoAlCheque #CertificadoMiPyME #Ganancias #ARCA",
       "hora": "18:00",
-      "estado": "pendiente",
+      "estado": "aprobada",
       "redes": {}
     }
   ],
