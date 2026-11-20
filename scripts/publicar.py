@@ -387,15 +387,10 @@ def instagram(pieza, fecha, d):
     ig = os.environ["IG_USER_ID"].strip()
     cap = pieza["caption"]
     if pieza["tipo"] == "reel":
-        video = d / "cola" / fecha / pieza["archivos"][0]
-        c = graph("POST", f"{ig}/media", {"media_type": "REELS", "upload_type": "resumable", "caption": cap,
-                                          "share_to_feed": "true"})
-        datos = video.read_bytes()
-        req = urllib.request.Request(f"https://rupload.facebook.com/ig-api-upload/{VERSION}/{c['id']}",
-                                     data=datos, method="POST",
-                                     headers={"Authorization": f"OAuth {meta_token()}", "offset": "0",
-                                              "file_size": str(len(datos))})
-        _pedir(req, "subida del reel")
+        # Igual que las imágenes: Instagram baja el video desde la URL pública de la rama `publicar`.
+        # (La subida "resumable" a rupload.facebook.com respondía 400 con el token de Instagram.)
+        c = graph("POST", f"{ig}/media", {"media_type": "REELS", "video_url": url_publica(fecha, pieza["archivos"][0]),
+                                          "caption": cap, "share_to_feed": "true"})
         esperar_contenedor(c["id"], 15)
         cid = c["id"]
     elif pieza["tipo"] == "carrusel":
