@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-11-22",
+  "aprobacion": null,
+  "piezas": [
+    {
+      "id": "reel",
+      "tipo": "reel",
+      "archivos": [
+        "reel/reel.mp4"
+      ],
+      "caption": "💼 ¿Trabajás en blanco y arrancás algo aparte? Mirá cuánto te sale el monotributo.\n\nUn ejemplo: sueldo en blanco + $600.000 por mes de diseño freelance → categoría A.\nLa cuota completa es de $49.527,18, pero si además trabajás en relación de dependencia pagás solo el impuesto: $5.585,77 por mes (jubilación y obra social ya las aporta tu empleador).\nPero ojo: si dejás el empleo pasás a la cuota completa, y según tu provincia puede sumarse Ingresos Brutos.\n\n¿Vos tenés un trabajo en blanco y algo aparte? Contanos qué hacés 👇\n\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #Emprendedores #Monotributo #PrimerosPasos #ARCA #Freelance #Impuestos",
+      "hora": "18:00",
+      "estado": "pendiente",
+      "redes": {}
+    }
+  ],
+  "mensaje_id": null
+}
