@@ -390,7 +390,9 @@ def instagram(pieza, fecha, d):
         # Igual que las imágenes: Instagram baja el video desde la URL pública de la rama `publicar`.
         # (La subida "resumable" a rupload.facebook.com respondía 400 con el token de Instagram.)
         c = graph("POST", f"{ig}/media", {"media_type": "REELS", "video_url": url_publica(fecha, pieza["archivos"][0]),
-                                          "caption": cap, "share_to_feed": "true"})
+                                          "caption": cap, "share_to_feed": "true",
+                                          # Portada: el cuadro a los 2,5 s, con el gancho ya escrito (el primero es papel vacío).
+                                          "thumb_offset": str(int(pieza.get("portada_ms", 2500)))})
         esperar_contenedor(c["id"], 15)
         cid = c["id"]
     elif pieza["tipo"] == "carrusel":
