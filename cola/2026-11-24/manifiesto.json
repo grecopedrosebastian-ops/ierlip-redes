@@ -1,6 +1,9 @@
 {
   "fecha": "2026-11-24",
-  "aprobacion": null,
+  "aprobacion": {
+    "alcance": "todo",
+    "hora": "2026-11-24T09:02-03:00"
+  },
   "piezas": [
     {
       "id": "placa1",
@@ -13,7 +16,7 @@
       ],
       "caption": "📅 Empleadores · El finde largo de diciembre\n\nEl lunes 7 de diciembre es día no laborable con fines turísticos: no es feriado, así que el empleador decide si se trabaja.\nSi se trabaja el 7, se paga el salario simple. Si das el día libre, se paga igual.\nEl martes 8 sí es feriado nacional inamovible: quien trabaja cobra el día doble.\n\n¿Tu equipo trabaja el lunes 7 o se toma el finde largo? Contanos 👇\n\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #Empleadores #Pymes #Feriados #Sueldos #RRHH #Emprendedores",
       "hora": "12:00",
-      "estado": "pendiente",
+      "estado": "aprobada",
       "redes": {}
     }
   ],
