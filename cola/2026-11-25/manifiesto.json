@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-11-25",
+  "aprobacion": null,
+  "piezas": [
+    {
+      "id": "reel",
+      "tipo": "reel",
+      "archivos": [
+        "reel/reel.mp4"
+      ],
+      "caption": "📚 ¿Garpa dar clases particulares desde casa?\nCon 60 clases por mes a $20.000 y monotributo categoría B, te quedan unos $1.083.000 por mes: alrededor de $18.000 por clase.\nPero la cuenta no muestra las horas que usás para preparar, el verano sin alumnos ni las cancelaciones.\nY ojo: con más de 73 clases por mes pasás el tope de la B y te toca la C.\n¿Vos cuánto cobrás la clase? Contanos 👇\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n#EstudioIERLIP #Emprendedores #Monotributo #ClasesParticulares #EmprenderDesdeCasa #Impuestos",
+      "hora": "18:00",
+      "estado": "pendiente",
+      "redes": {}
+    }
+  ],
+  "mensaje_id": null
+}
