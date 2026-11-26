@@ -1,4 +1,4 @@
-"""Voz en off para los reels explicados (templates/reel-explicado.html).
+"""Voz en off para los reels explicados (templates/reel-personaje.html).
 
 Uso:  python scripts/voz-reel.py reel.json carpeta_salida [voz=eleven | eleven:<voice_id> | es-AR-TomasNeural] [velocidad=+6%]
 reel.json: la pieza del template ({"escenas": [{"tipo", "voz", ...}]}); también acepta [[inicio, duración, "texto"], ...].
@@ -19,7 +19,7 @@ SR = 44100
 guion_f, carpeta = sys.argv[1:3]
 VOZ = sys.argv[3] if len(sys.argv) > 3 else "eleven"
 VEL = sys.argv[4] if len(sys.argv) > 4 else "+6%"
-DUR = {"texto": 3.2, "barras": 0.8, "ticket": 7, "cifra": 4, "lista": 6.5, "cierre": 4.5}   # igual que en el template
+DUR = {"texto": 2.2, "barras": 0.5, "ticket": 5.5, "cifra": 3, "lista": 4.5, "cierre": 3.8}   # igual que en el template
 pieza = json.load(open(guion_f, encoding="utf-8"))
 if isinstance(pieza, dict):
     guion = [[0, e.get("dur") or DUR.get(e.get("tipo"), 3), e.get("voz", "")] for e in pieza["escenas"]]

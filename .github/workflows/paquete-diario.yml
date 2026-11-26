@@ -45,7 +45,7 @@ jobs:
             [ "$i" = 3 ] && exit 1
             echo "Falló la instalación (intento $i), reintento en 60 s"; sleep 60; sudo apt-get update -q || true
           done
-          pip install -q numpy edge-tts
+          pip install -q numpy scipy pillow edge-tts
 
       # Fecha del paquete: si corre después del mediodía, es para mañana; si corre a la mañana (atrasado), para hoy.
       - name: Fecha del paquete

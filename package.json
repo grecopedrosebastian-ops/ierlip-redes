@@ -8,6 +8,7 @@
     "render": "node scripts/render.mjs"
   },
   "dependencies": {
+    "@fontsource/anton": "^5.0.0",
     "@fontsource/inter": "^5.0.0",
     "@fontsource/montserrat": "^5.0.0",
     "@fontsource/patrick-hand": "^5.0.0",

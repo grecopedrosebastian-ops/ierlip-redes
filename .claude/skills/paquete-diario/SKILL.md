@@ -65,7 +65,8 @@ Se mantiene el estilo Papel (template `placa-papel`), pero cada día cambia.
 - **Nunca:** fuentes en la pieza, ni textos, imágenes o logo de ARCA.
 
 ## 5. Reel "Lo que te diría tu contador"
-Seguí `reel-explicado.md` (líneas por día, reglas de los números, estructura, voz y formato del JSON). El workflow genera
+Seguí `reel-explicado.md` (líneas por día, reglas de los números, tono polémico con criterio y sus límites, gestos del
+personaje, estructura de 30 a 40 s, voz y formato del JSON). El workflow genera
 la voz, la música y el video a partir de tu JSON.
 
 ## 6. Entregar en `bot/salida/`

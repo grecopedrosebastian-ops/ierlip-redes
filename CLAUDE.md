@@ -22,7 +22,9 @@ docs/estilos.md                    especificación visual B y C (colores, tipogr
 docs/referentes.md                 qué tomar de @contadoresenred, @elpyme y @arca_informa
 config/calendario-noviembre-2026.json  30 días: placa + historia por día (tema, puntos, qué verificar)
 templates/placa-papel.html         estilo B (portada / numero / pregunta / items / versus / tip / cierre; tema crema, azul o violeta)
-templates/reel-explicado.html      reel "Lo que te diría tu contador" (caso con números, voz en off: scripts/reel-explicado.sh)
+templates/reel-personaje.html      reel "Lo que te diría tu contador" con personaje 3D (voz en off: scripts/reel-explicado.sh)
+assets/personaje/                  clips del personaje (sin audio); los recorta scripts/personaje.py
+templates/reel-explicado.html      estilo anterior en papel crema (archivado)
 templates/reel-cortes.html         reel 9:16 con cortes cada 2,4 s (música: scripts/audio-reel.py)
 templates/historia-tipografica.html estilo C, historia
 templates/placa-debate.html        estilo C, placa de debate
@@ -82,6 +84,7 @@ Cambios hechos el 22 y el 27/10, **solo en la copia local, sin push**:
 - **Desde el 19/11 (auditoría: 80 seguidores, 1-2 likes y 0 comentarios por publicación):** una sola publicación por día, alternando **reel** (lun, mié, vie y dom) y **carrusel** (mar, jue y sáb), siempre con una pregunta para comentar en el copy. Los jueves llega además un **reel con voz solo para TikTok** (Seba lo sube a mano; no entra a la cola de Instagram). El guion a cámara quedó en pausa: Seba no graba por ahora. La tabla está en la sección 2 de la skill; lo de abajo describe los formatos.
 - Se arma **la noche anterior** (cron 19:07, o a mano desde Actions) y llega por Telegram para revisar. Los botones para autorizar llegan a las **9:00** del día y, si no hubo respuesta, un recordatorio a las **15:00** (pedido de Seba: autorizar antes de las 11:30 y entre las 15 y las 18). Skill: `.claude/skills/paquete-diario`.
 - **Placa 1 (actualidad):** la novedad de ARCA de los últimos 3 días (si no hay, de ARBA o AGIP, o el próximo vencimiento). **Placa 2 (servicio):** la pregunta frecuente, mito o realidad, un trámite o el dato del mes. Horarios sugeridos: 10:00 y 15:00.
+- **Formato de reel desde el 26/11:** estilo cómic con personaje 3D, voz de Franco, 30 a 40 s y polémica con criterio (`reel-explicado.md`). Lo de voz y template que sigue abajo describe el formato anterior.
 - **Reel "Lo que te diría tu contador"** (desde el 07/11): un caso con números para emprendedores, principiantes y pymes, con una línea por día (lun ¿Te conviene?, mar ¿Garpa?, mié Primeros pasos, jue Pagar tarde sale caro, vie Pyme: ¿cuánto cuesta de verdad?, sáb ¿Garpa? desde casa, dom Consejo con números). Detalle en `.claude/skills/paquete-diario/reel-explicado.md`. Se arma con `bash scripts/reel-explicado.sh <explicado.json> <salida.mp4>`: voz de ElevenLabs (Juan; secretos `ELEVENLABS_API_KEY` y `ELEVENLABS_VOICE_ID`, plan Starter: alcanza para uno por día), música de `scripts/audio-explicado.py` y `templates/reel-explicado.html`. Si ElevenLabs falla, sale con la voz gratis de respaldo (edge-tts) y avisa por Telegram. Hora sugerida: 18:00 (lun y jue, 20:00). El reel corto de cortes (`templates/reel-cortes.html`) queda disponible pero ya no sale en el paquete.
 - **Variedad:** `placa-papel` tiene `tema` crema, azul o violeta, y portadas `portada`, `numero` o `pregunta`, más el interior `versus`. La skill rota todo con `state/paquete-vistas.json`.
 - Reemplaza a `arca-diario.yml` y a `historia-animada.yml`, que quedaron sin cron (se pueden correr a mano). El Instagram de ARCA no se lee de forma automática: se usan las fuentes oficiales. Nunca copiar textos, imágenes ni logo de ARCA.

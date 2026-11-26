@@ -32,6 +32,7 @@ try {
   for (let i = 0; i < frames; i++) {
     const ms = (i * 1000) / fps;
     await page.evaluate(t => document.getAnimations().forEach(a => { a.currentTime = t; }), ms);
+    await page.evaluate(t => window.cuadro?.(t), i / fps);   // fondo y personaje (reel-personaje.html)
     await page.screenshot({ path: path.join(tmp, `f${String(i).padStart(5, "0")}.png`) });
   }
 } finally {

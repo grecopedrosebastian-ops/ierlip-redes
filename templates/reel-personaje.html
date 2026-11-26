@@ -1,0 +1,243 @@
+<!doctype html>
+<!--
+  Reel 1080x1920 "Lo que te diría tu contador", estilo cómic con personaje 3D (aprobado por Seba el 26/11/2026).
+  Usa el mismo JSON que reel-explicado.html (texto · barras · ticket · cifra · lista · cierre; ver
+  .claude/skills/paquete-diario/reel-explicado.md). Cada escena puede llevar "gesto". scripts/personaje.py agrega
+  PERSONAJE (qué cuadro del personaje va en cada momento) y scripts/render-animada.mjs llama a window.cuadro(segundos).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel con personaje</title>
+<link rel="stylesheet" href="../node_modules/@fontsource/anton/400.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/300.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/500.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/700.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/montserrat/900.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/patrick-hand/400.css">
+<style>
+  :root{--deep:#0F1A30;--fondo:#F3EEE2;--papel:#FBF8F1;--azul:#1F3A7A;--vio:#892CA0;--mostaza:#E9B949;--terra:#C8643B;--verde:#2E9E6B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--fondo)}
+  body{font-family:'Montserrat',sans-serif;color:var(--deep)}
+  .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;mix-blend-mode:multiply}
+  .sc{position:absolute;inset:0;opacity:0}
+  .col{position:absolute;left:90px;right:90px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center}
+  .cen{align-items:center;text-align:center}
+  b.v{color:var(--vio);font-weight:inherit}
+  /* tipografía cinética: pesado + liviano, como la referencia */
+  .w9{font-weight:900;text-transform:uppercase;line-height:.98;letter-spacing:-.01em}
+  .w3{font-weight:300;text-transform:uppercase;line-height:1;letter-spacing:-.01em}
+  .xl{font-size:150px} .lg{font-size:118px} .md{font-size:84px} .sm{font-size:56px}
+  .w9.vio,.w3.vio{color:var(--vio)}
+  .mano{font-family:'Patrick Hand',cursive;font-size:58px;color:var(--terra)}
+  .hl{position:relative;display:inline-block;padding:0 16px;z-index:0}
+  .hl::before{content:"";position:absolute;inset:6px 0 2px;background:var(--mostaza);z-index:-1;transform-origin:left;transform:scaleX(var(--s,1))}
+  /* barras: el texto "se condensa" antes de cambiar de escena */
+  .barras{display:flex;flex-direction:column;gap:34px;align-items:center}
+  .barras i{display:block;height:58px;background:var(--deep);border-radius:4px}
+  .barras i.m{background:var(--mostaza)}
+  /* ticket */
+  .ticket{background:var(--papel);width:820px;padding:56px 60px 70px;box-shadow:0 30px 70px rgba(15,26,48,.18);position:relative;
+          font-weight:500;font-size:40px;border-radius:10px 10px 0 0}
+  .ticket::after{content:"";position:absolute;left:0;right:0;bottom:-28px;height:28px;
+          background:linear-gradient(-45deg,transparent 14px,var(--papel) 0) 0 0/40px 28px repeat-x,linear-gradient(45deg,transparent 14px,var(--papel) 0) 0 0/40px 28px repeat-x}
+  .ticket h4{font-weight:900;font-size:36px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding-bottom:26px;border-bottom:4px dashed rgba(15,26,48,.35);margin-bottom:24px}
+  .fila{display:flex;justify-content:space-between;gap:30px;padding:14px 0;text-align:left}
+  .fila b{font-weight:900;white-space:nowrap}
+  .fila.menos b{color:var(--terra)}
+  .fila.mas b{color:var(--verde)}
+  .fila.sub{border-top:3px solid var(--deep);margin-top:8px;padding-top:22px}
+  .fila.por{font-family:'Patrick Hand',cursive;font-size:50px;color:var(--vio)}
+  .total{margin-top:26px;background:var(--deep);color:#fff;border-radius:16px;padding:26px 34px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .total span{font-weight:700;font-size:34px;letter-spacing:.08em;text-transform:uppercase;text-align:left}
+  .total b{font-weight:900;font-size:62px;color:var(--mostaza);white-space:nowrap}
+  .nota{font-weight:500;font-size:30px;opacity:.7;margin-top:56px;text-align:center}
+  /* rayos + tarjeta */
+  .rayos{position:absolute;left:50%;top:50%;width:1500px;height:1500px;margin:-750px 0 0 -750px}
+  .marco{position:relative;background:var(--deep);color:#fff;border-radius:44px;padding:90px 70px;width:800px;text-align:center;
+         box-shadow:0 0 0 14px var(--fondo),0 0 0 22px var(--deep),0 40px 80px rgba(15,26,48,.3)}
+  .marco .big{font-weight:900;font-size:130px;color:var(--mostaza);line-height:1;white-space:nowrap}
+  .marco .chico{font-weight:700;font-size:46px;margin-top:24px;line-height:1.2}
+  /* lista */
+  .lista{margin-top:60px;display:flex;flex-direction:column;gap:30px}
+  .item{display:flex;align-items:center;gap:34px;background:var(--papel);border-radius:22px;padding:30px 40px;box-shadow:0 18px 40px rgba(15,26,48,.12)}
+  .item .x{flex:0 0 76px;height:76px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center}
+  .item .x.ok{background:var(--verde)}
+  .item span{font-weight:900;font-size:56px;line-height:1.05;text-transform:uppercase}
+  /* cierre */
+  .wpp{margin-top:70px;display:flex;align-items:center;gap:26px;background:var(--deep);color:#fff;border-radius:999px;padding:30px 54px;text-align:left}
+  .wpp b{font-weight:900;font-size:52px}
+  .pie{position:absolute;left:0;right:0;bottom:120px;text-align:center;font-weight:700;font-size:28px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+  /* animaciones (las arranca el script en el segundo que corresponde) */
+  @keyframes vis{from,to{opacity:1}}
+  @keyframes sube{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+  @keyframes golpe{0%{opacity:0;transform:scale(1.5)}60%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:none}}
+  @keyframes pop{0%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
+  @keyframes resalta{from{--s:0}to{--s:1}}
+  @keyframes barra{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes papel{0%{opacity:0;transform:translateY(500px) rotate(4deg)}75%{opacity:1;transform:translateY(-14px) rotate(-1deg)}100%{opacity:1;transform:rotate(-1.2deg)}}
+  @keyframes gira{from{transform:rotate(0) scale(.6)}to{transform:rotate(25deg) scale(1)}}
+  @keyframes tacha{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:none}}
+  @property --s{syntax:'<number>';inherits:false;initial-value:1}
+  /* estilo cómic */
+  :root{--deep:#07101F;--lima:#D7FF3A;--vio:#892CA0}
+  html,body{background:#0F2347}
+  body{color:#fff}
+  #fondo,#fx{position:absolute;inset:0}
+  #per{position:absolute;display:none;transform-origin:var(--ox) 100%;filter:drop-shadow(-26px 18px 0 rgba(7,16,31,.45));z-index:1}
+  #reel{position:absolute;inset:0;z-index:2}
+  #fx{z-index:3;pointer-events:none}
+  .col{left:64px;right:64px;top:90px;bottom:auto;height:var(--alto,870px);justify-content:center;align-items:center;text-align:center}
+  .w9,.w3{font-family:'Anton',sans-serif;font-weight:400;line-height:1.14;letter-spacing:0;text-shadow:7px 8px 0 var(--deep)}
+  .w3{font-family:'Montserrat',sans-serif;font-weight:900;font-size:60px;line-height:1.15;background:var(--deep);padding:8px 22px;margin:8px 0;text-shadow:none}
+  .xl{font-size:168px}.lg{font-size:132px}.md{font-size:96px}.sm{font-size:68px}
+  .w3.xl,.w3.lg{font-size:74px}.w3.sm{font-size:44px}
+  b.v{color:var(--lima)}
+  .w9.vio,.w3.vio{color:var(--lima)}
+  .hl{padding:0 26px;color:var(--deep);text-shadow:none;transform:rotate(-3deg);margin:14px 0}
+  .hl::before{background:var(--lima);inset:0}
+  .hl b.v{color:var(--vio)}
+  .mano{color:var(--deep);background:#fff;padding:6px 26px;transform:rotate(-2deg);font-size:50px}
+  .barras i{background:#fff}.barras i.m{background:var(--lima)}
+  .ticket{color:var(--deep);width:880px;padding:36px 52px 44px;border-radius:14px;box-shadow:16px 18px 0 rgba(7,16,31,.55)}
+  .ticket::after{display:none}
+  .fila{padding:9px 0}
+  .total b{color:var(--lima)}
+  .nota{color:#fff;background:var(--deep);opacity:1;margin-top:24px;padding:10px 22px;font-size:26px}
+  .rayos{display:none}
+  .marco{background:var(--lima);color:var(--deep);border-radius:24px;padding:70px 50px;width:900px;transform:rotate(-3deg);box-shadow:18px 20px 0 var(--deep)}
+  .marco .big{font-family:'Anton';font-weight:400;color:var(--deep);font-size:190px}
+  .marco b.v{color:var(--vio)}
+  .lista{margin-top:30px;gap:22px;width:880px}
+  .item{color:var(--deep);background:#fff;padding:22px 34px;border-radius:16px;box-shadow:12px 14px 0 rgba(7,16,31,.55);text-align:left}
+  .item .x{background:#C8243B}.item .x.ok{background:#0E8A4F}
+  .item span{font-family:'Anton';font-weight:400;font-size:58px}
+  .wpp{margin-top:36px;padding:22px 44px}
+  .logo{width:430px;margin-top:34px;background:#fff;border-radius:14px;padding:18px 24px}
+  .col>.w9{align-self:stretch}
+  .ticket{font-size:48px} .ticket h4{font-size:42px} .total span{font-size:40px} .total b{font-size:72px}
+  .pie{display:none}
+</style>
+</head>
+<body>
+<svg id="fondo" width="1080" height="1920"></svg>
+<img id="per" alt="">
+<div id="reel"></div>
+<svg id="fx" width="1080" height="1920"></svg>
+<script>
+(function(){
+  // Ejemplo (el caso que aprobó Seba): ¿en blanco o facturando?
+  const P = window.PIEZA || {escenas: [
+    {tipo: "texto", gesto: "serio", lineas: [{t: "¿Perdiste plata?"}, {t: "Pagás igual", tam: "xl", hl: true}], voz: ""},
+    {tipo: "cierre", arriba: "No pagues", abajo: "de más.", boton: "Revisamos tu caso", voz: ""}
+  ]};
+  const DUR = {texto: 2.2, barras: 0.5, ticket: 5.5, cifra: 3, lista: 4.5, cierre: 3.8};   // duración base (igual en voz-reel.py)
+  const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const mark = s => esc(s).replace(/\*(.+?)\*/g, '<b class="v">$1</b>');
+  const X = ok => `<div class="x ${ok ? "ok" : ""}"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">${ok ? '<path d="M5 12.5l4.5 4.5L19 7.5"/>' : '<path d="M6 6l12 12M18 6L6 18"/>'}</svg></div>`;
+  const WAPP = `<svg width="64" height="64" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#25D366"/><path fill="#fff" d="M16 7.2a8.7 8.7 0 0 0-7.5 13.1L7.3 24.8l4.6-1.2A8.7 8.7 0 1 0 16 7.2zm5.1 12.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.5-.6 11.6 11.6 0 0 1-4.4-3.9c-.3-.5-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>`;
+  const RAYOS = (() => { let l = ""; for (let i = 0; i < 36; i++) { const a = i * 10 * Math.PI / 180;
+      l += `<line x1="${750+Math.cos(a)*470}" y1="${750+Math.sin(a)*470}" x2="${750+Math.cos(a)*(i%2?640:720)}" y2="${750+Math.sin(a)*(i%2?640:720)}"/>`; }
+    return l; })();
+
+  // Cada tipo devuelve su HTML; a(anim, seg) marca cuándo entra cada elemento, en segundos desde el inicio de la escena.
+  // d = duración real de la escena (con la voz), para repartir las entradas a lo largo de lo que se va diciendo.
+  // Los momentos de los "pops" (total del ticket, cifra, botón) tienen que coincidir con POPS en voz-reel.py.
+  const a = (anim, t, dur) => `class="a" data-a="${anim}" data-t="${t}"${dur ? ` data-d="${dur}"` : ""}`;
+  const hl = (t, txt) => `<span class="hl" data-a="resalta" data-t="${t + .35}" data-d=".35">${txt}</span>`;
+  const TIPOS = {
+    texto(e, d) {
+      const ls = e.lineas || [], paso = Math.min(.6, (d - 1.2) / Math.max(1, ls.length));
+      return `<div class="col ${e.centro ? "cen" : ""}">${ls.map((l, i) => {
+        const t = .1 + i * paso, peso = l.peso == 3 ? "w3" : "w9", tam = l.tam || "lg";
+        const txt = l.hl ? hl(t, mark(l.t)) : mark(l.t);
+        return `<div ${a("golpe", t)} data-c="${peso} ${tam} ${l.color === "vio" ? "vio" : ""}">${txt}</div>`;
+      }).join("")}${e.mano ? `<div ${a("sube", Math.min(d - .8, .4 + ls.length * paso))} data-c="mano" style="margin-top:40px">${esc(e.mano)}</div>` : ""}</div>`;
+    },
+    barras() {
+      return `<div class="col cen"><div class="barras">${[820, 640, 780, 520].map((w, i) =>
+        `<i ${a("barra", i * .06)} data-c="${i === 3 ? "m" : ""}" style="width:${w}px;transform-origin:${i % 2 ? "right" : "left"}"></i>`).join("")}</div></div>`;
+    },
+    ticket(e, d) {
+      const fs = e.filas || [], tTot = Math.max(1.6, d - 1.5), paso = (tTot - .9) / Math.max(1, fs.length);
+      return `<div class="col cen">${e.arriba ? `<div ${a("sube", .05)} data-c="w9 sm" style="margin-bottom:50px">${mark(e.arriba)}</div>` : ""}
+        <div ${a("papel", .2, .7)} data-c="ticket"><h4>${esc(e.titulo)}</h4>
+          ${fs.map(([x, y, cls], i) => `<div ${a("sube", .9 + i * paso)} data-c="fila ${cls || ""}"><span>${esc(x)}</span><b>${esc(y)}</b></div>`).join("")}
+          ${e.total ? `<div ${a("pop", tTot)} data-c="total"><span>${esc(e.total[0])}</span><b>${esc(e.total[1])}</b></div>` : ""}
+        </div>${e.nota ? `<div ${a("sube", tTot + .5)} data-c="nota">${esc(e.nota)}</div>` : ""}</div>`;
+    },
+    cifra(e, d) {
+      return `<div class="col cen"><svg ${a("gira", 0, d)} data-c="rayos" viewBox="0 0 1500 1500" stroke="#fff" stroke-width="16" stroke-linecap="round">${RAYOS}</svg>
+        <div ${a("pop", .15, .55)} data-c="marco"><div class="big">${esc(e.numero)}</div><div class="chico">${mark(e.texto)}</div></div>
+        ${e.mano ? `<div ${a("sube", Math.min(d - .8, 1.6))} data-c="mano" style="margin-top:80px;position:relative">${esc(e.mano)}</div>` : ""}</div>`;
+    },
+    lista(e, d) {
+      const its = e.items || [], paso = Math.min(.85, (d - 1.6) / Math.max(1, its.length));
+      return `<div class="col"><div ${a("golpe", .1)} data-c="w9 xl">${mark(e.titulo)}</div>
+        ${e.bajada ? `<div ${a("sube", .6)} data-c="w3 sm" style="margin-top:14px">${mark(e.bajada)}</div>` : ""}
+        <div class="lista">${its.map((s, i) => `<div ${a("tacha", 1.2 + i * paso)} data-c="item">${X(e.marca === "check")}<span>${esc(s)}</span></div>`).join("")}</div></div>`;
+    },
+    cierre(e) {
+      return `<div class="col cen"><div ${a("sube", .1)} data-c="w3 md">${mark(e.arriba)}</div><div ${a("golpe", .5)} data-c="w9 lg">${mark(e.abajo)}</div>
+        <div ${a("pop", .9)} data-c="wpp">${WAPP}<div><div style="font-weight:700;font-size:32px">${esc(e.boton || "Escribinos por WhatsApp")}</div><b>+54 11 4992-2513</b></div></div>
+        <img ${a("sube", 1.6)} data-c="logo" src="../assets/logo/ierlip-logo-color.png"></div>`;
+    },
+  };
+
+  const E = P.escenas || [];
+  let T = P.TIEMPOS || window.TIEMPOS;
+  if (!T) { let t = 0; T = E.map(e => { const d = e.dur || DUR[e.tipo] || 3; const r = [t, d]; t += d; return r; }); }
+  const R = document.getElementById("reel");
+  R.innerHTML = E.map((e, i) => `<div class="sc" style="animation:vis ${T[i][1]}s linear ${T[i][0]}s 1 none">${(TIPOS[e.tipo] || TIPOS.texto)(e, T[i][1])}</div>`).join("")
+    + `<div class="pie">Estudio IERLIP · ${esc(P.pie || "lo que te diría tu contador")}</div>`;
+  R.querySelectorAll(".sc").forEach((sc, i) => sc.querySelectorAll("[data-a]").forEach(el => {
+    if (el.dataset.c) el.setAttribute("class", ((el.getAttribute("class") || "") + " " + el.dataset.c).trim());
+    const t = T[i][0] + Number(el.dataset.t), d = Number(el.dataset.d || .45);
+    const ease = el.dataset.a === "gira" ? "linear" : el.dataset.a === "resalta" ? "ease-out" : "cubic-bezier(.2,.9,.3,1.1)";
+    el.style.animation = `${el.dataset.a} ${d}s ${ease} ${t}s 1 both`;
+  }));
+  // Achica lo que no entra a lo ancho (las palabras largas en mayúscula).
+  document.fonts.ready.then(() => R.querySelectorAll(".w9,.w3,.big,.total b").forEach(el => {
+    let fs = parseFloat(getComputedStyle(el).fontSize);
+    while (el.scrollWidth > el.clientWidth + 2 && fs > 30) { fs -= 4; el.style.fontSize = fs + "px"; }
+  }));
+  // Cuánto ocupa el texto según la escena; el personaje se achica cuando hay cuenta o lista.
+  const ALTO = {texto: 870, cifra: 870, cierre: 930, ticket: 1130, lista: 1100, barras: 870};
+  const ESC = {texto: 1.3, cifra: 1.24, cierre: 1.14, ticket: .98, lista: 1.0, barras: 1.2};
+  const COLOR = ["#0F2347", "#7A1FB8", "#0F2347", "#C8243B"];
+  const $ = id => document.getElementById(id);
+  R.querySelectorAll(".sc").forEach((sc, i) => sc.style.setProperty("--alto", (ALTO[E[i].tipo] || 870) + "px"));
+  document.fonts.ready.then(() => requestAnimationFrame(() => R.querySelectorAll(".col").forEach(col => {
+    const hs = [...col.children].reduce((s, c) => s + c.offsetHeight + parseFloat(getComputedStyle(c).marginTop || 0), 0);
+    if (hs > col.clientHeight) col.style.zoom = (col.clientHeight / hs).toFixed(3);
+  })));
+  const rnd = n => { const x = Math.sin(n * 127.1) * 43758.5453; return x - Math.floor(x); };
+  const back = x => { x = Math.max(0, Math.min(1, x)); const c = 1.9; return 1 + (c + 1) * (x - 1) ** 3 + c * (x - 1) ** 2; };
+  const total = P.total || T.reduce((s, x) => Math.max(s, x[0] + x[1]), 0);
+  window.cuadro = async t => {
+    let i = T.length - 1; while (i > 0 && t < T[i][0]) i--;
+    const u = t - T[i][0], f = Math.floor(t * 15), col = COLOR[i % COLOR.length];
+    let rayos = "";
+    for (let n = 0; n < 34; n++) { const a = n / 34 * 6.283 + rnd(n + f) * .12, w = .008 + rnd(n * 3 + f) * .022, r = 560 + rnd(n * 7 + f) * 260;
+      rayos += `<path d="M${540 + Math.cos(a) * r} ${1400 + Math.sin(a) * r}L${540 + Math.cos(a - w) * 1900} ${1400 + Math.sin(a - w) * 1900}L${540 + Math.cos(a + w) * 1900} ${1400 + Math.sin(a + w) * 1900}Z"/>`; }
+    let cinta = ""; const tx = (t * 140) % 1250;
+    for (let n = -1; n < 3; n++) cinta += `<text x="${n * 1250 - tx}" font-family="Anton" font-size="170" fill="#fff" opacity=".07">SIN LETRA CHICA ·</text>`;
+    $("fondo").innerHTML = `<rect width="1080" height="1920" fill="${col}"/><defs><pattern id="pt" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(25)"><circle cx="11" cy="11" r="5" fill="#07101F"/></pattern><linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset=".35" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient><mask id="mk"><rect width="1080" height="1920" fill="url(#gr)"/></mask></defs>
+      <g transform="translate(0 1060) rotate(-9)">${cinta}</g><g fill="#07101F" opacity=".3">${rayos}</g><rect width="1080" height="1920" fill="url(#pt)" mask="url(#mk)" opacity=".75"/>
+      <path d="M-20 ${1640 + Math.sin(i) * 60}L1100 ${1330 - Math.sin(i) * 60}L1100 ${1450 - Math.sin(i) * 60}L-20 ${1760 + Math.sin(i) * 60}Z" fill="${i % 2 ? "#D7FF3A" : "#8B2FC9"}" opacity=".9"/>`;
+    let w = ""; if (i > 0 && u < .2) { const x = -500 + u / .2 * 2100; w = `<path d="M${x} -50L${x + 330} -50L${x - 150} 1970L${x - 480} 1970Z" fill="#D7FF3A"/><path d="M${x + 370} -50L${x + 450} -50L${x - 30} 1970L${x - 110} 1970Z" fill="#fff"/>`; }
+    $("fx").innerHTML = w + `<rect width="${1080 * Math.min(1, t / total)}" height="12" fill="#D7FF3A"/>`;
+    const per = P.PERSONAJE; if (!per) return;
+    const [nombre, k] = per.cuadros[Math.min(per.cuadros.length - 1, Math.round(t * 30))], info = per.escenas[k];
+    const s = ESC[E[k].tipo] || 1.2, entra = back((t - info.desde) / .3), ox = info.cara * s, alto = 744 * s, el = $("per");
+    el.style.cssText = `display:block;width:${1328 * s}px;height:${alto}px;left:${540 - ox}px;top:${1962 - alto}px;--ox:${ox}px;transform:translate(${(k % 2 ? 1 : -1) * (1 - entra) * 160}px,${(1 - entra) * 60}px) scale(${1 + (t - info.desde) * .006 + (1 - entra) * .14})`;
+    const src = per.base + nombre + ".png";
+    if (el.getAttribute("src") !== src) { el.src = src; await el.decode(); }
+  };
+  window.cuadro(0);
+  window.__READY = true;
+})();
+</script>
+</body>
+</html>

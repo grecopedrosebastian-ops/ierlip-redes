@@ -32,6 +32,10 @@ Referencia de **energía**, no de contenido: @elpyme (la voz de la pyme frente a
 - Parodias de marcas, películas o personas reales.
 - Responder agresiones en comentarios: moderar con respeto o pasar a privado.
 
+### Reels: polémica con criterio (desde el 26/11/2026, aprobado por Seba)
+Todos los reels "Lo que te diría tu contador" usan la energía de la línea 3: gancho que divide y pregunta de dos opciones
+para comentar. Rigen los mismos **Sí** y **No** de arriba. Detalle en `.claude/skills/paquete-diario/reel-explicado.md`.
+
 ## Reglas comunes
 - Nunca publicar sin el OK de Seba. En Zoho Social y TikTok Studio no se programa nada sin su OK: primero se le muestra el paquete de carga semanal.
 - Todo dato fiscal (fechas, montos, topes, alícuotas, procedimientos) se verifica en fuentes oficiales: arca.gob.ar, arba.gov.ar, agip.gob.ar, boletinoficial.gob.ar. Lo que no se pudo confirmar va a la lista **VERIFICAR ANTES DE PUBLICAR**.

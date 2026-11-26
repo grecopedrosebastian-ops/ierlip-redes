@@ -1,8 +1,10 @@
-# Reel "Lo que te diría tu contador" (uno por día, con voz en off)
+# Reel "Lo que te diría tu contador" (con personaje y voz en off)
 
-Formato aprobado por Seba el 06/11/2026: un **caso con números**, contado con tipografía cinética sobre papel crema y la voz
-de Juan (ElevenLabs). Referencia de contenido: @nogarpa_ (casos de negocios con la cuenta a la vista). La vuelta propia es
-**"lo que te diría tu contador"**: después de los números viene el criterio (lo que la cuenta no muestra).
+Formato vigente desde el 26/11/2026 (aprobado por Seba): **estilo cómic** (azul, violeta, rojo y lima) con el
+**personaje 3D** del estudio que gesticula, letras gigantes, voz de **Franco** (ElevenLabs), **30 a 40 segundos** y un tono
+**polémico con criterio**, pensado para generar comentarios. Vale para todos los reels, incluido el de TikTok de los jueves.
+Se mantiene la base: un **caso con números** y **"lo que te diría tu contador"** (lo que la cuenta no muestra).
+Template: `templates/reel-personaje.html`. El anterior (`reel-explicado.html`, papel crema) quedó archivado.
 
 Público: **emprendedores, gente que quiere arrancar un negocio, principiantes y pymes**. Lenguaje simple, con voseo.
 
@@ -28,29 +30,47 @@ Rotá rubros, públicos y montos. No repitas un caso de los últimos 60 días (`
 - Hacé las cuentas con código y revisalas dos veces: lo que dice la voz y lo que dice la pantalla tienen que coincidir.
 - Lo que no puedas confirmar no va: cambiá el caso. Los supuestos van en `needs_review`.
 
-## Estructura (de 8 a 11 escenas, 40 a 55 segundos)
-1. **Gancho**: la pregunta con el número ("¿Garpa abrir un café con $20 millones?"). Tipo `texto`.
-2. **El caso** o la pregunta A/B. Tipo `texto`.
-3. "Lo que te diría tu contador" / "Hagamos la cuenta". Tipo `texto` centrado, seguido de `barras` (la transición).
-4. **La cuenta**: uno o dos `ticket`.
-5. **La cifra** que resume: tipo `cifra` (con rayos).
-6. **"Pero…"**: lo que la cuenta no muestra. Tipo `lista` (✗ o ✓).
-7. Un **"ojo:"** con el criterio o el consejo. Tipo `texto`.
-8. **Cierre** con WhatsApp. Tipo `cierre`.
+## Tono polémico con criterio
+- **Gancho que divide:** una afirmación incómoda o una pregunta con dos bandos, en la primera escena y en menos de 10
+  palabras ("¿Perdiste plata? Pagás impuestos igual.", "Facturar todo te sale caro. ¿O no?").
+- El tema sale de la **experiencia del contribuyente**: impuestos sobre la venta, burocracia, costo de estar en regla,
+  en blanco contra facturando, efectivo contra QR. La línea del día de la tabla se mantiene; cambia el ángulo.
+- La incomodidad sale de un **dato verificado** mostrado sin vueltas, nunca de exagerarlo. El "pero" va siempre en el mismo reel.
+- **Cierre de debate:** una pregunta de dos opciones que se responda con una palabra ("¿Justo o injusto?", "¿Team blanco o
+  team factura?"). La misma va primera en el texto del reel, para fijarla como comentario.
+- El estudio no toma partido sobre si la norma está bien: plantea, muestra la cuenta y ayuda a pagar lo que corresponde.
+- **Límites (sin excepción):** nada de partidos, políticos, funcionarios o ideología; nada de sugerir no pagar, evadir o
+  "zafar"; sin cifras sin fuente, alarmas falsas ni títulos que el video no cumpla; sin burlas a empleados de organismos,
+  clientes o seguidores. Si el gancho solo funciona rompiendo una de estas reglas, cambiá de tema.
+- Anotá en `needs_review` toda afirmación discutible, para que Seba la mire antes de aprobar.
+
+## Estructura (de 6 a 8 escenas, 30 a 40 segundos)
+1. **Gancho** polémico. Tipo `texto`, gesto `serio` o `sorpresa`.
+2. **La regla** que incomoda, en una frase. Tipo `texto`, gesto `explica`.
+3. **La cuenta**: un solo `ticket`.
+4. **La cifra** que resume: tipo `cifra`, gesto `sorpresa`.
+5. **"Pero…"** lo que conviene revisar: tipo `lista`, gesto `advierte`.
+6. **La pregunta de debate**: tipo `texto`, gesto `señala`.
+7. **Cierre** con WhatsApp: tipo `cierre`, gesto `pulgar`.
+
+## El personaje (`gesto`, opcional en cada escena)
+`serio` (dedo en alto) · `advierte` (señala serio) · `señala` (a cámara) · `sorpresa` (manos arriba) · `explica` ·
+`pregunta` · `pulgar`. Sin `gesto`, sale según el tipo de escena. No repitas el mismo en dos escenas seguidas.
+La boca se mueve pero no está sincronizada con la voz; los gestos salen de clips fijos (`assets/personaje/`).
 
 ## La voz (`voz` de cada escena)
 - Una o dos oraciones cortas por escena, como se habla, con voseo. **Se lee en voz alta**: escribí los números como se dicen
   ("un millón y medio", "diecisiete por ciento", "sesenta y seis mil") y redondeá ("unos sesenta y seis mil").
 - Nada de siglas raras sin explicar. "ART" e "IVA" sí; "SIPA" no.
 - Evitá comas en medio de las preguntas (la voz se traba): "¿Qué te conviene: en blanco o facturando?".
-- La escena dura lo que tarde la voz; no hace falta medir. Total razonable: 110 a 150 palabras.
+- La escena dura lo que tarde la voz; no hace falta medir. Total: **75 a 95 palabras** (con más, pasa de 40 segundos).
 
 ## Formato del JSON (`bot/salida/reel/explicado.json`)
 ```json
 {
   "pie": "lo que te diría tu contador",
   "escenas": [
-    {"tipo": "texto", "lineas": [{"t": "¿Garpa abrir"}, {"t": "un café", "color": "vio"}, {"t": "con $20 M?", "tam": "xl", "hl": true}], "mano": "— un ejemplo con números", "voz": "..."},
+    {"tipo": "texto", "gesto": "serio", "lineas": [{"t": "¿Garpa abrir"}, {"t": "un café", "color": "vio"}, {"t": "con $20 M?", "tam": "xl", "hl": true}], "mano": "— un ejemplo con números", "voz": "..."},
     {"tipo": "texto", "centro": true, "lineas": [{"t": "Hagamos la cuenta", "peso": 3, "tam": "md"}, {"t": "como tu contador", "hl": true}], "voz": "..."},
     {"tipo": "barras"},
     {"tipo": "ticket", "arriba": "Por mes · *el local*", "titulo": "Lo que entra y lo que sale",
@@ -75,7 +95,7 @@ Rotá rubros, públicos y montos. No repitas un caso de los últimos 60 días (`
 - `barras` no lleva voz. Todas las demás escenas llevan `voz`.
 
 ## Texto del reel (`bot/salida/reel/texto.txt`)
-Primera línea: emoji + la pregunta del gancho. Después, 2 o 3 líneas con el resultado y el "pero", **una pregunta para
+Primera línea: emoji + la pregunta de debate (la de dos opciones). Después, 2 o 3 líneas con el resultado y el "pero", **una pregunta para
 comentar** ("¿Vos cuánto separás de cada cobro? Contanos 👇", "¿Lo harías? 👇"), "Guardalo y mandáselo a quien lo
 necesite 📌", "Escribinos por WhatsApp: +54 11 4992-2513", "@estudioierlip · estudioierlip.com" y de 5 a 8 hashtags con
 #EstudioIERLIP y #Emprendedores. Última línea: la hora sugerida (18:00; los lunes, 20:00).

@@ -20,4 +20,6 @@ ffmpeg -v error -y -i "$dir/musica.wav" -i "$dir/voz.wav" -filter_complex \
   "[1]aformat=channel_layouts=stereo,asplit[v1][v2];[0][v1]sidechaincompress=threshold=0.02:ratio=10:attack=15:release=350[m];[m][v2]amix=inputs=2:weights='0.7 1':normalize=0,alimiter=limit=0.95" \
   "$dir/mezcla.wav"
 total="$("$PY" -c "import json,sys;print(json.load(open(sys.argv[1],encoding='utf-8'))['total'])" "$dir/datos.json")"
-node scripts/render-animada.mjs --datos "$dir/datos.json" templates/reel-explicado.html "$out" "$total" 30 "$dir/mezcla.wav"
+cuadros="$(mktemp -d)"; trap 'rm -rf "$cuadros"' EXIT   # cuadros del personaje: pesan mucho, fuera de la salida
+"$PY" scripts/personaje.py "$dir/datos.json" "$cuadros"
+node scripts/render-animada.mjs --datos "$dir/datos.json" templates/reel-personaje.html "$out" "$total" 30 "$dir/mezcla.wav"
