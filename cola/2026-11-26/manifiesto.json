@@ -1,0 +1,22 @@
+{
+  "fecha": "2026-11-26",
+  "aprobacion": null,
+  "piezas": [
+    {
+      "id": "placa1",
+      "tipo": "carrusel",
+      "archivos": [
+        "placa1/1.jpg",
+        "placa1/2.jpg",
+        "placa1/3.jpg",
+        "placa1/4.jpg",
+        "placa1/5.jpg"
+      ],
+      "caption": "🧾 ARCA · Fondo de Asistencia Laboral (FAL)\n\nDesde el período noviembre 2026, la DDJJ de cargas sociales trae el FAL: un fondo a nombre del empleador para afrontar indemnizaciones.\nMiPyMEs con Certificado MiPyME vigente: 2,5% de las remuneraciones. El resto de los empleadores privados: 1%.\nNo es un pago aparte: se descuenta de las contribuciones patronales y lo calcula el sistema.\nLo nuevo (RG 5928/2026, del 25/11): las cooperativas pueden sacar el Certificado MiPyME, y ARCA aclaró los requisitos para las entidades sin fines de lucro.\n\n¿Ya tenés el Certificado MiPyME al día o se te venció? Contanos 👇\n\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #ARCA #Empleadores #Pymes #FondoDeAsistenciaLaboral #CertificadoMiPyME #CargasSociales",
+      "hora": "12:00",
+      "estado": "pendiente",
+      "redes": {}
+    }
+  ],
+  "mensaje_id": null
+}
