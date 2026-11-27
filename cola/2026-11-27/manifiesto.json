@@ -1,0 +1,18 @@
+{
+  "fecha": "2026-11-27",
+  "aprobacion": null,
+  "piezas": [
+    {
+      "id": "reel",
+      "tipo": "reel",
+      "archivos": [
+        "reel/reel.mp4"
+      ],
+      "caption": "⚖️ Pagar el IVA antes de cobrar: ¿justo o injusto?\nEn una venta, el IVA nace cuando entregás o facturás, no cuando cobrás. Si vendés $10.000.000 + IVA a 60 días en noviembre, el IVA neto ($840.000 en el ejemplo) vence en diciembre y la plata entra en enero.\nEl \"pero\": si sos micro o pequeña empresa con Certificado MiPyME, podés pedir pagar el IVA a 90 días (la DDJJ sigue siendo mensual).\n¿Vos a cuántos días cobrás tus ventas? Contanos 👇\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n#EstudioIERLIP #Emprendedores #Pymes #IVA #CertificadoMiPyME #ARCA #Impuestos",
+      "hora": "18:00",
+      "estado": "pendiente",
+      "redes": {}
+    }
+  ],
+  "mensaje_id": null
+}
