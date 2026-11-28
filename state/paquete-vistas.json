@@ -362,6 +362,14 @@
         "tema": "Pagar el IVA antes de cobrar: pyme vende $10.000.000 + IVA a 60 días en noviembre, IVA neto $840.000 ($2.100.000 − $1.260.000 de compras) vence en diciembre y cobra en enero; micro y pequeñas con Certificado MiPyME pagan el IVA a 90 días",
         "linea": "Pyme: ¿cuánto cuesta de verdad?"
       }
+    },
+    {
+      "fecha": "2026-11-28",
+      "placa1": {
+        "tema": "Monotributo para jubilados: no pagan obra social (PAMI); aporte jubilatorio sí con la ley 24.241 (desde 07/1994) y no con las leyes 18.037/18.038 (hasta 06/1994); caja provincial sin aporte jubilatorio ni obra social (mito o realidad)",
+        "fondo": "azul",
+        "portada": "pregunta"
+      }
     }
   ]
 }
