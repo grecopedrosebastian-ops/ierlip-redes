@@ -1,6 +1,9 @@
 {
   "fecha": "2026-11-28",
-  "aprobacion": null,
+  "aprobacion": {
+    "alcance": "todo",
+    "hora": "2026-11-28T09:25-03:00"
+  },
   "piezas": [
     {
       "id": "placa1",
@@ -14,7 +17,7 @@
       ],
       "caption": "👵 ARCA · Monotributo para jubilados\n\n¿Te jubilaste y seguís facturando? En el monotributo no pagás obra social: ya tenés PAMI.\nEl aporte jubilatorio depende de tu ley: si te jubilaste por la ley 24.241 (desde 07/1994), lo pagás; si fue por las leyes 18.037 o 18.038 (hasta 06/1994), no.\nY si aportás a una caja previsional provincial, tampoco pagás aporte jubilatorio ni obra social en el monotributo.\n\n¿Tenés algún jubilado en la familia que siga facturando? Contanos 👇\n\nGuardalo y mandáselo a quien lo necesite 📌\nEscribinos por WhatsApp: +54 11 4992-2513\n@estudioierlip · estudioierlip.com\n\n#EstudioIERLIP #Monotributo #Jubilados #ARCA #ObraSocial #Emprendedores #Impuestos",
       "hora": "11:00",
-      "estado": "pendiente",
+      "estado": "aprobada",
       "redes": {}
     }
   ],
